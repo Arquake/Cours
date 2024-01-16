@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<title>Enumération</title>
+<style type="text/css" media="all">
+#pied {
+    font-size: 80%;    
+    text-align: right;
+    font-style: italic;
+}
+
+.toc { 
+    font-size: 80%;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 15em;
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px 
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+}      
+
+.toc ul {
+    list-style-type: none;
+    padding: 0em 1em;
+}
+
+.toc ul ul {
+    font-size: 90%;
+}
+
+#tour {
+    display: inline-block;
+    text-align: justify;
+    width: 60em;
+    padding: 2em;
+}
+
+body {
+	font: normal 12pt sans-serif;
+    line-height: 1.3em;
+	text-align: left;
+	margin: 3em;
+	padding: 2em;
+}
+
+#header h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+
+#body h2 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+
+#body h3 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+#body h1 {
+    border-bottom: 1px solid black;
+    padding-bottom: 0.25em;
+	margin-top: 2em;
+}
+
+a {
+    color: #ee7700;
+    font-weight: bold;
+	text-decoration: none;
+}
+
+.toc a {
+    color: black;
+}
+
+blockquote {
+	margin-left: 5em;
+	margin-top:2em;
+	font-style:italic;
+}
+
+hr {
+	margin-top:3em;
+}
+
+pre {
+    padding: 1em;
+    background-color: #fce4cc;
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+</style>
+<style type="text/css" media="print">
+body {
+    font-size: 10pt
+}
+.toc, #pied {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id="tour">
+<div id="header">
+<h1>Enumération</h1>
+<h2>M. Liedloff</h2>
+<h3>avril 2021</h3>
+</div>
+<div id="corps">
+<div class="toc">
+</div>
+<div class="body" id="body">
+<p>
+Une campagne du gouvernement prône de manger cinq fruits et légumes par jour. Nous allons
+vous y aider !
+</p>
+
+<h1>Générateurs en python</h1>
+
+<p>
+Une fonctionnalité intéressante en python est la possibilité de programmer des <b>générateurs</b>.
+Un générateur est comme une fonction mais il utilise <code>yield</code> à la place de <code>return</code> afin
+de produire une séquence de valeurs. Il est possible d'itérer sur cette séquence, il est possible
+d'en obtenir la prochaine en utilisant <code>next()</code>.
+</p>
+<p>
+L'instruction <code>yield</code> suspend temporairement la fonction et retourne une valeur. Lorsque
+la fonction <code>next</code> est appelée, l'exécution de la fonction reprend.
+</p>
+<p>
+Voici un exemple simple :
+</p>
+
+<pre>def cube(max):
+	x = 1
+	while x&lt;max:
+		yield x*x*x
+		x += 1
+
+gen = cube(5)
+
+print(next(gen))
+# &gt;&gt;&gt; 1
+print(next(gen))
+# &gt;&gt;&gt; 8
+print(next(gen))
+# &gt;&gt;&gt; 27
+
+newgen = cube(10)
+for v in newgen:
+	print(v)
+#affiche successivement 1, 8, 27, 64, 125, 216, 343, 512, 729
+</pre>
+
+<p>
+<i>Remarque:</i> lorsqu'il n'y a plus d'élément à produire, un <a href="https://docs.python.org/3/library/exceptions.html">exception</a>
+<code>StopIteration</code> est levée.
+</p>
+
+<h1>Enumération de sous-ensembles</h1>
+
+<p>
+Soit <code>S</code> un ensemble de <code>n</code> éléments dont on souhaite énumérer tous les sous-ensembles
+de taille <code>k</code>.
+Notons <code>1, 2, ..., n</code> les indices des <code>n</code> éléments de <code>S</code>.
+L'algorithme suivant énumère les indices des éléments appartenant à chacun des ensembles de taille <code>k</code>.
+</p>
+
+<pre>	Le premier ensemble d'indices à retourner est I = [1,2, ..., k]
+	
+	Tant que Vrai:
+		Soit j plus petit élément de I tel que j+1 n'appartienne pas à I.
+		
+		Si j=n alors
+			STOP: il n'y a plus d'ensemble à produire
+		Sinon
+			Soit q l'indice de l'élément j dans I.
+			Remplacer I[q] par j+1
+			Pour p de 1 à q-1:
+				remplacer I[p] par p
+			Retourner l'ensemble d'indices I
+</pre>
+
+<p>
+Voici une trace de cet algorithme pour l'énumération de tous les sous-ensembles à 3 éléments
+de <code>[1,2,3,4,5]</code>.
+</p>
+<p>
+<img align="middle" src="tp5_fichiers/trace.png" border="0" alt="">
+</p>
+<p>
+<i>Remarque:</i> n'oubliez pas que les listes sont indicées de <code>0</code> à <code>n-1</code> en Python.
+Une implémentation de l'algorithme précédent demande donc quelques adaptations.
+</p>
+
+<h1>Travail à faire</h1>
+
+<ol>
+<li>Ecrire un générateur <b><code>GenerateSubsets(S,k)</code></b> qui implémente en Python l'algorithme précédent.
+</li>
+<li>La fonction <b><code>createDict(n)</code></b> retourne un couple <code>(S,dictS)</code>. La liste <code>S</code> contient <code>n</code> fruits ou légumes.
+Le dictionnaire <code>dictS</code> contient un attribut (calories, prix) pour chacun des éléments de <code>S</code>.
+Pour <code>n=25</code> et <code>k=5</code>, trouvez les 5 fruits et légumes qui offrent le meilleur rapport <code>somme des calories/somme des prix</code>
+(où la somme est prise sur les <code>k=5</code> fruits et légumes).
+<p></p>
+Pour vérifier que votre résultat est correct, vous pouvez utiliser la fonction <b><code>check(dS,k)</code></b>
+qui attend en paramètre le dictionnaire retournée par <code>createDict(n)</code> et une valeur pour <code>k</code> (par exemple <code>k=5</code>)
+et qui retourne un couple <code>(nb, val)</code> où <code>nb</code> est le nombre de sous-ensembles de taille <code>k</code> et <code>val</code> est la
+valeur du meilleur rapport <code>somme des calories/somme des prix</code>
+(où la somme est prise sur les <code>k</code> fruits et légumes).
+</li>
+<li>Ecrire un générateur de permutations ... cela aidera à décider l'ordre dans lequel nous mangerons les 5 fruits et légumes !
+<p></p>
+Voici un algorithme recopié par un étudiant :
+<p></p>
+<img align="middle" src="tp5_fichiers/permut.png" border="0" alt="">
+</li>
+</ol>
+
+</div>
+<!-- xhtml code generated by txt2tags 2.6. (http://txt2tags.org) -->
+<!-- cmdline: txt2tags tp5-enumeration.t2t -->
+</div>
+<div id="pied">
+Dernière modification le 14 April 2021
+</div>
+</div>
+
+
+
+</body></html>

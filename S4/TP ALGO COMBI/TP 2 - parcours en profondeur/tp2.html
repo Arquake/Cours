@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<title>Parcours en profondeur par un robot</title>
+<style type="text/css" media="all">
+#pied {
+    font-size: 80%;    
+    text-align: right;
+    font-style: italic;
+}
+
+.toc { 
+    font-size: 80%;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 15em;
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px 
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+}      
+
+.toc ul {
+    list-style-type: none;
+    padding: 0em 1em;
+}
+
+.toc ul ul {
+    font-size: 90%;
+}
+
+#tour {
+    display: inline-block;
+    text-align: justify;
+    width: 60em;
+    padding: 2em;
+}
+
+body {
+	font: normal 12pt sans-serif;
+    line-height: 1.3em;
+	text-align: left;
+	margin: 3em;
+	padding: 2em;
+}
+
+#header h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+
+#body h2 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+
+#body h3 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+#body h1 {
+    border-bottom: 1px solid black;
+    padding-bottom: 0.25em;
+	margin-top: 2em;
+}
+
+a {
+    color: #ee7700;
+    font-weight: bold;
+	text-decoration: none;
+}
+
+.toc a {
+    color: black;
+}
+
+blockquote {
+	margin-left: 5em;
+	margin-top:2em;
+	font-style:italic;
+}
+
+hr {
+	margin-top:3em;
+}
+
+pre {
+    padding: 1em;
+    background-color: #fce4cc;
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+</style>
+<style type="text/css" media="print">
+body {
+    font-size: 10pt
+}
+.toc, #pied {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id="tour">
+<div id="header">
+<h1>Parcours en profondeur par un robot</h1>
+<h2>M. Liedloff</h2>
+<h3>février 2021</h3>
+</div>
+<div id="corps">
+<div class="toc">
+</div>
+<div class="body" id="body">
+<p>
+Un robot appelé Oscar cherche un cookie caché dans une grille.
+Pour explorer cette grille, et donc trouver le cookie, il utilise un parcours en profondeur.
+Votre mission est d’implémenter ce parcours pour rendre Oscar intelligent !
+</p>
+
+<h1>Description de la grille</h1>
+
+<p>
+Oscar se trouve sur une grille, entourée de murs. Celle-ci est composée de murs, d'herbes
+et d'un cookie. Initialement Oscar est sur l'une des cellules de la grille. À chaque
+étape, il se déplace sur l'une des cellules voisines (au nord, à l'ouest, au sud ou à l'est)
+à condition qu'il n'y ait pas de mur sur cette cellule.
+</p>
+<p>
+<img align="middle" src="tp2_fichiers/capture.png" border="0" alt="">
+</p>
+<p>
+La <code>grille</code> est décrite en python par une liste de listes.
+Ainsi, la cellule <code>grille[i][j]</code> correspond à la cellule de la <code>i</code>-ième ligne
+et de la <code>j</code>-ième colonne. La cellule en haut à gauche est celle indicée <code>(0,0)</code>.
+</p>
+<p>
+Chaque cellule contient l'une des valeurs suivantes:
+</p>
+
+<ul>
+<li><code>wall</code> si la cellule contient un mur;
+</li>
+<li><code>grass</code> si la cellule contient de l'herbe;
+</li>
+<li><code>cookie</code> si la cellule contient le cookie;
+</li>
+<li><code>robot</code> si la cellule contient le robot Oscar.
+</li>
+</ul>
+
+<p>
+Dans un premier temps, cette grille vous est fournie ainsi que la position initiale d'Oscar.
+Cela vous évitera de parcourir la grille pour trouver le robot.
+Pour lire le fichier <code>grille.json</code> contenant ces données, nous utilisons le module <code>json</code>
+dans la fonction <code>creer_grille()</code>:
+</p>
+
+<pre>import json
+...
+def creer_grille(l,c):
+	with open("grille.json", "r", encoding="utf-8") as fichier:
+		(grille, p) = json.load(fichier)
+	return grille, (p[0],p[1])
+</pre>
+
+<h1>Quelques mots sur l'interface graphique</h1>
+
+<p>
+Pour afficher la grille à l'écran nous utiliserons la bibliothèque graphique <code>tkinter</code>;
+son utilisation est masquée par la classe <code>GUI</code> qui vous est fournie. Grâce à une
+fonction que nous détaillerons plus tard, le robot pourra être déplacé à l'écran.
+</p>
+<p>
+Sachez que cette interface réagit aux touches <code>q</code> (quitter l'interface),
+<code>+</code> (accélérer les déplacements d'Oscar) et <code>-</code> (ralentir Oscar).
+</p>
+
+<h1>Rendre Oscar intelligent</h1>
+
+<p>
+Il faut écrire la fonction <code>ParcoursRobot</code> qui implémente un parcours
+en profondeur afin qu'Oscar puisse explorer la grille. Oscar
+devra s'arrêter lorsqu'il aura atteint la cellule contenant le cookie,
+ou à défaut lorsqu'il aura exploré toute la grille sans pouvoir atteindre le cookie.
+Cela peut arriver si le cookie est entouré de murs et donc inaccessible.
+</p>
+
+<ol>
+<li>Dans un premier temps, commencez par écrire une fonction <b><code>voisins(G,pos)</code></b> qui attend en paramètres:
+ <ul>
+ <li>une grille <b><code>G</code></b> comme définie précédemment;
+ </li>
+ <li>une position <b><code>pos</code></b>, contenant un couple <code>(i,j)</code> représentant une cellule de la grille. 
+ </li>
+ </ul>
+<p></p>
+Cette fonction retourne un ensemble contenant les coordonnées <code>(i',j')</code>
+des cellule atteignables depuis la position <code>pos</code> sur la grille <code>G</code>.
+Une case est atteignables si elle est voisine à la case <code>(i,j)</code>et qu'elle ne contient pas un mur.
+<p></p>
+</li>
+<li>Vous pouvez maintenant implémenter la fonction qui réalise le parcours en profondeur:
+<b><code>ParcoursRobot(G, depart, gui)</code></b>. On préférera une version itérative de ce parcours.
+Cette fonction attend en paramètres:
+ <ul>
+ <li>une grille <b><code>G</code></b>;
+ </li>
+ <li>la position initiale du robot stocké dans le paramètre <b><code>depart</code></b> qui est un coupe <code>(i,j)</code>;
+ </li>
+ <li>l'interface graphique <b><code>gui</code></b> (pour Graphic User Interface).
+ </li>
+ </ul>
+<p></p>
+Pour l'affichage des déplacements d'Oscar dans l'interface graphique (la <code>gui</code>),
+il y a une fonction à utiliser: <b><code>gui.deplacer_oscar(prev_chemin, chemin)</code></b>.
+<p></p>
+</li>
+</ol>
+
+<table>
+<tbody><tr>
+<td><img align="middle" src="tp2_fichiers/chemin.png" border="0" alt=""></td>
+<td>Le parcours en profondeur explore successivement les cellules <code>(4,6)</code>, <code>(4,7)</code>, <code>(4,8)</code>, <code>(5,8)</code>, <code>(6,8)</code> puis la cellule <code>(3,8)</code>. Pour ne par donner l'impression que le robot se <code>télétransporte</code> de la cellule <code>(6,8)</code> à la cellule <code>(3,8)</code>, la fonction <b><code>deplacer_oscar()</code></b> va simuler le déplacement cellule par cellule de <code>(6,8)</code> à <code>(3,8)</code>. Pour cela, il faut donner fournir deux paramètres à  <b><code>deplacer_oscar()</code></b>.</td>
+</tr>
+</tbody></table>
+
+<p>
+Les deux paramètres à fournir :
+</p>
+
+ <ul>
+ <li><b><code>prev_chemin</code></b> chemin (découvert par le parcours) depuis la position initiale du robot à sa position cellule actuelle;
+ </li>
+ <li><b><code>chemin</code></b> chemin (découvert par le parcours) 
+depuis la position initiale du robot à la nouvelle position sur laquelle
+ il doit se déplacer;
+ </li>
+ </ul>
+
+<p>
+Ces deux chemins sont des listes de positions. Pour l'exemple précédent, à l'étape où le robot doit se déplacer de la cellule <code>(6,8)</code> à la cellule <code>(3,8)</code>, on a:
+</p>
+
+ <ul>
+ <li><code>prev_chemin = [(4,6), (4,7), (4,8), (5,8), (6,8)]</code>
+ </li>
+ <li><code>chemin = [(4,6), (4,7), (4,8), (3,8)]</code> 
+ </li>
+ </ul>
+
+<p>
+Ecrivez la fonction <code>ParcoursRobot(G, depart, gui)</code> pour que le robot puisse enfin explorer
+cette grille et s'arrêter lorsqu'il trouvera le cookie, c'est-a-dire lorsque
+<code>G[i][j]=="cookie"</code>.
+</p>
+<p>
+Pour vous aider, voici une version itérative de l'algorithme du parcours en profondeur:
+</p>
+<p>
+<img align="middle" src="tp2_fichiers/parcoursprpofondeur.png" border="0" alt="">
+</p>
+
+<h1>Générer votre grille</h1>
+
+<p>
+Maintenant qu'Oscar est pleinement opérationnel, écrire une fonction <b><code>creer_grille(l,c)</code></b>
+qui crée une grille aléatoire de dimension <i>l</i> x <i>c</i> (c'est-à-dire, <i>l</i> lignes et <i>c</i> colonnes).
+Votre fonction doit créer des murs sur les bords de la grille, y placer des murs aléatoirement (pas trop
+pour que le robot puisse circuler sur la grille), un cookie et Oscar !
+Les cellules ne contenant ni murs, ni cookie, ni robot devront être recouvertes d'herbe.
+</p>
+<p>
+Cette fonction <b><code>creer_grille(l,c)</code></b> retourne deux objets (<code>return G, (i,j)</code>):
+</p>
+
+ <ul>
+ <li>la grille <b><code>G</code></b> générée;
+ </li>
+ <li>un couple <b><code>(i,j)</code></b> contenant la position initiale du robot.
+ </li>
+ </ul>
+
+<p>
+Pour placer à la position (i,j) l'un des objets <i>mur</i>, <i>herbe</i>, <i>cookie</i>, <i>Oscar</i> :
+</p>
+
+ <ul>
+ <li><code>M[i][j] = 'wall'</code>
+ </li>
+ <li><code>M[i][j] = 'grass'</code>
+ </li>
+ <li><code>M[i][j] = 'cookie'</code>
+ </li>
+ <li><code>M[i][j] = 'robot'</code>
+ </li>
+ </ul>
+
+<p>
+Pour obtenir un entier aléatoire entre <code>a</code> (inclus) et <code>b</code> (inclus), vous pouvez
+utiliser la fonction <code>random.randint(a, b)</code>.
+</p>
+
+<h1>La bibliothèque Tkinter</h1>
+
+<p>
+Pour l'affichage graphique, nous utilisons la bibliothèque <code>Tkinter</code>. Par défaut, elle est
+installée avec Anaconda et <code>import tkinter</code> ne devrait pas retourner d'erreur.
+</p>
+<p>
+Si `tkinter` n'est pas installé :
+</p>
+
+<ul>
+<li>avec anaconda : <code>conda install -c anaconda tk</code>
+</li>
+<li>sous linux : <code>sudo apt-get install python3-tk</code>
+</li>
+<li>si vous utilisez MacPorts sur MacOS : <code>sudo port install py38-tkinter</code> (à la place de 38, vous pouvez mettre votre version de Python)
+<p></p>
+</li>
+</ul>
+
+</div>
+<!-- xhtml code generated by txt2tags 2.6. (http://txt2tags.org) -->
+<!-- cmdline: txt2tags tp2-parcours-profondeur.t2t -->
+</div>
+<div id="pied">
+Dernière modification le 10 February 2021
+</div>
+</div>
+
+
+
+</body></html>

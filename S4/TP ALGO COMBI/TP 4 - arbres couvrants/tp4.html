@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<title>Calcul d'un arbre couvrant de poids minimum</title>
+<style type="text/css" media="all">
+#pied {
+    font-size: 80%;    
+    text-align: right;
+    font-style: italic;
+}
+
+.toc { 
+    font-size: 80%;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 15em;
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px 
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+}      
+
+.toc ul {
+    list-style-type: none;
+    padding: 0em 1em;
+}
+
+.toc ul ul {
+    font-size: 90%;
+}
+
+#tour {
+    display: inline-block;
+    text-align: justify;
+    width: 60em;
+    padding: 2em;
+}
+
+body {
+	font: normal 12pt sans-serif;
+    line-height: 1.3em;
+	text-align: left;
+	margin: 3em;
+	padding: 2em;
+}
+
+#header h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+
+#body h2 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+
+#body h3 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+#body h1 {
+    border-bottom: 1px solid black;
+    padding-bottom: 0.25em;
+	margin-top: 2em;
+}
+
+a {
+    color: #ee7700;
+    font-weight: bold;
+	text-decoration: none;
+}
+
+.toc a {
+    color: black;
+}
+
+blockquote {
+	margin-left: 5em;
+	margin-top:2em;
+	font-style:italic;
+}
+
+hr {
+	margin-top:3em;
+}
+
+pre {
+    padding: 1em;
+    background-color: #fce4cc;
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+</style>
+<style type="text/css" media="print">
+body {
+    font-size: 10pt
+}
+.toc, #pied {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id="tour">
+<div id="header">
+<h1>Calcul d'un arbre couvrant de poids minimum</h1>
+<h2>M. Liedloff</h2>
+<h3>mars 2021</h3>
+</div>
+<div id="corps">
+<div class="toc">
+</div>
+<div class="body" id="body">
+
+<h1>Graphes pondérés</h1>
+
+<p>
+Pour représenter un graphe avec une <i>pondération</i> des arêtes (ou des arcs dans le cas d'un graphe orienté),
+il est possible d'utiliser un dictionnaire de dictionnaires. Ce n'est certainement
+pas la seule représentation possible, mais le parcours du graphe et l'obtention des poids est facilitée,
+comme le montre le code ci-dessous :
+</p>
+
+<pre>	G = {
+		"a": {"b":1, "c":2},
+		"b": {"a":1, "f":5,"c":10},
+		"c": {"a":2, "b":10, "f":2, "e":4},
+		"d": {"f":8, "e":3},
+		"e": {"c":4, "d":3},
+		"f": {"b":5, "c":2, "d":8}
+	}
+	
+	for u in G:
+		for v in G[u]:
+			print("L'arête (%s,%s) a pour poids %d"%(u,v,G[u][v]))
+</pre>
+
+<p>
+Nous disposons d'un graphe stocké sur un serveur. Pour se connecter au serveur, on
+utilise la fonction <code>connectSocket("distrigraphes.info-orleans.fr", 6667)</code>.
+</p>
+<p>
+On dispose aussi des fonctions suivantes qui permettent, une fois connecté au serveur, d'interagir avec celui-ci :
+</p>
+
+<ul>
+<li><b><code>getAVertex()</code></b> retourne l'un des sommet quelconque du graphe.
+</li>
+<li><b><code>getNeighbors(u)</code></b> retourne la liste des voisins d'un sommet <code>u</code>.
+</li>
+<li><b><code>getWeight(u,v)</code></b> retourne le poids de l'arête <code>(u,v)</code>.
+</li>
+<li><b><code>SpanningTreeWeight(w)</code></b> retourne <code>True</code> si et seulement si l'arbre couvrant optimal a pour poids <code>w</code>.
+</li>
+</ul>
+
+<p>
+Cette dernière fonction vous servira à vérifier que le poids de votre arbre couvrant est bien optimal.
+</p>
+
+<h1>Algorithme de Prim</h1>
+
+<p>
+L'algorithme de Prim nécessite une <b>file de priorité</b> qui peut être implémentée par un <b>tas</b>.
+</p>
+
+<h2>Description de l'algorithme</h2>
+
+<p>
+<img src="tp4_fichiers/prim.png" alt="" border="0" align="middle">
+</p>
+
+<h2>Utilisation d'une file de priorité</h2>
+
+<p>
+La classe <code>priority_dict</code> du fichier <code>priority_dict.py</code> implémente déjà une file de priorité.
+</p>
+<p>
+Voici un exemple d'utilisation :
+</p>
+
+<pre>from priority_dict import priority_dict
+
+F = priority_dict() # F est maintenant définie comme une file de priorité
+
+F['x'] = 30 # l'élément x a pour clé 30
+F['y'] = 10
+F['z'] = 20
+
+while F:
+	u = F.pop_smallest()
+	print(u)
+	if u=='y':
+		F['x'] = 5
+&gt;&gt;&gt; y
+&gt;&gt;&gt; x
+&gt;&gt;&gt; z
+</pre>
+
+<h2>Travail à réaliser</h2>
+
+<p>
+Vous devez implémenter l'algorithme de Prim pour calculer un arbre couvrant de poids minimum.
+Une fois que vous avez calculé le poids <code>w</code> de cet arbre, un appel à la fonction
+<code>SpanningTreeWeight(w)</code> retournera <code>True</code> si celui-ci est correct. (En fait, cette fonction
+va interroger le serveur pour savoir si le graphe envoyé admet bien un arbre couvrant ayant ce poids.)
+</p>
+
+<h1>Algorithme de Kruskal</h1>
+
+<p>
+L'algorithme de Kruskal nécessite une structure de données pour des <b>ensembles disjoints</b>.
+</p>
+
+<h2>Description de l'algorithme</h2>
+
+<p>
+<img src="tp4_fichiers/kruskal.png" alt="" border="0" align="middle">
+</p>
+
+<h2>Utilisation des ensembles disjoints</h2>
+
+<p>
+Le fichier <code>UnionFind.py</code> contient une implémentation d'une structure de données
+pour <i>ensembles disjoints</i>.
+</p>
+<p>
+Voici un exemple d'utilisation :
+</p>
+
+<pre>S = UnionFind() # crée une famille S d'ensembles disjoints
+
+S['a'] # retourne le représentant de l'ensemble contenant a, si un tel ensemble n'existe pas
+       # alors le singleton {a} est d'abord créé
+S['c']
+S['g']
+S['t'] # on a maintenant 4 singletons dans la structure S : {a}, {c}, {g}, {t}
+
+S.union('a','c')
+if S['g'] != S['t']:
+	S.union('g','t')
+
+print(S)
+
+&gt;&gt;&gt; {{'a', 'c'},{'g', 't'}}
+</pre>
+
+<h2>Travail à réaliser</h2>
+
+<p>
+Implémentez l'algorithme de Kruskal afin de calculer un arbre couvrant du graphe contenu dans le fichier <code>graphe.txt</code>.
+</p>
+<p>
+Vérifier que le poids de l'arbre retourné par votre implémentation de l'algorithme de Kruskal
+est égal à 275.
+</p>
+</div>
+
+<!-- xhtml code generated by txt2tags 2.6. (http://txt2tags.org) -->
+<!-- cmdline: txt2tags tp3-arbres-couvrant.t2t -->
+</div>
+<div id="pied">
+Dernière modification le 29 March 2018
+</div>
+</div>
+
+
+
+
+</body></html>

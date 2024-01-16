@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<title>Eviter les obstacles</title>
+<style type="text/css" media="all">
+#pied {
+    font-size: 80%;    
+    text-align: right;
+    font-style: italic;
+}
+
+.toc { 
+    font-size: 80%;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 15em;
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px 
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+}      
+
+.toc ul {
+    list-style-type: none;
+    padding: 0em 1em;
+}
+
+.toc ul ul {
+    font-size: 90%;
+}
+
+#tour {
+    display: inline-block;
+    text-align: justify;
+    width: 60em;
+    padding: 2em;
+}
+
+body {
+	font: normal 12pt sans-serif;
+    line-height: 1.3em;
+	text-align: left;
+	margin: 3em;
+	padding: 2em;
+}
+
+#header h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+
+#body h2 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+
+#body h3 {
+    margin-top: 2em;
+    padding-bottom: 0.25em;
+}
+
+#body h1 {
+    border-bottom: 1px solid black;
+    padding-bottom: 0.25em;
+	margin-top: 2em;
+}
+
+a {
+    color: #ee7700;
+    font-weight: bold;
+	text-decoration: none;
+}
+
+.toc a {
+    color: black;
+}
+
+blockquote {
+	margin-left: 5em;
+	margin-top:2em;
+	font-style:italic;
+}
+
+hr {
+	margin-top:3em;
+}
+
+pre {
+    padding: 1em;
+    background-color: #fce4cc;
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+</style>
+<style type="text/css" media="print">
+body {
+    font-size: 10pt
+}
+.toc, #pied {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id="tour">
+<div id="header">
+<h1>Eviter les obstacles</h1>
+<h2>M. Liedloff</h2>
+<h3>février 2019</h3>
+</div>
+<div id="corps">
+<div class="toc">
+</div>
+<div class="body" id="body">
+<p>
+Une scène apparaît dans un jeu vidéo. Oscar, un personnage du jeu
+doit atteindre un objectif, le plus rapidement possible, en évitant des obstacles.
+Vous devez l'aider à se déplacer !
+</p>
+
+<h1>Description de la scène</h1>
+
+<p>
+Chacun des obstacles est représenté par un polygone à plusieurs côtés. Le personnage Oscar
+est représenté par un petit rond vert. Il peut se déplacer mais ne peut pas traverser un polygone.
+L'objectif à atteindre est représenté sur la scène par un petit rond rouge.
+</p>
+<p>
+<img src="tp3_fichiers/scene.png" alt="" border="0" align="middle">
+</p>
+
+<h1>Modélisation par un graphe</h1>
+
+<p>
+La scène est représentée par un <b>graphe de visibilité</b> déjà 
+calculé. Par simplicité, votre programme ne travaillera que sur ce 
+graphe qui contient toute l'information nécessaire. Chaque sommet de ce 
+graphe correspond :
+</p>
+
+<ul>
+<li>à un sommet d'un polygone, ou
+</li>
+<li>à la position de départ du personnage, ou
+</li>
+<li>à la position de l'objectif à atteindre.
+</li>
+</ul>
+
+<p>
+Deux sommets du graphe sont adjacents (c'est-à-dire <i>voisins</i>) s'il est possible d'aller de l'un à l'autre, en ligne droite, sans percuter un obstacle.
+</p>
+<p>
+Les sommets ont des noms bizarres tels que <code>(50,100)</code> ou <code>(70,25)</code>. Ces noms sont des couples
+d'entiers <code>(x,y)</code> représentant la position du sommet. (Cette position est donnée depuis
+l'origine située en haut à gauche). Nous n'aurons pas à travailler avec ces positions, elles ne
+nous serviront que pour identifier un sommet.
+</p>
+<p>
+Le parcours des sommets du graphe <code>G</code> est simple :
+</p>
+
+<pre>for u in G:
+	print("sommet", u)
+</pre>
+
+<p>
+Celui des arêtes l'est tout autant :
+</p>
+
+<pre>for u in G:
+	for v in G[u]:
+		print("arête entre", u, "et", v)
+</pre>
+
+<p>
+Le graphe est pondéré, ainsi <code>G[u][v]</code> contient la distance entre les sommets <code>u</code> et <code>v</code>.
+</p>
+
+<h1>Trouver un plus court chemin évitant les obstacles</h1>
+
+<p>
+Pour trouver le plus court chemin évitant les obstacles, vous devez implémenter la fonction
+<b><code>chemin(gui, G, posInit, posFinal)</code></b>. 
+Cette fonction attend en paramètres:
+</p>
+
+ <ul>
+ <li>l'interface graphique <b><code>gui</code></b> (pour Graphic User Interface);
+ </li>
+ <li>le graphe de visibilité <b><code>G</code></b>;
+ </li>
+ <li>la position initiale du personnage Oscar, stockée dans le paramètre <b><code>posInit</code></b> qui est un couple <code>(x,y)</code>;
+ </li>
+ <li>la position finale du personnage, stockée dans le paramètre <b><code>posFinal</code></b> qui est un couple <code>(x,y)</code>.
+ </li>
+ </ul>
+
+<p>
+Votre fonction doit implémenter l'algorithme de Dijkstra rappelé ci-dessous.
+</p>
+<p>
+<img src="tp3_fichiers/dijkstra.png" alt="" border="0" align="middle">
+</p>
+<p>
+Comme vous le constatez, cet algorithme utilise une <b>file de priorité</b> notée <code>F</code> dans l'algorithme.
+Cette file permet de mémoriser des sommets ainsi qu'une valeur (également appelée <i>clé</i>) associée à chacun des sommets de <code>F</code>.
+L'implémentation de la file <code>F</code> doit donc supporter diverses opérations et en particulier d'extraire
+le sommet ayant la plus petite clé. Nous disposons déjà d'une implémentation pour gérer une file de priorité
+qui sont données dans la section suivante.
+</p>
+
+<h1>File de priorité</h1>
+
+<p>
+Nous disposons des plusieurs fonctions et méthodes pour gérer une file de priorité :
+</p>
+
+<ul>
+<li><code>F = priority_dict()</code> crée une file de priorité <code>F</code>, initialement vide;
+</li>
+<li><code>F[s] = val</code> ajoute l'élèment <code>s</code> de valeur <code>val</code>à la file <code>F</code>, ou modifie la valeur associée à <code>s</code> si <code>s</code> est déjà présent dans <code>F</code>;
+</li>
+<li><code>F.smallest()</code> retourne l'élément de plus petite valeur dans la file <code>F</code>;
+</li>
+<li><code>F.pop_smallest()</code> retourne et supprime l'élément de plus petite valeur dans la file <code>F</code>.
+</li>
+</ul>
+
+<p>
+L'implémentation de cette file de priorité est basée sur des tas.
+</p>
+
+<h1>Quelques mots sur l'interface graphique</h1>
+
+<p>
+Pour afficher la scène à l'écran nous utiliserons la bibliothèque graphique <code>tkinter</code>.
+Son utilisation est masquée par la classe <code>MotionPlanning</code> qui vous est fournie. 
+</p>
+<p>
+Sachez que cette interface réagit à la touche <code>esc</code> (quitter l'interface).
+</p>
+<p>
+Grâce à la fonction <b><code>gui.deplacer_oscar(v)</code></b>, Oscar se déplacera de sa position courrante
+vers la nouvelle position `v`, où `v` représente un couple `(x,y)` correspondant à des coordonnées de la scène.
+Attention <code>gui.deplacer_oscar((x,y))</code> fonctionnera alors que <code>gui.deplacer_oscar(x,y)</code> ne fonctionnera pas.
+</p>
+
+<h1>Travail à faire</h1>
+
+<h2>1. Dijkstra</h2>
+
+<p>
+Ecrivez la fonction <code>chemin(gui, G, posInit, posFinal)</code> pour qu'elle implémente l'algorithme
+de Dijkstra.
+</p>
+
+<h2>2. Bellman-Ford</h2>
+
+<p>
+Ecrivez la fonction <code>chemin(gui, G, posInit, posFinal)</code> pour qu'elle implémente l'algorithme
+de Bellamn-Ford.
+</p>
+<p>
+<img src="tp3_fichiers/bellmanford.png" alt="" border="0" align="middle">
+</p>
+
+<h2>3. Générer votre scène</h2>
+
+<p>
+Réfléchissez à une façon de générer une scène, avec des polygones aléatoires, qui ne s'intersectent pas.
+Le graphe de visibilité pourra être obtenu de <a href="https://github.com/TaipanRex/pyvisgraph">Pyvisgraph</a>.
+</p>
+</div>
+
+<!-- xhtml code generated by txt2tags 2.6. (http://txt2tags.org) -->
+<!-- cmdline: txt2tags tp3-pluscourtschemins.t2t -->
+</div>
+<div id="pied">
+Dernière modification le 28 February 2019
+</div>
+</div>
+
+
+
+</body></html>
