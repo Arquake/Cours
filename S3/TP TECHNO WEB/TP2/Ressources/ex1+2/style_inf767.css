@@ -1,0 +1,12 @@
+@media (max-width : 767px){
+    .non_adapted{
+        height: 100%;
+        width: 100%;
+    }
+
+    header, aside, .centrale {
+        visibility: hidden;
+    }
+
+
+}

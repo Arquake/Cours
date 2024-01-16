@@ -1,0 +1,33 @@
+DROP TABLE LesActeurs;
+DROP TABLE LesFilms;
+
+    
+CREATE TABLE LesFilms (
+    titre VARCHAR2(64) NOT NULL
+    CONSTRAINT PK_LesFilms PRIMARY KEY
+    ,pays VARCHAR2(64) NOT NULL
+    ,annee NUMBER(4)
+    ,realisateur VARCHAR2(64)
+    ,duree NUMBER(3)
+);
+
+CREATE TABLE LesActeurs (
+    titre VARCHAR2(32) NOT NULL
+    CONSTRAINT FK_LesActeurs_LesFilms REFERENCES LesFilms (titre)
+    ,acteurs VARCHAR2(64) NOT NULL
+    ,CONSTRAINT PK_LesActeurs_titre PRIMARY KEY(titre,acteurs)
+);
+
+INSERT INTO LesFilms(titre,pays,annee,realisateur,duree) VALUES('t1','p1',2020,'r1',180);
+INSERT INTO LesFilms(titre,pays,annee,realisateur,duree) VALUES('t2','p1',2020,'r1',180);
+INSERT INTO LesFilms(titre,pays,annee,realisateur,duree) VALUES('t3','p1',2020,'r2',180);
+INSERT INTO LesFilms(titre,pays,annee,realisateur,duree) VALUES('t4','p1',2020,'r3',180);
+
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t1','r1');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t1','r2');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t1','r3');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t2','a1');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t2','r1');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t3','r1');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t3','r2');
+INSERT INTO LesActeurs(titre,acteurs) VALUES('t4','a2');

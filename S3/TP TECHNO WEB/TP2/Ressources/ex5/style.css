@@ -1,0 +1,38 @@
+header, footer{
+    height: 2cm;
+    width: 100%;
+}
+
+footer{
+    clear: both;
+}
+
+header{
+    background-color: yellow;
+    position: relative;
+}
+
+.div1{
+    position: absolute;
+    left: 33.33%;
+    background-color: blue;
+}
+
+.div2{
+    float: right;
+    background-color: white;
+}
+
+.div3{
+    float:left;
+    background-color: red;
+}
+
+footer{
+    background-color: green;
+}
+
+div{
+    width: 33.33%;
+    height: 12cm;
+}

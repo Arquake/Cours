@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script type='text/javascript'>
+    //function essai() {
+    //alert('KYS');
+    //}
+    //pile = "";
+
+    //function add(x){
+    //    this.pile+=x
+    //    document.forms['calcu'].elements['res'].value = this.pile
+    //}
+    //
+    //function solve(){
+    //    this.pile = eval(this.pile)
+    //    //document.forms['calcu'].elements['res'].value = this.pile
+    //    alert(this.pile)
+    //}
+
+
+    //function multTable(){
+    //    x = prompt("nombre");
+    //    x = Number(x);
+    //    y = prompt("limite");
+    //    y = Number(y);
+    //    chain = "<table>";
+    //    for( i = 0 ; i <= y ; i++ ){
+    //        chain += "<tr><td>"+x+"</td><td>*</td><td>"+i+"</td><td>=</td><td>"+x*i+"</td></tr>";
+    //    }
+    //    chain+= "</table>";
+    //    console.log(chain)
+    //    document.write(chain);
+    //
+    //}
+    </script>
+</head>
+    <body>
+        <!--
+        <script type='text/javascript'>//multTable()</script>
+        <script>
+            function alti(){
+                chain=""
+                for( i = 0 ; i < this.pile.length ; i++){
+                    chain += this.pile[i]
+                }
+                document.forms['calcu'].elements['but'].value = chain
+            }
+        </script> 
+        -->  
+
+        <!--
+        <form id="calcu">
+        
+            <input type="button" value="1" OnClick="add(1)">
+            <input type="button" value="2" OnClick="add(2)">
+            <input type="button" value="3" OnClick="add(3)">
+            <input type="button" value="4" OnClick="add(4)">
+            <input type="button" value="5" OnClick="add(5)"><br>
+            <input type="button" value="6" OnClick="add(6)">
+            <input type="button" value="7" OnClick="add(7)">
+            <input type="button" value="8" OnClick="add(8)">
+            <input type="button" value="9" OnClick="add(9)">
+            <input type="button" value="0" OnClick="add(0)"><br>
+
+            <input type="button" value="+" OnClick="add('+')">
+            <input type="button" value="-" OnClick="add('-')">
+            <input type="button" value="/" OnClick="add('/')">
+            <input type="button" value="*" OnClick="add('*')"><br>
+
+            <input type="text" value="" id="res"><br>
+
+            <input type="button" value ="=" name="but" OnClick="solve('*')">
+        
+        </form>
+        -->  
+
+
+        <!--
+        <script type='text/javascript'>
+            function alti(){
+                x = document.forms['formulaire'].elements['nom'].value
+            alert(x)
+            }
+            
+        </script>
+        <form action="index.html" id="formulaire">
+            <label for="nom">nom</label><input type="text" name="nom">
+            <input type="button" name="but" Onclick="alti()">
+        </form>
+        -->
+
+
+
+        <script type='text/javascript'>
+
+            billets100=5
+            billets50=5
+            billets20=5
+            billets10=5
+            billets5=5
+            
+            aRetirer100=0
+            aRetirer50=0
+            aRetirer20=0
+            aRetirer10=0
+            aRetirer5=0
+
+            somme=0
+            
+            function subs(x){
+                if( document.forms['distrib'].elements['somme'].value < x){ return }
+                else{
+                    if( x == 100 && billets100 > 0 ){
+                        aRetirer100+=1
+                        document.forms['distrib'].elements['100b'].value = aRetirer100
+                    } else if( x == 50 && billets50 == 50 ){
+                        aRetirer50+=1
+                        document.forms['distrib'].elements['somme'].value = aRetirer50
+                    } else if( x == 20 && billets20 == 20 ){
+                        aRetirer20+=1
+                        document.forms['distrib'].elements['somme'].value = aRetirer20
+                    } else if( x == 10 && billets10 == 10 ){
+                        aRetirer10+=1
+                        document.forms['distrib'].elements['somme'].value = aRetirer10
+                    } else if( x == 5 && billets5 == 5 ){
+                        aRetirer5+=1
+                        document.forms['distrib'].elements['somme'].value = aRetirer5
+                    } else {
+                        alert("Invalid Operation")
+                    }
+                }
+                
+            }
+
+            function retirer(){
+                if( somme < aRetirer100 * 100 + aRetirer50 * 50 + aRetirer20 * 20 + aRetirer10 * 10 + aRetirer5 * 5){
+                    billets100-=aRetirer100
+                billets50-=aRetirer50
+                billets20-=aRetirer20
+                billets10-=aRetirer10
+                billets5-=aRetirer5
+                } else {
+                    alert("Invalid operation")
+                    somme = 0
+                }
+        
+                aRetirer100=0
+                aRetirer50=0
+                aRetirer20=0
+                aRetirer10=0
+                aRetirer5=0
+            }
+            
+        </script>
+
+
+        
+        <form id="distrib"0>
+
+            <p>Somme <input type="text" value="" name="somme"></p>
+
+            <input type="button" value="100" OnClick="subs(100)"> <input type="text" value="" name="100b" disabled="disabled"><br>
+            <input type="button" value="50" OnClick="subs(50)"> <input type="text" value="" name="50b" disabled="disabled"><br>
+            <input type="button" value="20" OnClick="subs(20)"> <input type="text" value="" name="20b" disabled="disabled"><br>
+            <input type="button" value="10" OnClick="subs(10)"> <input type="text" value="" name="10b" disabled="disabled"><br>
+            <input type="button" value="5" OnClick="subs(5)"> <input type="text" value="" name="5b" disabled="disabled"><br>
+
+            <br>
+            <br>
+
+            <input type="button" value="debit" OnClick="retirer()"><br>
+ 
+        </form>
+        
+
+
+</body>
+</html>
