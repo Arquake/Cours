@@ -1,0 +1,11 @@
+let x = 1;;
+let x = x + 1;;
+let y = x = 2;;
+let cube = fun n -> n*n*n;;
+let f = cube;;
+cube;;
+cube 2;;
+f 3;;
+let double_cube = fun n -> 2*(cube n);;
+ let f = fun n -> if n >=0 then n else -n;;
+ let f = fun n -> if if n>=0 then true else false then n else -n;;
