@@ -1,11 +1,11 @@
-let x = 1;;
-let x = x + 1;;
-let y = x = 2;;
-let cube = fun n -> n*n*n;;
-let f = cube;;
-cube;;
-cube 2;;
-f 3;;
-let double_cube = fun n -> 2*(cube n);;
- let f = fun n -> if n >=0 then n else -n;;
- let f = fun n -> if if n>=0 then true else false then n else -n;;
+let x = 1;;                                                                 (* val x : int = 1 *)       (* definition *)
+let x = x + 1;;                                                             (* val x : int = 2 *)      (* expression *)
+let y = x = 2;;                                                             (* val y : bool = true *)      (* definition *)
+let cube = fun n -> n*n*n;;                                                 (* val cube : int -> int = <fun>*)      (* definition *)
+let f = cube;;                                                              (* val f : int -> int *)      (* definition *)
+cube;;                                                                      (* -: int -> int = <fun> *)      (*  *)
+cube 2;;                                                                    (* -: int = 8 *)      (* expression *)
+f 3;;                                                                       (* -: int = 27 *)      (* expression *)
+let double_cube = fun n -> 2*(cube n);;                                     (* val double_cube : int -> int = <fun>*)      (* definition *)
+let f = fun n -> if n >=0 then n else -n;;                                  (* val f : int -> int *)      (* expression *)
+let f = fun n -> if if n>=0 then true else false then n else -n;;           (* val f : int -> int *)      (* expression *)
