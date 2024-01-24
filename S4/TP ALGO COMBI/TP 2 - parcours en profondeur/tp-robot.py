@@ -15,7 +15,8 @@ def creer_grille(l,c):
 
 
 def voisins(G, pos):
-	pass
+	listPossiblePos = []
+	
 
 
 def ParcoursRobot(G, depart, gui):
