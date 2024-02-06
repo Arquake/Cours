@@ -7,4 +7,4 @@ val shift_left : a' List -> a' List
 
 fun l -> 
     if l = [] then []
-    else UOList.tl l @ [ UOList.hd l ]
+    else UOList.tl l @ [ UOList.hd l ];;
