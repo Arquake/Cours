@@ -12,6 +12,6 @@ let from_to = fun (a,b) ->
 (* Q2 *)
 
 let to_list = fun s -> let (x,y,z) = (
-                                        iterate_until   ( (fun (c,b,l) -> if List.length c = b then true else false), (fun (c,b,l) -> (c,b+1,UOSTRING.get (c,b))), (ch,0,[]) )
-                                    ) in
-                                    if true then z else [0];;
+      iterate_until   ( (fun (c,b,l) -> if List.length c = b then true else false), (fun (c,b,l) -> (c,b+1,UOSTRING.get (c,b))), (ch,0,[]) )
+  ) in
+  if true then z else [0];;

@@ -27,9 +27,9 @@ def chemin(gui, G, posInit, posFinal):
     et le sommet d'arrivée posFinal"""
 
     # Si vous souhaitez cacher les arêtes du graphes, supprimez les 3 lignes suivantes (ou mettez les en commentaires)
-    for u in G:
-        for v in G[u]:
-            gui.drawLine(u, v)
+    #for u in G:
+    #    for v in G[u]:
+    #        gui.drawLine(u, v)
 
     # Commencer par programmer l'algorithme de Dijkstra
     # puis faire parcourir le plus court chemin par Oscar en utilisant la fonction gui.deplacer_oscar(v)
@@ -37,7 +37,55 @@ def chemin(gui, G, posInit, posFinal):
     ######################################################################################
     # à vous de jouer ci-dessous ! Vous pouvez programmer d'autres fonctions si besoin   #
     ######################################################################################
-    pass
+    
+    
+    #explored = []
+    #explore = [posInit]
+    #rapidite = {}
+    #rapidite[posInit] = ([],0)
+    #i = 0
+    #
+    #while len(explore) != i :
+    #    for element in G[explore[-1]] :
+    #        distanceY = max(explore[-1][1],element[1]) - min(explore[-1][1],element[1])
+    #        distanceX = max(explore[-1][0],element[0]) - min(explore[-1][0],element[0])
+    #        sumDistance = distanceX**2 + distanceY**2
+    #        if rapidite.get(element) :
+    #            # si le poids de l'élément est inférieur au poids avec l'ajout du chemin actuel
+    #            
+    #            if rapidite[element][1] > rapidite[explore[-1]][1] + sumDistance :
+    #                rapidite[element] = (rapidite[explore[-1]][0]+[explore[-1]], rapidite[explore[-1]][1]+sumDistance)
+    #        else :
+    #            rapidite[element] = (rapidite[explore[-1]][0]+[explore[-1]], rapidite[explore[-1]][1]+sumDistance)
+    #            explore
+        
+    d = {}
+    pi = {}
+    for u in G:
+        d[u]='inf'
+        pi[u]=None
+    d[posInit] = 0
+
+    explored = [posInit]
+
+    i = 0 
+    while i < len(explored) :
+        toExplore = None
+        for u in d.keys():
+            if u not in explored and d[u] != 'inf' :
+                if toExplore == None : 
+                    toExplore = u
+                if d[u] < d[toExplore] :
+                    toExplore = u
+
+        if toExplore == None : break
+
+        
+
+    
+
+
+
 
 
 if __name__ == "__main__":
