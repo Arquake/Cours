@@ -16,7 +16,24 @@ from UnionFind import UnionFind
 #---------------------------------------------------------------------------------------------------
 def ACM_Prim():
 	""" calcule un ACM du graphe stocké sur le serveur en utilisant l'algorithme de Prim """
-	pass
+	F = {}
+
+	v = getAVertex
+	n = getNeighbors[v]
+	explored = [v]
+	toExplore = [n]
+	F[v] = n
+	while toExplore != [] :
+		print(toExplore,'\n',explored)
+		v = toExplore.pop(0)
+		n = getNeighbors(n)
+		explored += [v]
+		for i in n :
+			if i not in toExplore and i not in explored :
+				toExplore += [i]
+	print(explored)
+
+
 
 #---------------------------------------------------------------------------------------------------
 

@@ -38,53 +38,92 @@ def chemin(gui, G, posInit, posFinal):
     # à vous de jouer ci-dessous ! Vous pouvez programmer d'autres fonctions si besoin   #
     ######################################################################################
     
-    
-    #explored = []
-    #explore = [posInit]
-    #rapidite = {}
-    #rapidite[posInit] = ([],0)
-    #i = 0
-    #
-    #while len(explore) != i :
-    #    for element in G[explore[-1]] :
-    #        distanceY = max(explore[-1][1],element[1]) - min(explore[-1][1],element[1])
-    #        distanceX = max(explore[-1][0],element[0]) - min(explore[-1][0],element[0])
-    #        sumDistance = distanceX**2 + distanceY**2
-    #        if rapidite.get(element) :
-    #            # si le poids de l'élément est inférieur au poids avec l'ajout du chemin actuel
-    #            
-    #            if rapidite[element][1] > rapidite[explore[-1]][1] + sumDistance :
-    #                rapidite[element] = (rapidite[explore[-1]][0]+[explore[-1]], rapidite[explore[-1]][1]+sumDistance)
-    #        else :
-    #            rapidite[element] = (rapidite[explore[-1]][0]+[explore[-1]], rapidite[explore[-1]][1]+sumDistance)
-    #            explore
-        
+    def minMax (x,y) :
+        h = max(x[0],y[0]) - min(x[0],y[0])
+        v = max(x[1],y[1]) - min(x[1],y[1])
+        return h**2 + v**2
+
     d = {}
     pi = {}
     for u in G:
-        d[u]='inf'
+        d[u]=9999999999999999
         pi[u]=None
     d[posInit] = 0
 
-    explored = [posInit]
+    X = priority_dict()
+    F = priority_dict()
 
-    i = 0 
-    while i < len(explored) :
-        toExplore = None
-        for u in d.keys():
-            if u not in explored and d[u] != 'inf' :
-                if toExplore == None : 
-                    toExplore = u
-                if d[u] < d[toExplore] :
-                    toExplore = u
+    for i in G:
+        l= []
+        for j in G[u]:
+            l += [j]
+        F[i] = l
 
-        if toExplore == None : break
 
+    while True:
+        try :
+            u = F.pop_smallest()
+        except :
+            break
+        X[u] = u
         
+
+        for v in G[u].keys() :
+            w = minMax(v,u)
+            if type(d[v]) == str or d[v] > d[u] + w  :
+                d[v] = d[u] + w
+                pi[v] = u
+                
+
+    pos = posFinal
+    prevPos = pi[pos]
+    
+    while prevPos != None :
+        gui.drawLine(pos, prevPos)
+        pos = prevPos
+        prevPos = pi[pos]
 
     
 
+def cheminBell(gui, G, posInit, posFinal):
+    
+    def minMax (x,y) :
+        h = max(x[0],y[0]) - min(x[0],y[0])
+        v = max(x[1],y[1]) - min(x[1],y[1])
+        return h**2 + v**2
 
+    d = {}
+    pi = {}
+    for u in G:
+        d[u]=9999999999999999
+        pi[u]=None
+    d[posInit] = 0
+
+    F = priority_dict()
+
+    for i in G:
+        l= []
+        for j in G[u]:
+            l += [j]
+        F[i] = l
+
+    for i in range(1, len(G)-1):
+        for j in G.keys() :
+            for k in G[j] :
+                w = minMax(j,k)
+                print(d[j])
+                if type(d[j]) == str or d[j] > d[k] + w  :
+                    d[j] = d[k] + w
+                    pi[j] = k
+                
+
+    pos = posFinal
+    prevPos = pi[pos]
+    
+    while prevPos != None :
+        gui.drawLine(pos, prevPos)
+        pos = prevPos
+        prevPos = pi[pos]
 
 
 
@@ -99,7 +138,7 @@ if __name__ == "__main__":
 
     # Launch a Thread running the main program to move the robot
     def runwrapper():
-        chemin(gui, graphe, posInit, posFinal)
+        cheminBell(gui, graphe, posInit, posFinal)
 
     th = Thread(target=runwrapper)
     th.daemon = True
