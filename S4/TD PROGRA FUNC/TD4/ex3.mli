@@ -1,0 +1,8 @@
+List.map ((+) 2) [1; 2; 4; 8];;                                       (* -: int list = [3;4;6;10] *)
+List.filter ((<=) 4) [4; 2; 6; 3];;                                   (* -: int list = [4;6] *)
+List.map (List.map (( * ) 2)) [ [1; 2]; [4; 2]; [0; 1] ];;            (* -: int list list = [[2;4];[8;4];[0;2]] *)
+fun s -> fun r -> s^" = "^(string_of_int r);;                         (* -: string -> int -> string = <fun> *)
+let string_val = fun s -> fun r -> s^" = "^(string_of_int r);;        (* val string_val : string -> int -> string = <fun> *)
+let i = string_val "x";;                                              (* val i : int -> string = <fun> *)
+i 2;;                                                                 (* -: string = "x = 2" *)
+string_val "answer" 42;;                                              (* -: string = "answer = 42" *)
