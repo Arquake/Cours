@@ -33,7 +33,29 @@ def createDict(n):
 
 
 def GenerateSubsets(S,k):
-	pass
+	I = []
+	for v in range(1,k+1) :
+		I += [v]
+
+	yield I
+
+	while True :
+		
+		j = mini = max(I)
+		for i in range(len(I)):
+			if I[i] < mini and not (I[i]+1 in I): 
+				mini = i
+				j = I[i]
+
+		if j == len(S)-1 :
+			break
+		else :
+			q = I.index(j)
+			I[q] = j+1
+			for p in range(0,q-1) :
+				I[p] = p+1
+			yield I
+
 
 
 def Permutation(S):
@@ -46,7 +68,7 @@ if __name__ == '__main__':
 	n, k = 25, 5
 	S, dictS = createDict(n)
 	
-	print( check(dictS,k) )
+	#print( check(dictS,k) )
 	
-#	for subsets in GenerateSubsets(S,k):
-#		print("indices", subsets, " --> corresponding subset", [S[j] for j in subsets])
+	for subsets in GenerateSubsets(S,k):
+		print("indices", subsets, " --> corresponding subset", [S[j] for j in subsets])

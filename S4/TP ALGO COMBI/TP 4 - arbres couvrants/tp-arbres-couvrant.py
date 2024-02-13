@@ -56,7 +56,9 @@ if __name__ == "__main__":
 	ACM_Kruskal(G) en définissant le graphe au préalable """
 	
 	# connexion au serveur
-	connectSocket("192.168.47.162", 6667)
+	#connectSocket("192.168.47.162", 6667)
+	#connectSocket("uomobile.univ-orleans.fr", 6667)
+	connectSocket("distrigraphes.info-orleans.fr", 8080)
 
 	ACM_Prim() # peut être mis en commentaire si nécessaire
 	
