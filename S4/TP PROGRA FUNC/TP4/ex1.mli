@@ -5,12 +5,6 @@ let rec for_all = fun (f,l) ->
     | [] -> true
     | head::tail -> f head && for_all(f,tail);;
   
-for_all ((fun n -> n >= 0),[1; 2; 3]);;
-for_all ((fun n -> n >= 0),[]);;
-for_all ((fun n -> n >= 0),[1; -2; 3]);;
-for_all ((fun c -> 'a' <= c && c <= 'z'),['a'; 'e'; 'z'; 'o'; 'u']);;
-for_all ((fun c -> 'a' <= c && c <= 'z'),['a'; 'e'; '1'; 'o'; 'u']);;
-  
 
 (* Q2 *)
 
