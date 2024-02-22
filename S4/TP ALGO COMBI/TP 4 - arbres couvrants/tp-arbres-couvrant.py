@@ -16,23 +16,34 @@ from UnionFind import UnionFind
 #---------------------------------------------------------------------------------------------------
 def ACM_Prim():
 	""" calcule un ACM du graphe stocké sur le serveur en utilisant l'algorithme de Prim """
-	F = {}
+	F = priority_dict()
+	pi = {}
+	cle = {}
 
-	v = getAVertex
-	n = getNeighbors[v]
-	explored = [v]
-	toExplore = [n]
-	F[v] = n
+	v = getAVertex()
+	toExplore = [v]
+
 	while toExplore != [] :
-		print(toExplore,'\n',explored)
-		v = toExplore.pop(0)
-		n = getNeighbors(n)
-		explored += [v]
-		for i in n :
-			if i not in toExplore and i not in explored :
-				toExplore += [i]
-	print(explored)
+		for element in getNeighbors(toExplore[0]) :
+			if element not in F and element not in toExplore  :
+				toExplore += [element]
+		F[toExplore[0]] = float('inf')
+		cle[toExplore[0]] = float('inf')
+		toExplore.pop(0)
+	
+	F[v] = 0
+	pi[v] = None
 
+	while F != {} :
+		u = F.pop_smallest()
+		for v in getNeighbors(u) : 
+			weigth = getWeight(u,v)
+			if v in F and ( F[v] == float('inf') or weigth < cle[v] ) :
+				pi[v] = u
+				cle[v] = weigth
+		print(F)
+
+	print(cle,pi)
 
 
 #---------------------------------------------------------------------------------------------------
@@ -44,7 +55,16 @@ def ACM_Prim():
 #---------------------------------------------------------------------------------------------------
 def ACM_Kruskal(G):
 	""" calcule un ACM du graphe G en utilisant l'algorithme de Kruskal"""
-	pass
+	A = UnionFind()
+	
+	for element in G.keys() :
+		A[element]
+	G['E'].sort()
+	for element in getWeight(u,v) in G['E'] :
+		if A[u] != A[v] :
+			A = A.union(u,v)
+			union(u,v)
+	return A
 
 #---------------------------------------------------------------------------------------------------
 

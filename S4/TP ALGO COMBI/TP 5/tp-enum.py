@@ -67,8 +67,44 @@ if __name__ == '__main__':
 	
 	n, k = 25, 5
 	S, dictS = createDict(n)
+
+	#print(S, dictS)
 	
 	#print( check(dictS,k) )
 	
+	sommeCalories = float('inf')
+	sommeCaloriesSet = []
+
 	for subsets in GenerateSubsets(S,k):
-		print("indices", subsets, " --> corresponding subset", [S[j] for j in subsets])
+		#print("indices", subsets, " --> corresponding subset", [S[j] for j in subsets])
+
+		tempSomCal = 0
+		sub = list(subsets)
+		for element in sub :
+			val = dictS[S[element]]
+			tempSomCal += val[0] * val[1]
+		if tempSomCal < sommeCalories :
+			sommeCaloriesSet = sub
+			sommeCalories = tempSomCal
+
+	print(sommeCalories)
+	print(sommeCaloriesSet)
+
+	allSet = []
+
+	for ele in sommeCaloriesSet :
+		secSet = [x for x in sommeCaloriesSet if x!=ele]
+
+		for ele2 in secSet :
+			thirdSet = [x for x in secSet if x!=ele2]
+
+			for ele3 in thirdSet :
+				fourthSet = [x for x in thirdSet if x!=ele3]
+
+				for ele4 in fourthSet :
+					ele5 = [x for x in fourthSet if x!=ele4]
+
+					allSet.append([ele,ele2,ele3,ele4,ele5[0]])
+
+	print(allSet)
+	print(len(allSet))
