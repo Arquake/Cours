@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/">
+<title>tp7.rst</title>
+<style type="text/css">
+
+/* Minimal style sheet for the HTML output of Docutils.                    */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: minimal.css 8783 2021-06-30 07:47:46Z milde $                                                               */
+/* :Copyright: © 2015, 2021 Günter Milde.                                  */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+
+/* This CSS3 stylesheet defines rules for Docutils elements without        */
+/* HTML equivalent. It is required to make the document semantics visible. */
+/*                                                                         */
+/* .. _validates: http://jigsaw.w3.org/css-validator/validator$link        */
+
+/* titles */
+p.topic-title,
+p.admonition-title,
+p.system-message-title {
+  font-weight: bold;
+}
+p.sidebar-title,
+p.rubric {
+  font-weight: bold;
+  font-size: larger;
+}
+p.rubric {
+  color: maroon;
+}
+p.subtitle,
+p.section-subtitle,
+p.sidebar-subtitle {
+  font-weight: bold;
+  margin-top: -0.5em;
+}
+h1 + p.subtitle {
+  font-size: 1.6em;
+}
+a.toc-backref {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Warnings, Errors */
+.system-messages h2,
+.system-message-title,
+span.problematic {
+  color: red;
+}
+
+/* Inline Literals */
+.docutils.literal {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+/* do not wrap at hyphens and similar: */
+.literal > span.pre { white-space: nowrap; }
+
+/* Lists */
+
+/* compact and simple lists: no margin between items */
+.simple  li, .simple  ul, .simple  ol,
+.compact li, .compact ul, .compact ol,
+.simple  > li p, dl.simple  > dd,
+.compact > li p, dl.compact > dd {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Nested Paragraphs */
+p:first-child { margin-top: 0; }
+p:last-child { margin-bottom: 0; }
+details > p:last-child { margin-bottom: 1em; }
+
+/* Table of Contents */
+.contents ul.auto-toc { /* section numbers present */
+  list-style-type: none;
+}
+
+/* Enumerated Lists */
+ol.arabic     { list-style: decimal }
+ol.loweralpha { list-style: lower-alpha }
+ol.upperalpha { list-style: upper-alpha }
+ol.lowerroman { list-style: lower-roman }
+ol.upperroman { list-style: upper-roman }
+
+/* Definition Lists and Derivatives */
+dt .classifier { font-style: italic }
+dt .classifier:before {
+  font-style: normal;
+  margin: 0.5em;
+  content: ":";
+}
+/* Field Lists and similar */
+/* bold field name, content starts on the same line */
+dl.field-list,
+dl.option-list,
+dl.docinfo {
+  display: flow-root;
+}
+dl.field-list > dt,
+dl.option-list > dt,
+dl.docinfo > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.2em;
+}
+/* Offset for field content (corresponds to the --field-name-limit option) */
+dl.field-list > dd,
+dl.option-list > dd,
+dl.docinfo > dd {
+  margin-left:  9em; /* ca. 14 chars in the test examples, fit all Docinfo fields */
+}
+/* start nested lists on new line */
+dd > dl:first-child,
+dd > ul:first-child,
+dd > ol:first-child {
+  clear: left;
+}
+/* start field-body on a new line after long field names */
+dl.field-list > dd > *:first-child,
+dl.option-list > dd > *:first-child
+{
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+}
+
+/* Bibliographic Fields (docinfo) */
+dl.docinfo pre.address {
+  font: inherit;
+  margin: 0.5em 0;
+}
+dl.docinfo > dd.authors > p { margin: 0; }
+
+/* Option Lists */
+dl.option-list > dt { font-weight: normal; }
+span.option { white-space: nowrap; }
+
+/* Footnotes and Citations  */
+
+.footnote, .citation { margin: 1em 0; } /* default paragraph skip (Firefox) */
+/* hanging indent */
+.citation { padding-left: 2em; }
+.footnote { padding-left: 1.7em; }
+.footnote.superscript { padding-left: 0.9em; }
+.citation > .label { margin-left: -2em; }
+.footnote > .label { margin-left: -1.7em; }
+.footnote.superscript > .label { margin-left: -0.9em; }
+
+.footnote > .label + *,
+.citation > .label + * {
+  display: inline-block;
+  margin-top: 0;
+  vertical-align: top;
+}
+.footnote > .backrefs + *,
+.citation > .backrefs + * {
+  margin-top: 0;
+}
+.footnote > .label + p, .footnote > .backrefs + p,
+.citation > .label + p, .citation > .backrefs + p {
+  display: inline;
+  vertical-align: inherit;
+}
+
+.backrefs > a { font-style: italic; }
+
+/* superscript footnotes */
+a[role="doc-noteref"].superscript,
+.footnote.superscript > .label,
+.footnote.superscript > .backrefs {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: 1;
+}
+a[role="doc-noteref"].superscript > .fn-bracket,
+.footnote.superscript > .label > .fn-bracket {
+  /* hide brackets in display but leave for copy/paste */
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+[role="doc-noteref"].superscript + [role="doc-noteref"].superscript {
+  padding-left: 0.15em; /* separate consecutive footnote references */
+  /* TODO: unfortunately, "+" also selects with text between the references. */
+}
+
+/* Alignment */
+.align-left   {
+  text-align: left;
+  margin-right: auto;
+}
+.align-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-right  {
+  text-align: right;
+  margin-left: auto;
+}
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+/* reset inner alignment in figures and tables */
+figure.align-left, figure.align-right,
+table.align-left, table.align-center, table.align-right {
+  text-align: inherit;
+}
+
+/* Text Blocks */
+.topic { margin: 1em 2em; }
+.sidebar,
+.admonition,
+.system-message {
+  margin: 1em 2em;
+  border: thin solid;
+  padding: 0.5em 1em;
+}
+div.line-block { display: block; }
+div.line-block div.line-block, pre { margin-left: 2em; }
+
+/* Code line numbers: dropped when copying text from the page */
+pre.code .ln { display: none; }
+pre.code code:before {
+  content: attr(data-lineno); /* …, none) fallback not supported by any browser */
+  color: gray;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+td, th {
+  border: thin solid silver;
+  padding: 0 1ex;
+}
+.borderless td, .borderless th {
+  border: 0;
+  padding: 0;
+  padding-right: 0.5em /* separate table cells */
+}
+
+table > caption {
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+table.captionbelow {
+  caption-side: bottom;
+}
+
+/* Document Header and Footer */
+header { border-bottom: 1px solid black; }
+footer { border-top: 1px solid black; }
+
+/* Images are block-level by default in Docutils */
+/* New HTML5 block elements: set display for older browsers */
+img, header, footer, main, aside, nav, section, figure, video, details {
+  display: block;
+}
+/* inline images */
+p img, p video, figure img, figure video {
+  display: inline;
+}
+
+</style>
+<style type="text/css">
+
+/* CSS31_ style sheet for the output of Docutils HTML writers.             */
+/* Rules for easy reading and pre-defined style variants.                  */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: plain.css 8805 2021-08-10 14:13:35Z milde $                                                               */
+/* :Copyright: © 2015 Günter Milde.                                        */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+/* .. _CSS3: http://www.w3.org/TR/CSS3                                     */
+
+
+/* Document Structure */
+/* ****************** */
+
+/* "page layout" */
+body {
+  margin: 0;
+  background-color: #dbdbdb;
+  --field-indent: 9em; /* default indent of fields in field lists */
+}
+main, footer, header {
+  line-height:1.6;
+  /* avoid long lines --> better reading */
+  /* optimum is 45…75 characters/line <http://webtypography.net/2.1.2> */
+  /* OTOH: lines should not be too short because of missing hyphenation, */
+  max-width: 50rem;
+  padding: 1px 2%; /* 1px on top avoids grey bar above title (mozilla) */
+  margin: auto;
+}
+main {
+  counter-reset: table figure;
+  background-color: white;
+}
+footer, header {
+  font-size: smaller;
+  padding: 0.5em 2%;
+  border: none;
+}
+
+/* Table of Contents */
+ul.auto-toc > li > p {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+nav.contents ul {
+  padding-left: 1em;
+}
+main > nav.contents ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B29\ ';
+}
+main > nav.contents ul ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B1D\ ';
+}
+
+/* Transitions */
+hr.docutils {
+  width: 80%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  clear: both;
+}
+
+/* Paragraphs */
+
+/* vertical space (parskip) */
+p, ol, ul, dl, li,
+div.line-block,
+.footnote, .citation,
+div > math,
+table {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6,
+dd, details > p:last-child {
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+/* ===== */
+
+/* Definition Lists */
+/* Indent lists nested in definition lists */
+dd > ul:only-child, dd > ol:only-child { padding-left: 1em; }
+
+/* Description Lists */
+/* styled like in most dictionaries, encyclopedias etc. */
+dl.description {
+  display: flow-root;
+}
+dl.description > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.3em;
+}
+dl.description > dd:after {
+  display: table;
+  content: "";
+  clear: left; /* clearfix for empty descriptions */
+}
+
+/* Field Lists */
+
+dl.field-list > dd,
+dl.docinfo > dd {
+  margin-left: var(--field-indent); /* adapted in media queries or HTML */
+}
+
+/* example for custom field-name width */
+dl.field-list.narrow > dd {
+  --field-indent: 5em;
+}
+/* run-in: start field-body on same line after long field names */
+dl.field-list.run-in > dd p {
+  display: block;
+}
+
+/* Bibliographic Fields */
+
+/* generally, bibliographic fields use dl.docinfo */
+/* but dedication and abstract are placed into divs */
+div.abstract p.topic-title {
+  text-align: center;
+}
+div.dedication {
+  margin: 2em 5em;
+  text-align: center;
+  font-style: italic;
+}
+div.dedication p.topic-title {
+  font-style: normal;
+}
+
+/* disclosures */
+details { padding-left: 1em; }
+summary { margin-left: -1em; }
+
+/* Text Blocks */
+/* =========== */
+
+/* Literal Blocks */
+pre.literal-block, pre.doctest-block,
+pre.math, pre.code {
+  font-family: monospace;
+}
+
+/* Block Quotes and Topics */
+bockquote { margin: 1em 2em; }
+blockquote p.attribution,
+.topic p.attribution {
+  text-align: right;
+  margin-left: 20%;
+}
+
+/* Tables */
+/* ====== */
+
+/* th { vertical-align: bottom; } */
+
+table tr { text-align: left; }
+
+/* "booktabs" style (no vertical lines) */
+table.booktabs {
+  border: 0;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.booktabs * {
+  border: 0;
+}
+table.booktabs th {
+  border-bottom: thin solid;
+}
+
+/* numbered tables (counter defined in div.document) */
+table.numbered > caption:before {
+  counter-increment: table;
+  content: "Table " counter(table) ": ";
+  font-weight: bold;
+}
+
+/* Explicit Markup Blocks */
+/* ====================== */
+
+/* Footnotes and Citations */
+/* ----------------------- */
+
+/* line on the left */
+.footnote {
+  border-left: solid thin;
+  padding-left: 2.1em;
+  margin-bottom: 0;
+}
+.footnote + .footnote {
+  padding-top: 0.5em;
+  margin-top: 0;
+}
+.footnote.superscript {
+  padding-left: 1.2em;
+}
+
+/* Directives */
+/* ---------- */
+
+/* Body Elements */
+/* ~~~~~~~~~~~~~ */
+
+/* Images and Figures */
+
+/* let content flow to the side of aligned images and figures */
+figure.align-left,
+img.align-left,
+video.align-left,
+object.align-left {
+  clear: left;
+  float: left;
+  margin-right: 1em;
+}
+figure.align-right,
+img.align-right,
+video.align-right,
+object.align-right {
+  clear: right;
+  float: right;
+  margin-left: 1em;
+}
+/* Stop floating sidebars, images and figures */
+h1, h2, h3, h4, footer, header { clear: both; }
+
+/* Numbered figures */
+figure.numbered > figcaption > p:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  font-weight: bold;
+}
+
+/* Admonitions and System Messages */
+.caution p.admonition-title,
+.attention p.admonition-title,
+.danger p.admonition-title,
+.error p.admonition-title,
+.warning p.admonition-title,
+div.error {
+  color: red;
+}
+
+/* Sidebar */
+/* Move right. In a layout with fixed margins, */
+/* it can be moved into the margin.            */
+aside.sidebar {
+  width: 30%;
+  max-width: 26em;
+  float: right;
+  clear: right;
+  margin-left: 1em;
+  margin-right: -1%;
+  background-color: #fffffa;
+}
+
+
+/* Code */
+pre.code { padding: 0.7ex }
+pre.code, code { background-color: #eeeeee }
+/* basic highlighting: for a complete scheme, see */
+/* http://docutils.sourceforge.net/sandbox/stylesheets/ */
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+/* Math */
+/* for math-output=MathML (for math-output=HTML, see math.css) */
+math .boldsymbol {
+  font-weight: bold;
+}
+mstyle.mathscr, mi.mathscr {
+  font-family: STIX;
+}
+
+/* Epigraph           */
+/* Highlights         */
+/* Pull-Quote         */
+/* Compound Paragraph */
+/* Container          */
+
+/* Inline Markup */
+/* ============= */
+
+sup, sub { line-height: 0.8; } /* do not add leading for lines with sup/sub */
+
+/* Inline Literals                                          */
+/* possible values: normal, nowrap, pre, pre-wrap, pre-line */
+/*   span.docutils.literal { white-space: pre-wrap; }       */
+
+/* Hyperlink References */
+a { text-decoration: none; }
+
+/* External Targets       */
+/*   span.target.external */
+/* Internal Targets       */
+/*   span.target.internal */
+/* Footnote References    */
+/*   a[role="doc-noteref"] */
+/* Citation References    */
+/*   a.citation-reference */
+
+</style>
+<style type="text/css">
+
+/*
+*   math2html: convert LaTeX equations to HTML output.
+*
+*   Copyright (C) 2009,2010 Alex Fernández
+*                 2021      Günter Milde
+*
+*   Released under the terms of the `2-Clause BSD license'_, in short:
+*   Copying and distribution of this file, with or without modification,
+*   are permitted in any medium without royalty provided the copyright
+*   notice and this notice are preserved.
+*   This file is offered as-is, without any warranty.
+*
+* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause
+*
+*   Based on eLyXer: convert LyX source files to HTML output.
+*   http://elyxer.nongnu.org/
+*
+*
+* CSS file for LaTeX formulas.
+*
+* References: http://www.zipcon.net/~swhite/docs/math/math.html
+*             http://www.cs.tut.fi/~jkorpela/math/
+*/
+
+/* Formulas */
+.formula {
+	text-align: center;
+	margin: 1.2em 0;
+	line-height: 1.4;
+}
+span.formula {
+	white-space: nowrap;
+}
+div.formula {
+	padding: 0.5ex;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Basic features */
+a.eqnumber {
+	display: inline-block;
+	float: right;
+	clear: right;
+	font-weight: bold;
+}
+span.unknown {
+	color: #800000;
+}
+span.ignored, span.arraydef {
+	display: none;
+}
+.phantom {
+	visibility: hidden;
+}
+.formula i {
+	letter-spacing: 0.1ex;
+}
+
+/* Alignment */
+.align-left, .align-l {
+	text-align: left;
+}
+.align-right, .align-r {
+	text-align: right;
+}
+.align-center, .align-c {
+	text-align: center;
+}
+
+/* Structures */
+span.hspace {
+	display: inline-block;
+}
+span.overline, span.bar {
+	text-decoration: overline;
+}
+.fraction, .fullfraction, .textfraction {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+}
+span.formula .fraction,
+.textfraction,
+span.smallmatrix {
+	font-size: 80%;
+	line-height: 1;
+}
+span.numerator {
+	display: block;
+	line-height: 1;
+}
+span.denominator {
+	display: block;
+	line-height: 1;
+	padding: 0ex;
+	border-top: thin solid;
+}
+.formula sub, .formula sup {
+	font-size: 80%;
+}
+sup.numerator, sup.unit {
+	vertical-align: 80%;
+}
+sub.denominator, sub.unit {
+	vertical-align: -20%;
+}
+span.smallsymbol {
+	font-size: 75%;
+	line-height: 75%;
+}
+span.boldsymbol {
+	font-weight: bold;
+}
+span.sqrt {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0.1ex;
+}
+sup.root {
+	position: relative;
+	left: 1.4ex;
+}
+span.radical {
+	display: inline-block;
+	padding: 0ex;
+	/* font-size: 160%; for DejaVu, not required with STIX */
+	line-height: 100%;
+	vertical-align: top;
+	vertical-align: middle;
+}
+
+span.root {
+	display: inline-block;
+	border-top: thin solid;
+	padding: 0ex;
+	vertical-align: middle;
+}
+div.formula .bigoperator,
+.displaystyle .bigoperator,
+.displaystyle .bigoperator {
+	line-height: 120%;
+	font-size: 140%;
+	padding-right: 0.2ex;
+}
+span.fraction .bigoperator,
+span.scriptstyle .bigoperator {
+	line-height: inherit;
+	font-size: inherit;
+	padding-right: 0;
+}
+span.bigdelimiter {
+	display: inline-block;
+}
+span.bigdelimiter.size1 {
+	transform: scale(1, 1.2);
+	line-height: 1.2;
+}
+span.bigdelimiter.size2 {
+	transform: scale(1, 1.62);
+	line-height: 1.62%;
+
+}
+span.bigdelimiter.size3 {
+	transform: scale(1, 2.05);
+	line-height: 2.05%;
+}
+span.bigdelimiter.size4 {
+	transform: scale(1, 2.47);
+	line-height: 2.47%;
+}
+/* vertically stacked sub and superscript */
+span.scripts {
+	display: inline-table;
+	vertical-align: middle;
+	padding-right: 0.2ex;
+}
+.script {
+	display: table-row;
+	text-align: left;
+	line-height: 150%;
+}
+span.limits {
+	display: inline-table;
+	vertical-align: middle;
+}
+.limit {
+	display: table-row;
+	line-height: 99%;
+}
+sup.limit, sub.limit {
+	line-height: 100%;
+}
+span.embellished,
+span.embellished > .base {
+	display: inline-block;
+}
+span.embellished > sup,
+span.embellished > sub {
+	display: inline-block;
+	font-size: 100%;
+	position: relative;
+	bottom: 0.3em;
+	width: 0px;
+}
+span.embellished > sub {
+	top: 0.4em;
+}
+
+/* Environments */
+span.array, span.bracketcases, span.binomial, span.environment {
+	display: inline-table;
+	text-align: center;
+	vertical-align: middle;
+}
+span.arrayrow, span.binomrow {
+	display: table-row;
+	padding: 0;
+	border: 0;
+}
+span.arraycell, span.bracket, span.case, span.binomcell, span.environmentcell {
+	display: table-cell;
+	padding: 0ex 0.2ex;
+	line-height: 1; /* 99%; */
+	border: 0ex;
+}
+.environment.align > .arrayrow > .arraycell.align-l {
+	padding-right: 2em;
+}
+
+/* Inline binomials */
+span.binom {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 80%;
+}
+span.binomstack {
+	display: block;
+	padding: 0em;
+}
+
+/* Over- and underbraces */
+span.overbrace {
+	border-top: 2pt solid;
+}
+span.underbrace {
+	border-bottom: 2pt solid;
+}
+
+/* Stackrel */
+span.stackrel {
+	display: inline-block;
+	text-align: center;
+}
+span.upstackrel {
+	display: block;
+	padding: 0em;
+	font-size: 80%;
+	line-height: 64%;
+	position: relative;
+	top: 0.15em;
+
+}
+span.downstackrel {
+	display: block;
+	vertical-align: bottom;
+	padding: 0em;
+}
+
+/* Fonts */
+.formula {
+	font-family: STIX, "DejaVu Serif", "DejaVu Math TeX Gyre", serif;
+}
+span.radical,   /* ensure correct size of square-root sign */
+span.integral { /* upright integral signs for better alignment of indices */
+	font-family: "STIXIntegralsUp", STIX;
+	/* font-size: 115%; match apparent size with DejaVu */
+}
+span.bracket {
+  /* some "STIX" and "DejaVu Math TeX Gyre" bracket pieces don't fit */
+	font-family: "DejaVu Serif", serif;
+}
+span.mathsf, span.textsf {
+	font-family: sans-serif;
+}
+span.mathrm, span.textrm {
+	font-family: STIX, "DejaVu Serif", "DejaVu Math TeX Gyre", serif;
+}
+span.mathtt, span.texttt {
+	font-family: monospace;
+}
+span.text, span.textnormal,
+span.mathsf, span.mathtt, span.mathrm {
+	font-style: normal;
+}
+span.fraktur {
+	font-family: "Lucida Blackletter", eufm10, blackletter;
+}
+span.blackboard {
+	font-family: Blackboard, msbm10, serif;
+}
+span.scriptfont {
+	font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;
+	font-style: italic;
+}
+span.mathscr {
+  font-family: MathJax_Script, rsfs10,  cursive;
+  font-style: italic;
+}
+span.textsc {
+	font-variant: small-caps;
+}
+span.textsl {
+	font-style: oblique;
+}
+
+/* Colors */
+span.colorbox {
+	display: inline-block;
+	padding: 5px;
+}
+span.fbox {
+	display: inline-block;
+	border: thin solid black;
+	padding: 2px;
+}
+span.boxed, span.framebox {
+	display: inline-block;
+	border: thin solid black;
+	padding: 5px;
+}
+
+</style>
+</head>
+<body>
+<main>
+
+
+<blockquote>
+<table class="align-center" style="width: 100%;">
+<colgroup>
+<col style="width: 80%">
+<col style="width: 20%">
+</colgroup>
+<tbody>
+<tr><td><p>Université d'Orléans</p></td>
+<td><p>L2 Informatique</p></td>
+</tr>
+<tr><td><p>Programmation fonctionnelle</p></td>
+<td><p>2022-2023</p></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<section id="tp-n7">
+<h2>TP n°7</h2>
+<section id="exercice-1-representation-et-manipulation-d-expressions-arithmetiques">
+<h3>Exercice 1. Répresentation et manipulation d'expressions arithmétiques.</h3>
+<p>On souhaite pouvoir représenter des expressions arithmétiques avec
+variables par un type OCaml puis manipuler ces représentations.  Des
+exemples d'expressions devant pouvoir être représentées suivent :</p>
+<ul class="simple">
+<li><p><span class="formula">(2×<i>x</i>) + 1</span></p></li>
+<li><p><span class="formula">42<i>mod</i>7 + 12×2</span></p></li>
+<li><p><span class="formula">(<i>a</i> + <i>b</i>) ⁄ (<i>a</i> − <i>b</i>)</span></p></li>
+<li><p><span class="formula">1 + <i>max</i>(<i>x</i>, 0)</span></p></li>
+<li><p><span class="formula"><i>sqr</i>(<i>abs</i>(<i>x</i> − <i>y</i>))</span></p></li>
+<li><p><span class="formula"> − <i>x</i> + 2</span></p></li>
+</ul>
+</section>
+<section id="question-1-types">
+<h3>Question 1 : types</h3>
+<ol class="arabic simple">
+<li><p>Définir un type <code class="ocaml"><span class="name">unary_operation</span></code> qui permet de représenter les
+opérations unaires (l'opposé, la valeur absolue, le carré).</p></li>
+<li><p>Définir un type <code class="ocaml"><span class="name">binary_operation</span></code> qui permet de représenter les
+opérations binaires.</p></li>
+<li><p>Définir un type paramétré <code class="ocaml"><span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span></code> pour définir des
+opérations arithmétiques avec variables. Il est attendu que ce type
+ait quatre constructeurs. Dans le constructeur qui les concernent,
+les variables sont représentées par des valeurs de type <code class="ocaml"><span class="keyword">'</span><span class="name">a</span></code>.</p></li>
+<li><p>En utilisant les constructeurs de ces types, définir des valeurs
+qui représentent les expressions arithmétiques ci-dessus.</p></li>
+</ol>
+</section>
+<section id="question-2-evaluation-des-expressions">
+<h3>Question 2 : évaluation des expressions</h3>
+<ol class="arabic simple">
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">closed</span><span class="operator">:</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span> <span class="operator">-&gt;</span> <span class="keyword type">bool</span></code> qui
+renvoie <code class="ocaml"><span class="name builtin pseudo">true</span></code> si et seulement si l'expression est close,
+c'est-à-dire qu'elle ne contient pas de variables.</p></li>
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">all_variables</span><span class="operator">:</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">a</span> <span class="keyword type">list</span></code> qui
+renvoie la liste de toutes les variables présentes dans l'expression.
+Une variable présente plusieurs fois dans l'expression sera présente
+plusieurs fois dans la liste.</p></li>
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">variables</span><span class="operator">:</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">a</span> <span class="keyword type">list</span></code> qui
+renvoie la liste de toutes les variables présentes dans l'expression,
+mais sans doublons dans la liste.</p></li>
+</ol>
+</section>
+<section id="question-3-analyse-des-expressions">
+<h3>Question 3 : analyse des expressions</h3>
+<ol class="arabic simple">
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">get_unary</span><span class="operator">:</span> <span class="name">unary_operation</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span></code>
+qui à la représentation d'une opération unaire fait
+correspondre son implantation en OCaml.</p></li>
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">get_binary</span><span class="operator">:</span> <span class="name">binary_operation</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span></code>
+qui fait de même pour les opérations binaires.</p></li>
+<li><p>Ecrire une fonction <code class="ocaml"><span class="name">evaluate_closed</span><span class="operator">:</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span></code> qui
+évalue des expressions closes (c'est-à-dire qui ne contiennent pas
+de variables). Si l'expression donnée en argument n'est pas close,
+la fonction lève une exception appropriée.</p></li>
+</ol>
+</section>
+<section id="exercice-2-bonus">
+<h3>Exercice 2. Bonus</h3>
+<p>Cet exercice est la suite de l'exercice 1.</p>
+</section>
+<section id="question-1">
+<h3>Question 1</h3>
+<p>Ecrire une fonction <code class="ocaml"><span class="name">eval_with_store</span> <span class="operator">:</span> <span class="operator">(</span><span class="keyword">'</span><span class="name">a</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">b</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span><span class="operator">)</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">b</span>
+<span class="operator">-&gt;</span> <span class="keyword type">int</span> <span class="name">option</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span></code> qui permet d'évaluer des
+expressions avec variables.</p>
+<p>Dans un appel <code class="ocaml"><span class="name">eval_with_store</span> <span class="name">get</span> <span class="name">store</span> <span class="name">default_value</span>
+<span class="name">expression</span></code>, les valeurs pour ces variables sont stockées dans une
+structure de données de dictionnaire <code class="ocaml"><span class="name">store</span></code> et le premier
+argument <code class="ocaml"><span class="name">get</span></code> est une fonction qui étant donnés une telle
+structure de données et une variable : soit retourne l'entier associé
+à cette variable, soit lance l'exception <code class="ocaml"><span class="name class">Not_found</span></code>.  Le
+troisième argument est une valeur par défaut optionnelle.  Si jamais
+une variable n'est pas présente dans le dictionnaire et si une valeur
+par défaut est donnée, cette valeur est utilisée.  Si une variable
+n'est pas dans le dictionnaire et que la valeur par défaut est
+<code class="ocaml"><span class="name class">None</span></code>, la fonction <code class="ocaml"><span class="name">eval_with_store</span></code> lève une
+exception.</p>
+</section>
+<section id="question-2">
+<h3>Question 2</h3>
+<p>En utilisant, <code class="ocaml"><span class="name">eval_with_store</span></code> écrire une
+fonction <code class="ocaml"><span class="name">evaluate</span> <span class="operator">:</span> <span class="operator">(</span><span class="keyword">'</span><span class="name">a</span> <span class="operator">*</span> <span class="keyword type">int</span><span class="operator">)</span> <span class="keyword type">list</span> <span class="operator">-&gt;</span> <span class="keyword">'</span><span class="name">a</span> <span class="name">expression</span></code>
+qui prend une liste d'association comme dictionnaire pour
+les variables.</p>
+<p>Si le premier exemple d'expression de l'exercice 1 est implantée par
+une expression <code class="ocaml"><span class="name">ex1</span></code> de type <code class="ocaml"><span class="keyword type">char</span> <span class="name">expression</span></code> et que la
+variable <span class="formula"><i>x</i></span> est représentée par le caractère <code class="ocaml"><span class="literal string char">'x'</span></code>,
+la boucle interactive doit répondre par exemple :</p>
+<pre class="code ocaml literal-block"><small class="ln">1 </small><code data-lineno="1 ">   <span class="operator">#</span> <span class="name">evaluate</span> <span class="operator">[(</span><span class="literal string char">'x'</span><span class="operator">,</span><span class="literal number integer">1</span><span class="operator">)]</span> <span class="name">ex1</span><span class="operator">;;</span>
+</code><small class="ln">2 </small><code data-lineno="2 ">   <span class="operator">-</span> <span class="operator">:</span> <span class="keyword type">int</span> <span class="operator">=</span> <span class="literal number integer">3</span></code></pre>
+</section>
+</section>
+</main>
+
+
+</body></html>

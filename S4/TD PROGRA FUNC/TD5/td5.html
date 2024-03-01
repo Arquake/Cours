@@ -1,0 +1,468 @@
+<!--?xml version="1.0" encoding="utf-8" ?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/">
+<title>td5.rst</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<table border="1" class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col width="80%">
+<col width="20%">
+</colgroup>
+<tbody valign="top">
+<tr><td>Université d'Orléans</td>
+<td>L2 Informatique</td>
+</tr>
+<tr><td>Programmation fonctionnelle</td>
+<td>2023-2024</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="td-n5">
+<h1>TD n°5</h1>
+<div class="section" id="exercice-1">
+<h2>Exercice 1</h2>
+<p>Sans l'utiliser, donner la réponse que donnerait la boucle interactive
+pour chacune des phrases suivantes, en supposant que celles-ci sont
+évaluées à la suite.</p>
+<pre class="code ocaml literal-block"><span class="ln"> 1 </span><span class="keyword">type</span> <span class="name">quantite</span> <span class="operator">=</span> <span class="keyword type">int</span><span class="operator">;;</span>
+<span class="ln"> 2 </span><span class="keyword">let</span> <span class="name">quantite_topinambour</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="operator">;;</span>
+<span class="ln"> 3 </span><span class="keyword">let</span> <span class="name">quantite_patates</span> <span class="operator">:</span> <span class="name">quantite</span> <span class="operator">=</span> <span class="literal number integer">9</span><span class="operator">;;</span>
+<span class="ln"> 4 </span><span class="keyword">type</span> <span class="name">tubercule</span> <span class="operator">=</span> <span class="name class">Patate</span> <span class="operator">|</span> <span class="name class">Topinambour</span><span class="operator">;;</span>
+<span class="ln"> 5 </span><span class="keyword">type</span> <span class="name">stock</span> <span class="operator">=</span> <span class="operator">{</span><span class="name">aliment</span> <span class="operator">:</span> <span class="name">tubercule</span> <span class="operator">;</span> <span class="name">qtte</span> <span class="operator">:</span> <span class="name">quantite</span><span class="operator">};;</span>
+<span class="ln"> 6 </span><span class="keyword">let</span> <span class="name">s</span> <span class="operator">=</span> <span class="operator">{</span><span class="name">aliment</span><span class="operator">=</span><span class="name class">Patate</span><span class="operator">;</span> <span class="name">qtte</span><span class="operator">=</span><span class="literal number integer">1</span><span class="operator">}</span> <span class="keyword">in</span> <span class="name">s</span><span class="operator">.</span><span class="name">qtte</span><span class="operator">;;</span>
+<span class="ln"> 7 </span><span class="keyword">let</span> <span class="name">est_bon</span> <span class="operator">=</span> <span class="keyword">fun</span> <span class="name">t</span> <span class="operator">-&gt;</span>
+<span class="ln"> 8 </span>   <span class="keyword">match</span> <span class="name">t</span> <span class="keyword">with</span>
+<span class="ln"> 9 </span>      <span class="operator">|</span><span class="name class">Patate</span> <span class="operator">-&gt;</span> <span class="name builtin pseudo">true</span>
+<span class="ln">10 </span>      <span class="operator">|</span><span class="name class">Topinambour</span> <span class="operator">-&gt;</span> <span class="name builtin pseudo">false</span><span class="operator">;;</span>
+<span class="ln">11 </span><span class="keyword">type</span> <span class="name">inventaire</span> <span class="operator">=</span> <span class="name">stock</span> <span class="keyword type">list</span><span class="operator">;;</span>
+<span class="ln">12 </span><span class="keyword">let</span> <span class="name">bon_stock</span> <span class="operator">=</span> <span class="name namespace">List</span><span class="punctuation">.</span><span class="name">filter</span> <span class="operator">(</span><span class="keyword">fun</span> <span class="name">s</span> <span class="operator">-&gt;</span> <span class="operator">(</span><span class="name">est_bon</span> <span class="name">s</span><span class="operator">.</span><span class="name">aliment</span><span class="operator">));;</span>
+<span class="ln">13 </span><span class="keyword">let</span> <span class="name">mon_stock</span> <span class="operator">=</span> <span class="operator">[</span> <span class="operator">{</span><span class="name">aliment</span><span class="operator">=</span><span class="name class">Patate</span><span class="operator">;</span><span class="name">qtte</span><span class="operator">=</span><span class="literal number integer">3</span><span class="operator">};</span>
+<span class="ln">14 </span>                  <span class="operator">{</span><span class="name">aliment</span><span class="operator">=</span><span class="name class">Topinambour</span><span class="operator">;</span><span class="name">qtte</span><span class="operator">=</span><span class="literal number integer">1</span><span class="operator">};</span>
+<span class="ln">15 </span>                  <span class="operator">{</span><span class="name">aliment</span><span class="operator">=</span><span class="name class">Patate</span><span class="operator">;</span><span class="name">qtte</span><span class="operator">=</span><span class="literal number integer">1</span><span class="operator">};</span>
+<span class="ln">16 </span>                  <span class="operator">{</span><span class="name">aliment</span><span class="operator">=</span><span class="name class">Topinambour</span><span class="operator">;</span><span class="name">qtte</span><span class="operator">=</span><span class="literal number integer">19</span><span class="operator">}</span>
+<span class="ln">17 </span>                 <span class="operator">];;</span>
+<span class="ln">18 </span><span class="keyword">let</span> <span class="keyword">rec</span> <span class="name">nb_bons_aliments</span> <span class="operator">=</span> <span class="keyword">fun</span> <span class="name">s</span> <span class="operator">-&gt;</span>
+<span class="ln">19 </span>   <span class="keyword">match</span> <span class="operator">(</span><span class="name">bon_stock</span> <span class="name">s</span><span class="operator">)</span> <span class="keyword">with</span>
+<span class="ln">20 </span>      <span class="operator">|</span><span class="name builtin pseudo">[]</span><span class="operator">-&gt;</span> <span class="literal number integer">0</span>
+<span class="ln">21 </span>      <span class="operator">|</span><span class="name">h</span><span class="operator">::</span><span class="name">t</span> <span class="operator">-&gt;</span> <span class="operator">(</span><span class="name">h</span><span class="operator">.</span><span class="name">qtte</span><span class="operator">)</span> <span class="operator">+</span> <span class="name">nb_bons_aliments</span> <span class="name">t</span><span class="operator">;;</span>
+<span class="ln">22 </span><span class="name">nb_bons_aliments</span> <span class="name">mon_stock</span><span class="operator">;;</span>
+</pre>
+</div>
+<div class="section" id="exercice-2">
+<h2>Exercice 2</h2>
+<p>Définissez un type somme <code class="ocaml"><span class="name">media_type</span></code> correspondant à des catégories de
+supports (livre, bd, jeu,…).</p>
+<p>Définissez ensuite un type enregistrement <code class="ocaml"><span class="name">media</span></code>
+comprenant des champs pour les informations liées à un support
+(catégorie, titre, auteur,…).</p>
+<p>Définissez un type <code class="ocaml"><span class="name">mediatheque</span></code> correspondant à plusieurs
+supports, ainsi que deux fonctions~:</p>
+<ul class="simple">
+<li><code class="ocaml"><span class="name">auteurs</span> <span class="operator">:</span> <span class="name">mediatheque</span> <span class="operator">-&gt;</span> <span class="keyword type">string</span> <span class="keyword type">list</span></code> qui retourne la liste
+des auteurs présents dans une médiathèque (sans se préoccuper des
+doublons).</li>
+<li><code class="ocaml"><span class="name">nb_categorie</span> <span class="operator">:</span> <span class="name">mediatheque</span> <span class="operator">-&gt;</span> <span class="name">media_type</span> <span class="operator">-&gt;</span> <span class="keyword type">int</span></code> qui
+retourne le nombre de supports d’une catégorie donnée dans une
+médiathèque</li>
+</ul>
+</div>
+<div class="section" id="exercice-3">
+<h2>Exercice 3</h2>
+<p>Dans cet exercice, on cherche à représenter des morceaux de musique.
+Une piste musicale est constituée de plusieurs données :</p>
+<ul class="simple">
+<li>Un titre</li>
+<li>Un auteur</li>
+<li>Une liste de lignes musicales (une pour chaque instrument)</li>
+</ul>
+<p>Une ligne musicale contient deux données : le nom de l’instrument, et une suite de sons, où un son est
+soit un silence, soit une note (encodée par un entier).</p>
+<p>Dans chaque ligne musicale, le n-ème élément de la liste correspond au son
+joué par l’instrument à l’instant n.</p>
+<div class="section" id="question-1">
+<h3>Question 1</h3>
+<p>Définissez les types <code class="ocaml"><span class="name">son</span><span class="operator">,</span><span class="name">ligne</span><span class="operator">,</span><span class="name">piste</span></code> pour représenter les donées
+décrites plus haut.</p>
+</div>
+<div class="section" id="question-2">
+<h3>Question 2</h3>
+<p>Définissez une fonction <code class="ocaml"><span class="name">transpose</span></code> qui prend en paramètres une piste et un
+entier n, et qui décale toutes les notes de n valeurs.</p>
+</div>
+<div class="section" id="question-3">
+<h3>Question 3</h3>
+<p>Définissez une fonction <code class="ocaml"><span class="name">who_plays</span></code> qui prend en paramètres une piste et un
+entier n, et qui renvoie la liste des instruments qui jouent (une note
+différente d’un silence) à la seconde n.</p>
+</div>
+<div class="section" id="question-4">
+<h3>Question 4</h3>
+<p>Comment modifieriez-vous le code pour rajouter la possibilité d’avoir
+une ligne musicale pour le chant, contenant, en plus des notes, les syllabes
+chantées ?</p>
+</div>
+</div>
+</div>
+</div>
+
+
+</body></html>
