@@ -13,7 +13,7 @@ let rec f = fun key -> fun list ->                            val f : 'a -> ('a,
   | Pair(_, _, tail)  -> f key tail;;                         
 f 3 v4;;                                                      -: string option = None
 f 2 v5;;                                                      -: string option = "Two"
-type 'a cell = { head : 'a; tail : 'a list' }                  type cell = { head : 'a ; tail : 'a list';}
+type 'a cell = { head : 'a; tail : 'a list' }                 type cell = { head : 'a ; tail : 'a list';}
 and  'a list' = 'a cell option;;                              type list' = 'a cell option
 let empty : 'a list' =  None;;                                val empty : 'a list' = None
 let (+:) : 'a -> 'a list' -> 'a list' =                       val (+:) : 'a -> 'a list' -> 'a list' = <fun>
