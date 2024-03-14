@@ -120,15 +120,18 @@ let get_binary = fun ope num1 num2 ->
   | Divide -> num1 / num2
   | Minus -> num1 - num2;;
 
-
-exception Invalid_Input of string;;
-
 let evaluate_closed = fun expr ->
   let rec checker = fun exp ->
   match exp with
   | Unary(operation,v1) -> get_unary operation (checker(v1))
   | Binary(operation,v1,v2) -> get_binary operation (checker(v1)) (checker(v2))
   | Int(v1) -> v1
-  | Variable (_) -> raise ("A variable was found in the expression")
+  | Variable (_) -> raise (Invalid_argument "A variable was found in the expression")
   in
   checker expr;;
+
+
+(* EXERCICE 2 *)
+
+(* Q1 *)
+
