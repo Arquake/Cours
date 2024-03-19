@@ -27,3 +27,15 @@ let check = fun dict ->
   match dict with
   | Empty -> false
   | Pair (k,v,t) -> inside_check dict [];;
+
+
+(* Q3 *)
+
+let delete = fun key dict -> 
+  let rec aux = fun dico ->
+    match dico with
+    | Empty -> Empty
+    | Pair(k,v,t) when k = key -> t
+    | Pair(k,v,t) -> Pair(k,v,aux t)
+  in
+  aux dict;;
