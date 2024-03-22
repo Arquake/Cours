@@ -1,0 +1,141 @@
+format 224
+
+classinstancecanvas 128002 classinstance_ref 128258 // 
+  xyz 287.361 46.3567 2005 life_line_z 2000
+end
+classinstancecanvas 128130 classinstance_ref 128386 // 
+  xyz 647.988 50.3538 2005 life_line_z 2000
+end
+note 129794 "ensemble VehiculesDispo
+( flèche retour )"
+  xyzwh 83.3643 1311.1 2017 206 56
+classinstancecanvas 131842 classinstance_ref 128642 // 
+  xyz 879.4 160.4 2005 life_line_z 2000
+end
+classinstancecanvas 132354 classinstance_ref 128770 // modele
+  xyz 1084.8 160.2 2005 life_line_z 2000
+end
+fragment 132866 "loop"
+  form ": ensemble<i>" xyzwh 1031.5 517.3 2020 1003 448
+end
+fragment 132994 "opt"
+  refer sequencediagram_ref 128130 // prg
+  form ": b = true" xyzwh 1078 691.2 2025 909 226
+end
+classinstancecanvas 133250 classinstance_ref 129026 // 
+  xyz 1307.1 273.6 2005 life_line_z 2000
+end
+classinstancecanvas 133378 classinstance_ref 129154 // lesVehiculesNeufs[i]
+  xyz 1648.3 266.9 2005 life_line_z 2000
+end
+fragment 133506 "alt"
+  refer sequencediagram_ref 128130 // prg
+  form ": choix = \"neuf\"" xyzwh 1003.5 451.5 2000 1385 713
+  separator 9190
+end
+classinstancecanvas 134274 classinstance_ref 129282 // lesVehOcc:[i]
+  xyz 1998.6 268.1 2005 life_line_z 2000
+end
+note 134786 "choix = \"occasion\""
+  xyzwh 1022 1106 2005 98 55
+fragment 134914 "loop"
+  xyzwh 1153.5 1104 2025 1000 53
+end
+durationcanvas 128386 classinstance_ref 128002 // :Controller
+  xyzwh 321 90.0993 2010 11 1248
+end
+durationcanvas 128770 classinstance_ref 128130 // :FaçadeVente
+  xyzwh 692 108.793 2010 11 1230
+end
+durationcanvas 131970 classinstance_ref 131842 // :lesModeles
+  xyzwh 918 246 2010 11 370
+end
+durationcanvas 132482 classinstance_ref 132354 // modele:Modele
+  xyzwh 1135 360.8 2010 11 460
+end
+durationcanvas 133634 classinstance_ref 133378 // lesVehiculesNeufs[i]:VehiculeNeuf
+  xyzwh 1758 385.3 2010 11 257
+end
+durationcanvas 134018 classinstance_ref 133250 // :ensVehiculeDispo:Set<Vehicule>
+  xyzwh 1417 400.9 2010 11 420
+end
+durationcanvas 134402 classinstance_ref 132354 // modele:Modele
+  xyzwh 1135 328.8 2010 11 815
+end
+durationcanvas 134530 classinstance_ref 134274 // lesVehOcc:[i]:VehiculeOccasion
+  xyzwh 2100 328.8 2010 11 815
+end
+durationcanvas 135042 classinstance_ref 132354 // modele:Modele
+  xyzwh 1135 1213.8 2010 11 40
+end
+durationcanvas 135170 classinstance_ref 128130 // :FaçadeVente
+  xyzwh 692 1214.8 2010 11 28
+end
+lostfoundmsgsupport 128514 xyz 16.9853 107 2015
+msg 128642 found_synchronous
+  from lostfoundmsgsupport_ref 128514
+  to durationcanvas_ref 128386
+  yz 105 2015 explicitmsg "rechercherVehiculeDispo(idModele,choix)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 36 89
+msg 128898 synchronous
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128770
+  yz 120 2020 explicitmsg "getVehiculeDispo(idModele,choix)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 401 103
+msg 129410 return
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128386
+  yz 1318 2015 explicitmsg "listeVehiculesDispo"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 447 1301
+msg 132098 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 131970
+  yz 265 2015 explicitmsg "get(idModele)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 759 250
+msg 132226 return
+  from durationcanvas_ref 131970
+  to durationcanvas_ref 128770
+  yz 318 2015 explicitmsg "modele"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 789 300
+msg 132610 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 132482
+  yz 372 2015 explicitmsg "getVehiculeDispo(choix)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 949 350
+msg 133762 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 133634
+  yz 526 2025 explicitmsg "estDispo()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1431 509
+msg 133890 return
+  from durationcanvas_ref 133634
+  to durationcanvas_ref 132482
+  yz 546 2015 explicitmsg "b"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1382 562
+msg 134146 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 134018
+  yz 799 2015 explicitmsg "add(lesVehiculesNeuf[i])"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1202 782
+msg 134658 synchronous
+  from durationcanvas_ref 134402
+  to durationcanvas_ref 134530
+  yz 1123 2020 explicitmsg "estDispo()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 1594 1138
+msg 135298 return
+  from durationcanvas_ref 135042
+  to durationcanvas_ref 135170
+  yz 1223 2015 explicitmsg "ensVehDispo"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 877 1198
+end

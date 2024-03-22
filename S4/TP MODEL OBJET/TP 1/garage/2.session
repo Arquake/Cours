@@ -1,0 +1,13 @@
+window_sizes 923 1016 184 733 963 0
+cleanlooks_style
+diagrams
+  active  sequencediagram_ref 128130 // prg
+    733 963 80 D 301 0
+  sequencediagram_ref 128002 // garage
+    120 106 100 A4 0 0
+end
+show_stereotypes
+open
+  usecaseview_ref 128002 // garage
+end
+end
