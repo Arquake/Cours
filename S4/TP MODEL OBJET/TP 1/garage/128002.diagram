@@ -1,0 +1,177 @@
+format 224
+
+classinstancecanvas 128130 classinstance_ref 128002 // System
+  xyz 510 87 2005 life_line_z 2000
+end
+classinstancecanvas 128258 classinstance_ref 128130 // Utilisateur
+  xyz 52 75 2005 life_line_z 2000
+end
+fragment 134914 "opt"
+  xyzwh 71 560 2000 546 87
+end
+fragment 135042 "opt"
+  xyzwh 71.5 656 2000 546 87
+end
+durationcanvas 129922 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 125 2010 11 752
+end
+durationcanvas 130050 classinstance_ref 128130 // System:System
+  xyzwh 561 134 2010 11 739
+end
+durationcanvas 130306 classinstance_ref 128130 // System:System
+  xyzwh 561 170 2010 11 61
+end
+durationcanvas 130562 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 195 2010 11 30
+end
+durationcanvas 130818 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 232 2010 11 41
+end
+durationcanvas 130946 classinstance_ref 128130 // System:System
+  xyzwh 561 232 2010 11 26
+end
+durationcanvas 131202 classinstance_ref 128130 // System:System
+  xyzwh 561 331 2010 11 40
+end
+durationcanvas 131330 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 331 2010 11 25
+end
+durationcanvas 131586 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 383 2010 11 25
+end
+durationcanvas 131714 classinstance_ref 128130 // System:System
+  xyzwh 561 382 2010 11 25
+end
+durationcanvas 131970 classinstance_ref 128130 // System:System
+  xyzwh 561 428 2010 11 41
+end
+durationcanvas 132098 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 429 2010 11 27
+end
+durationcanvas 132354 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 490 2010 11 25
+end
+durationcanvas 132482 classinstance_ref 128130 // System:System
+  xyzwh 561 488 2010 11 25
+end
+durationcanvas 132738 classinstance_ref 128130 // System:System
+  xyzwh 561 526 2010 11 25
+end
+durationcanvas 132866 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 524 2010 11 25
+end
+durationcanvas 133122 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 798 2010 11 25
+end
+durationcanvas 133250 classinstance_ref 128130 // System:System
+  xyzwh 561 787 2010 11 36
+end
+durationcanvas 134402 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 572 2010 11 65
+end
+durationcanvas 134530 classinstance_ref 128130 // System:System
+  xyzwh 561 572 2010 11 65
+end
+durationcanvas 135938 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 679 2010 11 40
+end
+durationcanvas 136066 classinstance_ref 128130 // System:System
+  xyzwh 561 679 2010 11 34
+end
+durationcanvas 136450 classinstance_ref 128258 // Utilisateur:Utilisateur
+  xyzwh 119 841 2010 11 40
+end
+durationcanvas 136578 classinstance_ref 128130 // System:System
+  xyzwh 561 841 2010 11 25
+end
+msg 130178 synchronous
+  from durationcanvas_ref 129922
+  to durationcanvas_ref 130050
+  yz 135 2015 explicitmsg "creerProposition()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 294 120
+msg 130434 synchronous
+  from durationcanvas_ref 129922
+  to durationcanvas_ref 130306
+  yz 171 2015 explicitmsg "rechercherClient(nom)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 257 156
+msg 130690 return
+  from durationcanvas_ref 130306
+  to durationcanvas_ref 130562
+  yz 208 2020 explicitmsg "listeClients"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 307 193
+msg 131074 synchronous
+  from durationcanvas_ref 130818
+  to durationcanvas_ref 130946
+  yz 241 2015 explicitmsg "getClient(idClient)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 282 225
+msg 131458 return
+  from durationcanvas_ref 131202
+  to durationcanvas_ref 131330
+  yz 331 2015 explicitmsg "listeModelesVehicules + info client"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 236 316
+msg 131842 synchronous
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 131714
+  yz 383 2015 explicitmsg "rechercherVehiculesDispo(idModele, choix)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 176 364
+msg 132226 return
+  from durationcanvas_ref 131970
+  to durationcanvas_ref 132098
+  yz 429 2015 explicitmsg "listeVehicules"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 299 414
+msg 132610 synchronous
+  from durationcanvas_ref 132354
+  to durationcanvas_ref 132482
+  yz 490 2015 explicitmsg "getVehicule(idVehicule)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 269 475
+msg 132994 return
+  from durationcanvas_ref 132738
+  to durationcanvas_ref 132866
+  yz 526 2015 explicitmsg "infoVehicule + prix"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 305 511
+msg 133378 synchronous
+  from durationcanvas_ref 133122
+  to durationcanvas_ref 133250
+  yz 812 2015 explicitmsg "finaliserProposition(idClient,idVehicule,remise,montantReprise)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 144 794
+msg 134658 synchronous
+  from durationcanvas_ref 134402
+  to durationcanvas_ref 134530
+  yz 580 2015 explicitmsg "remise(pourcentage)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 280 565
+msg 134786 return
+  from durationcanvas_ref 134530
+  to durationcanvas_ref 134402
+  yz 607 2020 explicitmsg "prix"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 336 592
+msg 136194 asynchronous
+  from durationcanvas_ref 135938
+  to durationcanvas_ref 136066
+  yz 679 2015 explicitmsg "remise(montant)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 290 664
+msg 136322 return
+  from durationcanvas_ref 136066
+  to durationcanvas_ref 135938
+  yz 702 2020 explicitmsg "prix"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 331 687
+msg 136706 synchronous
+  from durationcanvas_ref 136450
+  to durationcanvas_ref 136578
+  yz 853 2015 explicitmsg "imprimer()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 312 838
+end
