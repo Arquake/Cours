@@ -6,43 +6,35 @@ val fst: ('a, 'b) pair -> 'a
 val snd: ('a, 'b) pair -> 'b
 end
 
-module A = 
+module A:PAIR = 
 struct
-  type ('a, 'b) pair = Pair of 'a * 'b
-  let create = fun a b -> Pair(a,b)
-  let fst =  
-    function
-    | Pair(a,_) -> a
+  type ('a, 'b) pair = 'a * 'b
+  let create = fun a b -> (a,b)
+  let fst = fst
 
-  let snd =  
-    function
-    | Pair(_,b) -> b
+  let snd = snd
 end
 
 
-module B =
+module B: PAIR =
 struct
-  type ('a, 'b) pair = Combine of bool*bool
-  let create = fun a b -> Combine(a,b)
-  let fst =  
-    function
-    | Combine(a,_) -> a
+  type ('a, 'b) pair = {f:'a;s:'b}
+  let create = fun a b -> {f=a;s=b}
+  let fst = fun x -> x.f
 
-  let snd =  
-    function
-    | Combine(_,b) -> b
+  let snd = fun x -> x.s
 end
 
 
-module C =
+module C: PAIR =
   struct
-    type ('a, 'b) pair = Both of int*float
-    let create = fun a b -> Both(a,b)
+    type ('a, 'b) pair = Pair of 'a * 'b
+    let create = fun a b -> Pair(a,b)
     let fst =  
       function
-      | Both(a,_) -> a
+      | Pair(a,_) -> a
 
     let snd =  
       function
-      | Both(_,b) -> b
+      | Pair(_,b) -> b
   end

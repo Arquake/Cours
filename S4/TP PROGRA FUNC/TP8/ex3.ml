@@ -29,7 +29,22 @@ struct
   | Unary of unary_operation * 'a expression
   | Binary of binary_operation * 'a expression * 'a expression
 
-  let evaluate: 'a expr -> ('a, int) Env.t -> int = fun exp ele ->
-    try exp ele with raise "test"
+  let evaluate: 'a expression -> ('a, int) Env.t -> int = fun exp ele ->
+    let unary_opp = fun f v1 v2 ->
+      match f with
+      | Add -> v1 + v2
+      | Sub -> v1 - v2
+      | Mul -> v1 * v2
+      | Div -> v1 / v2
+      | Mod -> v1 - (v1 / v2) * v2
+      | Max -> if v1 > v2 then v1 else v2
+    in
+    
+
+    let rec aux =
+      function
+      | Var(variable) ->
+      | Int(x) -> x
+      |
   
 end
