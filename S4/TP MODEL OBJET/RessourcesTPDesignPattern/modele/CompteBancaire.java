@@ -52,14 +52,13 @@ public abstract class CompteBancaire implements Comparable<CompteBancaire>{
         if (montant>0) {
             solde = solde + montant;
         }
-        else
+        else {
             throw new IllegalArgumentException("Le montant doit être positif");
+        }
     }
     public void debiter(int montant) throws DebitImpossibleException{
           solde = solde - montant;
           Journalisation.getInstance().ajouterLog("Retrait de " + montant + " euros sur le compte numero " + numero);
-    
-        
     }
 
 

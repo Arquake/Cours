@@ -1,5 +1,9 @@
 package modele;
 
+import modele.Exception.MontantInvalidException;
+import modele.Exception.NumeroCompteInvalidException;
+import modele.Exception.OperationInvalidException;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -50,4 +54,17 @@ public class AgenceBancaire {
        }
     }
 
+    public void gererOperation(int numeroCompte, String type, int montant) throws NumeroCompteInvalidException, OperationInvalidException, MontantInvalidException {
+        if (lesComptes.get(numeroCompte) == null){throw new NumeroCompteInvalidException();}
+        if (!type.equalsIgnoreCase("D") && !type.equalsIgnoreCase("C")){throw new OperationInvalidException();}
+        try {
+            if (type.equalsIgnoreCase("D")) {
+                lesComptes.get(numeroCompte).debiter(montant);
+            } else {
+                lesComptes.get(numeroCompte).crediter(montant);
+            };
+        } catch (Exception e) {
+            throw new MontantInvalidException();
+        }
+    }
 }

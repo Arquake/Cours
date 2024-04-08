@@ -79,7 +79,7 @@ struct
   let find: 'a -> ('a, 'b) t -> 'b = fun ele l ->
     let rec check =
       function
-      | Node((k,v),_,_) when k = ele -> k
+      | Node((k,v),_,_) when k = ele -> v
       | Node((k,v),l,_) when k > ele -> check l
       | Node((k,v),_,r) when k < ele -> check r
       | Empty -> raise Not_found
@@ -94,20 +94,16 @@ struct
       | Node((k,v),l,_) when l <> Empty -> get_min l
       | Node((k,v),Empty,_) -> (k,v)
     in
-    let rec check_min = 
-      function
-      | Node((k,v),l,_) when l <> Empty -> true
-      | _ -> false
-  
-    in
+    
     let rec check = 
       function
-      | Node((k,v),l,r) when k = ele -> if check_min (Node((k,v),l,r)) = false then Empty 
-          else let min = get_min (Node((k,v),l,r)) in
-            let rest = Node(min,l,r) in check rest
+      | Node((k,v),l,r) when k = ele -> if r <> Empty then
+            let min = get_min r in
+            let rest = Node(min,l,r) in check rest 
+          else l
       | Node((k,v),l,r) when k > ele -> Node((k,v),check l,r)
       | Node((k,v),l,r) when k < ele -> Node((k,v),l,check r)
-      | Empty -> Node((ele,ele),Empty,Empty)
+      | Empty -> Empty
     in
     check li
 
