@@ -37,11 +37,18 @@ WHERE numCli=(Select * FROM v1);
 SELECT * FROM Action WHERE codeAct IN (SELECT * FROM v2);
 
 
-
-
 SELECT * FROM Action
 NATURAL JOIN PossedeAction
 NATURAL JOIN (SELECT nomCli FROM Client WHERE prenomCli='Pierre' AND nomCli='Leloup');
+
+
+CREATE OR REPLACE VIEW v1(numCli,codeAct) AS
+SELECT numCli,codeAct FROM PossedeAction WHERE PossedeAction.numCli=
+(
+    SELECT numCli FROM Client WHERE prenomCli='Pierre' AND nomCli='Leloup'
+);
+
+SELECT * FROM Action JOIN v1 ON Action.codeAct=v1.codeAct;
 
 /*   5   */
 

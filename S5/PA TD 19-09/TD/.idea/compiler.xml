@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Exceptions" />
+        <module name="Interfaces" />
+        <module name="Server" />
+        <module name="Client" />
+        <module name="RMI" />
+        <module name="Abstracts" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Error" target="22" />
+      <module name="untitled" target="22" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ebd5bc06-f2d7-49f1-b6a5-85ea9c2dee5e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TD/src/API/API.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/API/Exceptions/ClientIsNotConnectedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/API/Exceptions/InvalidDataUserCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/AlreadyContributedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/ChoiceDontExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/InvalidInputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/PollDontExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/UserDontExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Exceptions/UuidAlreadyInUseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Exceptions/EmailAlreadyInUseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Interfaces/AbstractUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Interfaces/NonUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Interfaces/Sondage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Interfaces/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TD/src/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../S3/TP BDD/TP 1 BDD/TP1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../S3/TP BDD/TP 1 BDD/TP1.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2mvglouSgVEGRh33JKJaqm3V304" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S5/PA TD 19-09/TD",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ebd5bc06-f2d7-49f1-b6a5-85ea9c2dee5e" name="Changes" comment="" />
+      <created>1727962618241</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727962618241</updated>
+      <workItem from="1727962619315" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

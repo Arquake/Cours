@@ -1,0 +1,10 @@
+<div>
+    <ul class="space-y-4">
+        <li>Titre: %TITLE%</li>
+        <li>Autheur: %AUTHOR%</li>
+        <li>Maison d'édition: %HOUSE%</li>
+        <li>Année de parution: %YEAR%</li>
+        <li>IBSN: %IBSN%</li>
+        <li>quartrième: %QUATRE%</li>
+    </ul>
+</div>

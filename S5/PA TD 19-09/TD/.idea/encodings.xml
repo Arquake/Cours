@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Abstracts/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Abstracts/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Error/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Error/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Exceptions/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Exceptions/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Interfaces/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Interfaces/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RMI/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RMI/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/untitled/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/untitled/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
