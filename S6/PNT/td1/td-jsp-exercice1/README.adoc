@@ -1,0 +1,159 @@
+= Exercice 1 -- Premier servlet
+
+Le but de cet exercice est de créer son premier servlet `HelloWorld.java`.
+
+Pour ceci, nous allons mettre en place la structure du projet qui va bien.
+
+Pour le moment, vous devriez uniquement avoir un fichier `README.adoc` (cet énoncé), ainsi qu'un fichier `pom.xml` (la configuration du module Maven).
+Vous pouvez directement ouvrir le fichier `pom.xml` avec `IntelliJ`.
+
+. La première étape est de mettre à jour le `pom.xml` racine avec la version de Java que vous utilisez.
+Il vous suffit de modifier les `<properties>` en précisant le numéro de version que vous utilisez.
+Par exemple, si vous utilisez une `JDK 17` :
+
+[source, xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.orleans.pnt</groupId>
+    <artifactId>td-jsp-exercice1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- TODO mode de packaging -->
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- TODO À compléter -->
+
+    <!-- Propriétés -->
+
+    <!-- Dépendances -->
+
+    <!-- Environnement de compilation et d'exécution -->
+
+</project>
+----
+
+[start=2]
+. Il faut ensuite compléter le fichier `pom.xml` avec le mode de _packaging_ du module, la déclaration des dépendances, et l'environnement de compilation et d'exécution.
+Ce module étant une application à déployer sur un serveur Web, nous utiliserons le mode de _packaging_ `war`.
+
+[source, xml]
+----
+<project>
+
+    ...
+
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+   <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>11.0.12</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+----
+
+[start=3]
+. Cliquez droit sur le projet et ajoutez un répertoire.
+Si votre projet est bien reconnu comme un projet Maven, IntelliJ va vous proposer d'ajouter les répertoires `src/main/java` et `src/main/resources`.
+Ajoutez ces deux répertoires.
+
+. Ajoutez *manuellement* le répertoire `webapp` dans le dossier `src` (au même niveau que `java` et `resources`).
+Faites un `Refresh maven` si votre dossier n'est pas reconnu en tant que ressource Web (rond bleu sur le dossier).
+
+. Créer un dossier `WEB-INF` *à l'intérieur du dossier* `webapp`.
+
+. Sélectionnez le projet, puis cliquez sur `File -> Project Structure` (ou faites un clic-droit sur le projet, puis `Open Module Settings`).
+Dirigez-vous ensuite vers le sous-menu `Facets`.
+
+. Cliquez sur le petit `+` à côté du tableau stockant les `Deployment descriptors`.
+Spécifiez que vous voulez créer le fichier `web.xml` *dans* le dossier `WEB-INF`, et choisissez la version *4.0* du web-descriptor.
+*Attention*, il faudra modifier le chemin proposé par `IntelliJ`, car celui-ci n'est pas correct.
+
+. Enfin, créez une classe `HelloWorld` étendant la classe `HttpServlet`, et copiez-collez le contenu suivant.
+Vous devrez ensuite déclarer dans le `web.xml` votre servlet et son *mapping url*.
+
+.HelloWorld.java
+[source, java]
+----
+public class HelloWorld extends HttpServlet {
+
+    @Override
+    public void service(ServletRequest req, ServletResponse res)
+            throws ServletException, IOException {
+        PrintWriter out = res.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Bonjour le monde !</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>Bonjour le monde !</h1>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+}
+
+----
+
+[start=7]
+. Refaites le même exercice en créant un nouveau projet Maven.
+Cette fois-ci, on utilisera les annotations, ainsi qu'une page `.jsp`.
+
+. Modifiez le fichier `pom.xml`.
+
+. Ajoutez le répertoire `webapp` dans le dossier `src` puis créez un dossier `WEB-INF`.
+
+. Créez un fichier `helloworld.jsp` dans `WEB-INF` contenant une phrase de bienvenue.
+
+. Créer un package `controleur`, puis une classe `Controleur` qui étend `HttpServlet` avec des annotations.
+
+.Controleur.java
+[source, java]
+----
+   @WebServlet (name="helloWorld", urlPatterns ="/hello")
+   public class Controleur extends HttpServlet {
+
+        @Override
+        public void service(ServletRequest req, ServletResponse res)
+                throws ServletException, IOException {
+             req.getServletContext()
+                .getRequestDispatcher("/WEB-INF/helloworld.jsp")
+                .forward(req, res);
+        }
+    }
+
+
+----

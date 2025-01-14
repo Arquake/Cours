@@ -1,0 +1,18 @@
+version: '3'
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GOODUSER: vera.nicolas
+        UID: 501
+        MAIL: nicolas.vera@etu.univ-orleans.fr
+        NOM: "Vera Nicolas"
+    container_name: my-good-container
+    volumes:
+    - ./dev:/var/www/html
+    ports:
+    - "5000:8000"
+    environment:
+      PHP_IDE_CONFIG: serverName=toto
