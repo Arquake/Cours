@@ -1,0 +1,19 @@
+Version pour ubuntu !
+
+Il faut modifier les lignes suivantes dans docker-compose.yml.
+Attention !!! GOODUSER est votre nom d'utilisateur.
+On obtient cette information en exécutant la commande "id".
+
+args:
+  GOODUSER: jean-michel.couvreur
+  UID: 11688
+  MAIL: jean-michel.couvreur@univ-orleans.fr
+  NOM: "Jean-Michel Couvreur"
+
+Dans cette version (voir docker-compose.yml),
+j'ai appelé le container : my-good-container
+
+L'utilisation est toujours
+  docker-compose build
+  docker-compose up -d
+  docker exec -ti my-good-container bash
