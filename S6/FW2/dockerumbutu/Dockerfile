@@ -1,4 +1,4 @@
-FROM  
+FROM php:8-fpm-alpine
 ARG GOODUSER
 ARG UID
 ARG MAIL
