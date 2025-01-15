@@ -92,7 +92,7 @@ public class Main {
                         "zulu");
 
 
-        System.out.println(
+        /*System.out.println(
                 alphabet.stream().sorted(Comparator.comparingInt(String::length)).toList()
         );
 
@@ -118,7 +118,7 @@ public class Main {
                             return result;
                         }
                 ))
-        );
+        );*/
 
         /*System.out.println(
                 sonnet.stream().collect(Collectors.toMap(
@@ -146,27 +146,63 @@ public class Main {
         jours.add("samedi");
         jours.add("dimanche");
 
-        System.out.println(
+        /*System.out.println(
                 jours.stream().filter(st -> st.matches("^.*di$")).toList()
-        );
+        );*/
 
         Path lepath = Paths.get("./src/main/java/tp4/lambda");
         try {
 
             Stream<String> stream = Files.lines(Paths.get("./src/main/java/tp4/lambda/jours.txt"), StandardCharsets.UTF_8);
 
-            System.out.println(
+            /*System.out.println(
                     stream.filter(st -> st.matches("^.*di$")).toList()
             );
 
             System.out.println(
                     stream.filter(st -> st.endsWith("di")).toList()
-            );
+            );*/
 
         }
         catch (Exception e) {
             System.out.println("alp");
         }
+
+        try {
+            Stream<String> stream2 = Files.lines(Paths.get("./src/main/java/tp4/lambda/mcdonalds.csv"), StandardCharsets.UTF_8);
+
+
+            /*System.out.println(stream2.map(line -> Arrays.asList(line.split(","))).toList());*/
+
+            /*System.out.println(
+                    stream2.map(line -> line.split(",")[2].trim().replace("\"", ""))
+                            .collect(Collectors.groupingBy(city -> city, Collectors.counting()))
+            );*/
+
+            System.out.println(
+                    stream2.map(line -> line.split(",")[2].trim().replace("\"", ""))
+                            .collect(Collectors.groupingBy(city -> city, Collectors.counting()))
+                            .entrySet()
+                            .stream()
+                            .max(Map.Entry.comparingByValue())
+                            .orElseThrow( () -> new RuntimeException(("No data found")))
+            );
+
+            System.out.println(
+                    stream2.map(line -> line.split(",")[2].trim().replace("\"", ""))
+                            .collect(Collectors.groupingBy(city -> city, Collectors.counting()))
+                            .entrySet()
+                            .stream()
+                            .sorted(Map.Entry.comparingByValue())
+                            .toList()
+            );
+
+
+        }
+        catch (Exception _) {
+
+        }
+
 
     }
 

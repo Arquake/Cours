@@ -1,0 +1,17 @@
+services:
+ base:
+  build:
+    context: .
+    dockerfile: Dockerfile_tp3
+    args:
+      USERNAME: 
+      USERID: 
+  container_name: fw1-tp3-${USERNAME}
+  command: /bin/bash
+  tty: true
+  volumes:
+  - .:/home/user/workspace
+  ports:
+  - "8080:8000"
+  environment:
+    PS1: "[ $$(whoami) | \\w ] "
