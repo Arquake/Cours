@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cours;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
+use cebe\markdown\Markdown;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,16 @@ final class CoursController extends AbstractController
     }
 
     #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Markdown $markdown): Response
     {
         $cour = new Cours();
         $form = $this->createForm(CoursType::class, $cour);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('markdown')->getData()) {
+                $cour -> setDescription($markdown->parse($cour->getDescription()));
+            }
             $entityManager->persist($cour);
             $entityManager->flush();
 

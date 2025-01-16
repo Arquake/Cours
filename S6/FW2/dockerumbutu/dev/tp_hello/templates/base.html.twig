@@ -15,19 +15,7 @@
     </head>
     <body>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ path('app_home') }}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_cours_index') }}">Show All</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_cours_new') }}">New</a>
-                </li>
-            </ul>
-        </nav>
+        {% include 'navbar.html.twig' %}
 
         {% block body %}{% endblock %}
 
