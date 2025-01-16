@@ -6,19 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Paris En Ligne</title>
+    <jsp:useBean id="connexionBean" scope="request" type="beans.ConnexionErrorBean"/>
 </head>
 <body>
 
 <c:choose>
-    <c:when test="${not empty connected and connected}">
+    <c:when test="${not empty connexionBean && connexionBean.alreadyConnectedError == true}">
         <p>
             <span style="color: red">Couple pseudo/password incohérent</span>
         </p>
     </c:when>
-    <c:when test="${not empty incoherent and incoherent}">
+    <c:when test="${not empty connexionBean && connexionBean.incoherentError == true}">
         <p>
             <span style="color: red">Le pseudo est obligatoire et de taille 2 min. Le mot de passe est obligatoire et de taille 2 min</span>
         </p>

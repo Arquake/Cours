@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Title</title>
-    <jsp:useBean id="pariAnnule" type="modele.Pari" scope="request"/>
+    <jsp:useBean id="pari" type="modele.Pari" scope="request"/>
     <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
 </head>
 <body>
     <p>${user.login}</p>
     <p>
-        La mise de ${pariAnnule.montant} euros sur le résultat ${pariAnnule.vainqueur} pour le match : ${pariAnnule.match.equipe1} vs ${pariAnnule.match.equipe2} le ${pariAnnule.match.quand} a bien été annulée !
+        Vous avez parié ${pari.montant} euros sur le résultat ${pari.vainqueur} pour le match : ${pari.match.equipe1} vs ${pari.match.equipe2} le ${pari.match.quand}
     </p>
     <a href="/pel/connexion">Retour au menu</a>
 </body>

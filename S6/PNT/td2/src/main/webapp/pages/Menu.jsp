@@ -8,9 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Menu</title>
+    <title>Paris En Ligne</title>
 </head>
 <body>
     <h1>Menu</h1>
+    <ul>
+        <li>
+            <a href="/pel/parisouverts">Afficher les matchs sur lesquels parier</a>
+        </li>
+        <li>
+            <a href="/pel/mesparis">Afficher mes paris</a>
+        </li>
+        <li>
+            <a href="/pel/logout">Déconnexion</a>
+        </li>
+    </ul>
 </body>
 </html>
