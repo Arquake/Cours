@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250116071239 extends AbstractMigration
+final class Version20250116085735 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,9 @@ final class Version20250116071239 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE cours (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, semestre INTEGER NOT NULL, name VARCHAR(255) NOT NULL, description CLOB NOT NULL, ects DOUBLE PRECISION NOT NULL, heure_tp DOUBLE PRECISION NOT NULL, heure_td DOUBLE PRECISION NOT NULL, heure_cm DOUBLE PRECISION NOT NULL)');
+        $this->addSql('CREATE TABLE cours (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, semestre_id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, description CLOB NOT NULL, ects DOUBLE PRECISION NOT NULL, heure_tp DOUBLE PRECISION NOT NULL, heure_td DOUBLE PRECISION NOT NULL, heure_cm DOUBLE PRECISION NOT NULL, CONSTRAINT FK_FDCA8C9C5577AFDB FOREIGN KEY (semestre_id) REFERENCES semestre (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('CREATE INDEX IDX_FDCA8C9C5577AFDB ON cours (semestre_id)');
+        $this->addSql('CREATE TABLE semestre (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, formation VARCHAR(255) NOT NULL, semestre INTEGER NOT NULL)');
         $this->addSql('CREATE TABLE messenger_messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, body CLOB NOT NULL, headers CLOB NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , available_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , delivered_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
@@ -34,6 +36,7 @@ final class Version20250116071239 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE cours');
+        $this->addSql('DROP TABLE semestre');
         $this->addSql('DROP TABLE messenger_messages');
     }
 }

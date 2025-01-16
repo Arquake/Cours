@@ -34,17 +34,27 @@ public class Controller extends HttpServlet {
         String cleNavigation = parts[parts.length - 1];
         String destination = "/pages/";
 
-        destination += switch (cleNavigation) {
-            case HOME -> "Home";
-            case ANNULER_PARI -> "AnnulerPari";
-            case CONNEXION -> "Connexion";
-            case PARIS_OUVERTS -> "ParisOuverts";
-            case MESPARIS -> "MesParis";
-            case PARIER -> "Parier";
-            default -> "NotFound";
-        } + ".jsp";
-
-        this.getServletContext().getRequestDispatcher(destination).forward(req, resp);
+        switch (cleNavigation) {
+            case CONNEXION:
+            case HOME:
+                this.ConnexionGetHandler(req, resp);
+                break;
+            case ANNULER_PARI:
+                this.AnnulerPari(req, resp);
+                break;
+            case PARIS_OUVERTS:
+                this.ParisOuverts(req, resp);
+                break;
+            case MESPARIS:
+                this.mesParis(req, resp);
+                break;
+            case PARIER:
+                this.ParierGetHandler(req, resp);
+                break;
+            default:
+                this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
+                break;
+        }
     }
 
     @Override
@@ -55,22 +65,20 @@ public class Controller extends HttpServlet {
 
         switch (cleNavigation) {
             case HOME:
-                tryConnectionHome(req, resp);
-                break;
             case CONNEXION:
-                tryConnectionConnexion(req, resp);
+                ConnexionPostHandler(req, resp);
                 break;
             case ANNULER_PARI:
-                this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
+                this.AnnulerPari(req, resp);
                 break;
             case PARIS_OUVERTS:
-                this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
+                this.ParisOuverts(req,resp);
                 break;
             case MESPARIS:
-                this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
+                this.mesParis(req,resp);
                 break;
             case PARIER:
-                this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
+                this.ParierPostHandler(req,resp);
                 break;
             default:
                 this.getServletContext().getRequestDispatcher("/pages/NotFound.jsp").forward(req, resp);
@@ -78,22 +86,10 @@ public class Controller extends HttpServlet {
         };
     }
 
-
-    private void tryConnectionHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void ConnexionPostHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             FACADE.connexion(req.getParameter("pseudo") ,req.getParameter("password"));
-            this.getServletContext().getRequestDispatcher("/pages/Home.jsp").forward(req, resp);
-        } catch (UtilisateurDejaConnecteException e) {
-            resp.sendRedirect("connexion");
-        } catch (InformationsSaisiesIncoherentesException e) {
-            resp.sendRedirect("connexion");
-        }
-    }
-
-    private void tryConnectionConnexion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            FACADE.connexion(req.getParameter("pseudo") ,req.getParameter("password"));
-            this.getServletContext().getRequestDispatcher("/pages/Connexion.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/pages/Menu.jsp").forward(req, resp);
         } catch (UtilisateurDejaConnecteException e) {
             req.setAttribute("connected", true);
             this.getServletContext().getRequestDispatcher("/pages/Connexion.jsp").forward(req, resp);
@@ -101,6 +97,19 @@ public class Controller extends HttpServlet {
             req.setAttribute("incoherent", true);
             this.getServletContext().getRequestDispatcher("/pages/Connexion.jsp").forward(req, resp);
         }
-
     }
+
+    private void ConnexionGetHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.getServletContext().getRequestDispatcher("/pages/Connexion.jsp").forward(req, resp);
+    }
+
+    private void AnnulerPari(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
+
+    private void ParisOuverts(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
+
+    private void ParierGetHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
+
+    private void ParierPostHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
+
+    private void mesParis(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
 }

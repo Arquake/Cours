@@ -14,9 +14,6 @@ class Cours
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $semestre = null;
-
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -34,6 +31,10 @@ class Cours
 
     #[ORM\Column]
     private ?float $heureCm = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cours')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Semestre $semestre = null;
 
     public function getId(): ?int
     {
