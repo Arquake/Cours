@@ -10,21 +10,18 @@
             <tr>
                 <th>Semestre</th>
                 <th>Name</th>
+                
             </tr>
         </thead>
         <tbody>
         {% for cour in cours %}
             <tr>
-                <td>
-                    {{ cour.semestre }}
-                </td>
-                <td>
-                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">{{ cour.name }}</a>
-                </td>
+                <td>{{ cour.semestre.semestre }}</td>
+                <td><a href="{{ path('app_cours_show', {'id': cour.id}) }}">{{ cour.name }}</a></td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

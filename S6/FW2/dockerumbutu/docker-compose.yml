@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         GOODUSER: vera.nicolas
-        UID: 501
+        UID: 1000
         MAIL: nicolas.vera@etu.univ-orleans.fr
         NOM: "Vera Nicolas"
     container_name: my-good-container

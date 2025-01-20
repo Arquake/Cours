@@ -41,12 +41,12 @@ class Cours
         return $this->id;
     }
 
-    public function getSemestre(): ?int
+    public function getSemestre(): ?Semestre
     {
         return $this->semestre;
     }
 
-    public function setSemestre(int $semestre): static
+    public function setSemestre(?Semestre $semestre): static
     {
         $this->semestre = $semestre;
 
