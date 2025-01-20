@@ -33,7 +33,9 @@ class AppFixtures extends Fixture
             ->setHeureCm($faker->numberBetween(10,16))
             ->setHeureTd($faker->numberBetween(14,18))
             ->setHeureTp($faker->numberBetween(8,16))
-            ->setSemestre($semestreArray[$faker->numberBetween(0,9)]);
+            ->setSemestre($semestreArray[$faker->numberBetween(0,9)])
+            ->setDateCreation($faker->dateTimeBetween('-54 week', '-24 week'))
+            ->setDateModification($faker->dateTimeBetween('-10 week', '0 week'));
             $manager->persist($cours);
         }
 

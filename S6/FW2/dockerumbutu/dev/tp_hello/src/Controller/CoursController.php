@@ -32,7 +32,9 @@ final class CoursController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('markdown')->getData()) {
-                $cour -> setDescription($markdown->parse($cour->getDescription()));
+                $cour -> setDescription($markdown->parse($cour->getDescription()))
+                ->setDateCreation(new \DateTime())
+                ->setDateModification(new \DateTime());
             }
             $entityManager->persist($cour);
             $entityManager->flush();
@@ -61,6 +63,7 @@ final class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cour->setDateModification(new \DateTime());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
