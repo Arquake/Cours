@@ -3,7 +3,8 @@
 {% block title %}Cours{% endblock %}
 
 {% block body %}
-    <h1>Cours</h1>
+<div class="container">
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Cours</h1>
 
     <table class="table">
         <tbody>
@@ -46,7 +47,10 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+    <div style="display:flex; gap:1rem">
+        <a class="btn btn-primary" href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
 
-    {{ include('cours/_delete_form.html.twig') }}
+        {{ include('cours/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

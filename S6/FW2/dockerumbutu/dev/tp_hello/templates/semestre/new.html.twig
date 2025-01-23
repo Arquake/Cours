@@ -3,9 +3,9 @@
 {% block title %}New Semestre{% endblock %}
 
 {% block body %}
-    <h1>Create new Semestre</h1>
+<div class="container">
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Create new Semestre</h1>
 
     {{ include('semestre/_form.html.twig') }}
-
-    <a href="{{ path('app_semestre_index') }}">back to list</a>
+</div>
 {% endblock %}

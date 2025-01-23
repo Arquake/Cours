@@ -3,7 +3,8 @@
 {% block title %}Semestre{% endblock %}
 
 {% block body %}
-    <h1>Semestre</h1>
+<div class="container">
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Semestre</h1>
 
     <table class="table">
         <tbody>
@@ -18,15 +19,10 @@
         </tbody>
     </table>
 
-    <div>
-        {% for cour in semestre.cours %}
-            test
-        {% endfor %}
+    <div style="display:flex; gap:1rem">
+        <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}" class="btn btn-primary">edit</a>
+
+        {{ include('semestre/_delete_form.html.twig') }}
     </div>
-
-    <a href="{{ path('app_semestre_index') }}">back to list</a>
-
-    <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}">edit</a>
-
-    {{ include('semestre/_delete_form.html.twig') }}
+</div>
 {% endblock %}
