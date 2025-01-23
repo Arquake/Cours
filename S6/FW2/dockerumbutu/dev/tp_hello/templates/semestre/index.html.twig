@@ -3,27 +3,22 @@
 {% block title %}Semestre index{% endblock %}
 
 {% block body %}
-    <h1>Semestre index</h1>
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Semestre index</h1>
 
-    <table class="table">
+    <table class="table container">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Formation</th>
                 <th>Semestre</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for semestre in semestres %}
             <tr>
-                <td>{{ semestre.id }}</td>
-                <td>{{ semestre.formation }}</td>
-                <td>{{ semestre.semestre }}</td>
                 <td>
-                    <a href="{{ path('app_semestre_show', {'id': semestre.id}) }}">show</a>
-                    <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}">edit</a>
+                    <a href="{{ path('app_semestre_show', {'id': semestre.id}) }}">{{ semestre.formation }}</a>
                 </td>
+                <td>{{ semestre.semestre }}</td>
             </tr>
         {% else %}
             <tr>
@@ -32,6 +27,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_semestre_new') }}">Create new</a>
 {% endblock %}
