@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="accueil"/>
+        <action name="accueil">
+            <result>/WEB-INF/pages/pageAccueil.jsp</result>
+        </action>
+
+        <action name="connexion" class="fr.univ.orleans.pnt.actions.Connexion" method="showForm">
+            <result name="connexionForm">/WEB-INF/pages/connexion.jsp</result>
+        </action>
+        <action name="saisie" class="fr.univ.orleans.pnt.actions.Saisie">
+            <result name="showSaisie">/WEB-INF/pages/infosSaisies.jsp</result>
+            <result name="errorSaisie">/WEB-INF/pages/connexion.jsp</result>
+        </action>
+
+        <action name="calculatriceStatique" class="fr.univ.orleans.pnt.actions.CalculatriceStatique">
+            <result name="toStatique">/WEB-INF/pages/calculatriceStatique.jsp</result>
+        </action>
+
+        <action name="calculatriceDynamique" class="fr.univ.orleans.pnt.actions.CalculatriceDynamique">
+            <result name="toDynamique">/WEB-INF/pages/calculatriceDynamique.jsp</result>
+        </action>
+    </package>
+
+</struts>
