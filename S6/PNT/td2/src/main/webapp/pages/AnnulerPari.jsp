@@ -8,12 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Paris En Ligne</title>
     <jsp:useBean id="pariAnnule" type="modele.Pari" scope="request"/>
     <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
 <body>
-    <p>${user.login}</p>
+    <h2>${user.login}</h2>
     <p>
         La mise de ${pariAnnule.montant} euros sur le résultat ${pariAnnule.vainqueur} pour le match : ${pariAnnule.match.equipe1} vs ${pariAnnule.match.equipe2} le ${pariAnnule.match.quand} a bien été annulée !
     </p>

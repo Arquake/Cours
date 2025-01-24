@@ -9,14 +9,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Paris  En Ligne</title>
     <jsp:useBean id="match" type="modele.Match" scope="request"/>
     <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
     <jsp:useBean id="errorMise" type="java.lang.Boolean" scope="request"/>
     <jsp:useBean id="verdict" type="java.lang.String" scope="request"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
-<body>
-    <p>${user.login}</p>
+<body class="container">
+    <h2>${user.login}</h2>
 
     <p>
         Vous voulez parier sur le match : ${match.equipe1} vs ${match.equipe2} le ${match.quand}
