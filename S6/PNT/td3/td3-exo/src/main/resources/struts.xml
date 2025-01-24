@@ -25,9 +25,15 @@
             <result name="toStatique">/WEB-INF/pages/calculatriceStatique.jsp</result>
         </action>
 
+        <action name="calculatriceStatiqueCalcul" class="fr.univ.orleans.pnt.actions.CalculatriceStatique" method="calculate">
+            <result name="resultat">/WEB-INF/pages/resultat.jsp</result>
+        </action>
+
         <action name="calculatriceDynamique" class="fr.univ.orleans.pnt.actions.CalculatriceDynamique">
             <result name="toDynamique">/WEB-INF/pages/calculatriceDynamique.jsp</result>
         </action>
     </package>
 
+    <constant name="struts.custom.i18n.resources" value="mesTextes"/>
+    <constant name="struts.i18n.encoding" value="UTF-8" />
 </struts>
