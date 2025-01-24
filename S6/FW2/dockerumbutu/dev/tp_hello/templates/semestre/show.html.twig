@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Semestre{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Semestre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Formation</th>
+                <td>{{ semestre.formation }}</td>
+            </tr>
+            <tr>
+                <th>Semestre</th>
+                <td>{{ semestre.semestre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="display:flex; gap:1rem">
+        <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}" class="btn btn-primary">edit</a>
+
+        {{ include('semestre/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

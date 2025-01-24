@@ -24,7 +24,7 @@ class Semestre
     /**
      * @var Collection<int, cours>
      */
-    #[ORM\OneToMany(targetEntity: cours::class, mappedBy: 'semestre')]
+    #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'semestre')]
     private Collection $cours;
 
     public function __construct()

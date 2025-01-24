@@ -40,4 +40,12 @@ class CoursRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+
+    public function getWIthFIlters(array $filters): array {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

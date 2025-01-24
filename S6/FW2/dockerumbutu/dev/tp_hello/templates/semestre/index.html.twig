@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Semestre index{% endblock %}
+
+{% block body %}
+    <h1 style="text-align:center; padding-top: 2rem; padding-bottom: 2rem;">Semestre index</h1>
+
+    <table class="table container">
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>Semestre</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for semestre in semestres %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_semestre_show', {'id': semestre.id}) }}">{{ semestre.formation }}</a>
+                </td>
+                <td>{{ semestre.semestre }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
