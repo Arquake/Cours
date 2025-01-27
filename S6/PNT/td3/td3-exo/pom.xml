@@ -23,8 +23,9 @@
         </dependency>
 
         <dependency>
-            <groupId></groupId>
-            <artifactId></artifactId>
+            <groupId>fr.univ.orleans.pnt</groupId>
+            <artifactId>modelecalculatricedynamique</artifactId>
+            <version>1.0</version>
         </dependency>
 
     </dependencies>

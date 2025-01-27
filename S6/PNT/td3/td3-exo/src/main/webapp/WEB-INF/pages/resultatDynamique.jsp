@@ -2,19 +2,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 24/01/2025
-  Time: 10:49
+  Date: 27/01/2025
+  Time: 11:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Calculatrice dynamique</title>
+    <title>Title</title>
 </head>
 <body>
-
-    <s:form action="calculatriceDynamiqueCalculate">
-        <s:submit value="Submit" cssClass="btn btn-primary" />
-    </s:form>
+    <s:property value="calculatrice.getValeurCompteur" />
 </body>
 </html>
