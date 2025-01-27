@@ -19,10 +19,12 @@
         </tbody>
     </table>
 
-    <div style="display:flex; gap:1rem">
-        <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}" class="btn btn-primary">edit</a>
+    {% if app.user %}
+        <div style="display:flex; gap:1rem">
+            <a href="{{ path('app_semestre_edit', {'id': semestre.id}) }}" class="btn btn-primary">edit</a>
 
-        {{ include('semestre/_delete_form.html.twig') }}
-    </div>
+            {{ include('semestre/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

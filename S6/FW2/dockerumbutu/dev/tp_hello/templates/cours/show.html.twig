@@ -47,10 +47,12 @@
         </tbody>
     </table>
 
-    <div style="display:flex; gap:1rem">
-        <a class="btn btn-primary" href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+    {% if app.user %}
+        <div style="display:flex; gap:1rem">
+            <a class="btn btn-primary" href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
 
-        {{ include('cours/_delete_form.html.twig') }}
-    </div>
+            {{ include('cours/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
