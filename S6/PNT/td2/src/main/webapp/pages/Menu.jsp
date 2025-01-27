@@ -9,8 +9,12 @@
 <html>
 <head>
     <title>Paris En Ligne</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
-<body>
+<body class="container">
     <h1>Menu</h1>
     <ul>
         <li>

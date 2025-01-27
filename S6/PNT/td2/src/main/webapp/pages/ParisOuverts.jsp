@@ -9,21 +9,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Paris En Ligne</title>
     <jsp:useBean id="matchs" type="java.util.Collection<modele.Match>" scope="request"/>
     <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
-<body>
-    <p>${user.login}</p>
+<body class="container">
+    <h2>${user.login}</h2>
 
     <ul>
         <c:forEach items="${matchs}" var="match" >
             <li style="display: flex; justify-items: center; align-items: center">
-                <p>sport : ${match.sport} - ${match.equipe1} vs ${match.equipe2} - </p>
-                <form action="/pel/parier" method="post">
-                    <input name="matchId" value="${match.idMatch}" hidden="hidden">
-                    <button type="submit">Parier</button>
-                </form>
+                <div style="display:flex; gap:.5rem;">
+                    <div style="display: flex; justify-items: center; align-items: center">
+                        <p style="text-align: center">sport : ${match.sport} - ${match.equipe1} vs ${match.equipe2} - </p>
+                    </div>
+                    <form action="/pel/parier" method="post">
+                        <input name="matchId" value="${match.idMatch}" hidden="hidden">
+                        <button type="submit">Parier</button>
+                    </form>
+                </div>
             </li>
         </c:forEach>
     </ul>

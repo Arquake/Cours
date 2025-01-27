@@ -1,0 +1,7 @@
+modele\CalculatriceDynamiqueDuFutur.class
+modele\operations\Pythagore.class
+modele\operations\Somme.class
+modele\CalculatriceDynamiqueDuFuturImpl.class
+modele\operations\Division.class
+modele\exceptions\NonSupporteeException.class
+modele\operations\Operations.class

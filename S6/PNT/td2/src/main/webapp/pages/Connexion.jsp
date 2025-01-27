@@ -11,8 +11,12 @@
 <head>
     <title>Paris En Ligne</title>
     <jsp:useBean id="connexionBean" scope="request" type="beans.ConnexionErrorBean"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
-<body>
+<body class="container">
 
 <c:choose>
     <c:when test="${not empty connexionBean && connexionBean.alreadyConnectedError == true}">

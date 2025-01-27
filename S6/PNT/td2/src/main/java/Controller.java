@@ -23,10 +23,8 @@ public class Controller extends HttpServlet {
     private static final String PARIER = "parier";
     private static final String DECONNEXION = "logout";
 
-    private static FacadeParisStaticImpl FACADE;
-
     public Controller() {
-        FACADE = new FacadeParisStaticImpl();
+
     }
 
 
@@ -99,8 +97,9 @@ public class Controller extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/pages/Menu.jsp").forward(req, resp);
         }
         else {
+            FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
             try {
-                Utilisateur user = FACADE.connexion(req.getParameter("pseudo") ,req.getParameter("password"));
+                Utilisateur user = facade.connexion(req.getParameter("pseudo") ,req.getParameter("password"));
                 (req.getSession()).setAttribute("user", user);
                 this.getServletContext().getRequestDispatcher("/pages/Menu.jsp").forward(req, resp);
             } catch (UtilisateurDejaConnecteException e) {
@@ -131,11 +130,11 @@ public class Controller extends HttpServlet {
             resp.sendRedirect("/pel/connexion");
             return;
         }
-
+        FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
         try {
             long id = Long.parseLong(req.getParameter("id"));
-            Pari pariAnnule = FACADE.getPari(id);
-            FACADE.annulerPari(
+            Pari pariAnnule = facade.getPari(id);
+            facade.annulerPari(
                     ((Utilisateur) req.getSession().getAttribute("user")).getLogin(), id
             );
             req.setAttribute("pariAnnule", pariAnnule);
@@ -143,7 +142,7 @@ public class Controller extends HttpServlet {
         }
         catch (Exception ignored) {
             try {
-                req.setAttribute("paris", FACADE.getMesParis(
+                req.setAttribute("paris", facade.getMesParis(
                         ((Utilisateur) req.getSession().getAttribute("user")).getLogin()
                 ));
                 req.setAttribute("cancelError", true);
@@ -160,8 +159,8 @@ public class Controller extends HttpServlet {
             resp.sendRedirect("/pel/connexion");
             return;
         }
-
-        req.setAttribute("matchs", FACADE.getMatchsPasCommences());
+        FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
+        req.setAttribute("matchs", facade.getMatchsPasCommences());
         this.getServletContext().getRequestDispatcher("/pages/ParisOuverts.jsp").forward(req, resp);
     }
 
@@ -170,41 +169,41 @@ public class Controller extends HttpServlet {
             resp.sendRedirect("/pel/connexion");
             return;
         }
-
+        FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
         try {
             if (req.getParameter("verdict") == null) {
-                req.setAttribute("match", FACADE.getMatch(Long.parseLong(req.getParameter("matchId"))));
+                req.setAttribute("match", facade.getMatch(Long.parseLong(req.getParameter("matchId"))));
                 req.setAttribute("verdict", "" );
                 req.setAttribute("errorMise", false);
                 this.getServletContext().getRequestDispatcher("/pages/Parier.jsp").forward(req, resp);
                 return;
             }
-            long pari = FACADE.parier(
+            long pari = facade.parier(
                     ((Utilisateur) req.getSession().getAttribute("user")).getLogin(),
                     Long.parseLong(req.getParameter("matchId")),
                     req.getParameter("verdict"),
                     Long.parseLong(req.getParameter("mise"))
             );
-            req.setAttribute("pari", FACADE.getPari(pari));
+            req.setAttribute("pari", facade.getPari(pari));
             this.getServletContext().getRequestDispatcher("/pages/PariValidation.jsp").forward(req, resp);
 
         } catch (MatchClosException e) {
             resp.sendRedirect("/pel/parisouverts");
 
         } catch (ResultatImpossibleException e) {
-            req.setAttribute("match", FACADE.getMatch(Long.parseLong(req.getParameter("matchId"))));
+            req.setAttribute("match", facade.getMatch(Long.parseLong(req.getParameter("matchId"))));
             req.setAttribute("verdict", req.getParameter("verdict") != null?req.getParameter("verdict"):"" );
             req.setAttribute("errorMise", false);
             this.getServletContext().getRequestDispatcher("/pages/Parier.jsp").forward(req, resp);
 
         } catch (MontantNegatifOuNulException e) {
-            req.setAttribute("match", FACADE.getMatch(Long.parseLong(req.getParameter("matchId"))));
+            req.setAttribute("match", facade.getMatch(Long.parseLong(req.getParameter("matchId"))));
             req.setAttribute("verdict", req.getParameter("verdict") != null?req.getParameter("verdict"):"" );
             req.setAttribute("errorMise", true);
             this.getServletContext().getRequestDispatcher("/pages/Parier.jsp").forward(req, resp);
         }
         catch (Exception e) {
-            req.setAttribute("match", FACADE.getMatch(Long.parseLong(req.getParameter("matchId"))));
+            req.setAttribute("match", facade.getMatch(Long.parseLong(req.getParameter("matchId"))));
             req.setAttribute("verdict", req.getParameter("verdict") != null?req.getParameter("verdict"):"" );
             req.setAttribute("errorMise", true);
             this.getServletContext().getRequestDispatcher("/pages/Parier.jsp").forward(req, resp);
@@ -217,9 +216,9 @@ public class Controller extends HttpServlet {
             resp.sendRedirect("/pel/connexion");
             return;
         }
-
+        FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
         try {
-            req.setAttribute("paris", FACADE.getMesParis(
+            req.setAttribute("paris", facade.getMesParis(
                     ((Utilisateur) req.getSession().getAttribute("user")).getLogin()
             ));
             req.setAttribute("cancelError", false);
@@ -232,7 +231,8 @@ public class Controller extends HttpServlet {
 
     private void deconnecter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            FACADE.deconnexion(((Utilisateur) req.getSession().getAttribute("user")).getLogin());
+            FacadeParisStaticImpl facade = (FacadeParisStaticImpl) this.getServletContext().getAttribute("facade");
+            facade.deconnexion(((Utilisateur) req.getSession().getAttribute("user")).getLogin());
             req.getSession().removeAttribute("user");
         }
         catch (Exception ignored) {}
