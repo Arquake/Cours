@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Nicolas
@@ -19,7 +20,7 @@
             <a href="/pel/parisouverts">Afficher les matchs sur lesquels parier</a>
         </li>
         <li>
-            <a href="/pel/mesparis">Afficher mes paris</a>
+            <s:a action="mesParis">Afficher mes paris</s:a>
         </li>
         <li>
             <a href="/pel/logout">Déconnexion</a>

@@ -9,5 +9,7 @@ facade\exceptions\MontantNegatifOuNulException.class
 facade\exceptions\ResultatImpossibleException.class
 Connexion.class
 facade\FacadeParisStaticImpl.class
+PariAnnule.class
 facade\FacadeParis.class
+MesParis.class
 facade\exceptions\UtilisateurDejaConnecteException.class

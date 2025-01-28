@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -9,18 +10,15 @@
 <html>
 <head>
     <title>Paris En Ligne</title>
-    <jsp:useBean id="pariAnnule" type="modele.Pari" scope="request"/>
-    <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    >
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
 </head>
 <body>
-    <h2>${user.login}</h2>
+<h2>
+    <s:property value="session.user.login" /></h2>
     <p>
-        La mise de ${pariAnnule.montant} euros sur le résultat ${pariAnnule.vainqueur} pour le match : ${pariAnnule.match.equipe1} vs ${pariAnnule.match.equipe2} le ${pariAnnule.match.quand} a bien été annulée !
+        La mise de ${pari.montant} euros sur le résultat ${pari.vainqueur} pour le match : ${pari.match.equipe1} vs ${pari.match.equipe2} le ${pari.match.quand} a bien été annulée !
     </p>
-    <a href="/pel/connexion">Retour au menu</a>
+    <s:a action="connexion">Retour au menu</s:a>
 </body>
 </html>

@@ -13,8 +13,28 @@
         </action>
 
         <action name="connexion" class="Connexion">
-            <result name="INPUT">/WEB-INF/pages/Connexion.jsp</result>
-            <result name="SUCCESS">/WEB-INF/pages/Menu.jsp</result>
+            <result name="input">/WEB-INF/pages/Connexion.jsp</result>
+            <result name="success">/WEB-INF/pages/Menu.jsp</result>
+        </action>
+
+        <action name="logout" class="Connexion" method="logout">
+            <result name="success" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+        <action name="mesParis" class="MesParis">
+            <result name="error" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+            <result name="success">/WEB-INF/pages/MesParis.jsp</result>
+        </action>
+
+        <action name="annulerPari" class="PariAnnule">
+            <result name="success">/WEB-INF/pages/AnnulerPari.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
         </action>
     </package>
 
