@@ -6,9 +6,6 @@
         <fileset id="s2fileset" name="My Fileset" removed="false">
           <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.30/struts2-core-2.5.30.jar!/struts-default.xml</file>
         </fileset>
-        <fileset id="s2fileset2" name="My Fileset 2" removed="false">
-          <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.30/struts2-core-2.5.30.jar!/struts-default.xml</file>
-        </fileset>
         <propertiesKeys disabled="false" />
       </configuration>
     </facet>
