@@ -1,0 +1,8 @@
+ifndef::imagesdir[:imagesdir: ./images]
+
+= PEL - Paris en ligne version Struts
+
+
+
+. Mettre à jour le projet fourni pour qu'il devienne une application Struts (en adaptant les étapes vues dans l'exercice précédent)
+. Refaites l'application JSP/Servlet en Struts

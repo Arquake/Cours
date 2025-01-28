@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="TP ARCHI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TP ARCHI/Digital.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TP ARCHI/PennSim.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

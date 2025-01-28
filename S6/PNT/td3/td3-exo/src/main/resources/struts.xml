@@ -36,6 +36,10 @@
         <action name="calculatriceDynamiqueCalculate" class="fr.univ.orleans.pnt.actions.CalculatriceDynamique" method="calculate">
             <result name="resultat">/WEB-INF/pages/resultatDynamique.jsp</result>
         </action>
+
+        <action name="listeEtudiant" class="fr.univ.orleans.pnt.actions.Etudiant">
+            <result name="showList">/WEB-INF/pages/listeEtudiant.jsp</result>
+        </action>
     </package>
 
     <constant name="struts.custom.i18n.resources" value="mesTextes"/>

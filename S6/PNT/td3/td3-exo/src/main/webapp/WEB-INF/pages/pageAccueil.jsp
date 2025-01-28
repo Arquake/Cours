@@ -25,6 +25,9 @@
             <li>
                 <s:a action="calculatriceDynamique"><s:text name="pageAccueil.linkDynamique"/></s:a>
             </li>
+            <li>
+                <s:a action="listeEtudiant"><s:text name="PageAccueil.linkListeEtudiant" /></s:a>
+            </li>
         </ul>
     </nav>
 </body>

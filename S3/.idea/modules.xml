@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP1/POOTP1.iml" filepath="$PROJECT_DIR$/TP POO/POOTP1/POOTP1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP2/POOTP2.iml" filepath="$PROJECT_DIR$/TP POO/POOTP2/POOTP2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP3/POOTP3.iml" filepath="$PROJECT_DIR$/TP POO/POOTP3/POOTP3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP4/POOTP4.iml" filepath="$PROJECT_DIR$/TP POO/POOTP4/POOTP4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP5/POOTP5.iml" filepath="$PROJECT_DIR$/TP POO/POOTP5/POOTP5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP POO/POOTP6/POOTP6.iml" filepath="$PROJECT_DIR$/TP POO/POOTP6/POOTP6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/S3.iml" filepath="$PROJECT_DIR$/.idea/S3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TD POO/TD02/TD02.iml" filepath="$PROJECT_DIR$/TD POO/TD02/TD02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TD POO/TD03/TD03.iml" filepath="$PROJECT_DIR$/TD POO/TD03/TD03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TD POO/TD04/TD04.iml" filepath="$PROJECT_DIR$/TD POO/TD04/TD04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TD POO/TD05/TD05.iml" filepath="$PROJECT_DIR$/TD POO/TD05/TD05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TD POO/TD06/TD06.iml" filepath="$PROJECT_DIR$/TD POO/TD06/TD06.iml" />
+    </modules>
+  </component>
+</project>
