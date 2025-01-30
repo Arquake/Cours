@@ -17,7 +17,7 @@
     <h1>Menu</h1>
     <ul>
         <li>
-            <a href="/pel/parisouverts">Afficher les matchs sur lesquels parier</a>
+            <s:a action="parisouverts">Afficher les matchs sur lesquels parier</s:a>
         </li>
         <li>
             <s:a action="mesParis">Afficher mes paris</s:a>
