@@ -10,16 +10,49 @@
 <html>
 <head>
     <title>Paris  En Ligne</title>
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    >
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
 </head>
 <body class="container">
     <h2><s:property value="session.user.login" /></h2>
 
-    <s:property value="match.idMatch" />
+    <s:if test="hasActionErrors()">
+        <div class="errors alert alert-danger">
+            <s:actionerror />
+        </div>
+    </s:if>
 
-    <a href="/pel/connexion">Retour au menu</a>
+    <p>
+        Vous voulez parier sur le match :
+        <s:property value="match.equipe1"/> vs
+        <s:property value="match.equipe2"/> le
+        <s:property value="match.quand"/>
+
+
+        <!--
+            <s:if test="true"> }">
+                <span style="color: red"></span>
+            </s:if>
+        -->
+    </p>
+
+    <s:form action="parierSubmit">
+        <s:label for="vainqueur">Verdict du match</s:label>
+        <s:select
+                name="vainqueur"
+                id="vainqueur"
+                list="{'nul' ,match.equipe1, match.equipe2}"
+                cssClass="form-control" size="1"
+        />
+
+        <s:label for="montant">Montant</s:label>
+        <s:textfield type="number" name="montant" id="montant" />
+
+        <s:hidden name="idMatch" value="%{match.idMatch}" />
+
+        <s:submit value="Gamble !!!!!" cssClass="btn btn-primary"/>
+    </s:form>
+
+    <s:a action="connexion">Retour au menu</s:a>
 </body>
 </html>

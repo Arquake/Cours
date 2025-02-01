@@ -24,7 +24,7 @@
                         <p style="text-align: center">sport : ${sport} - ${equipe1} vs ${equipe2} - </p>
                     </div>
                     <s:form action="parier">
-                        <s:hidden name="matchId" value="%{idMatch}" hidden="hidden" />
+                        <s:hidden name="idMatch" value="%{idMatch}" hidden="hidden" />
                         <s:submit value="GAMBLE!!!!!" cssClass="btn btn-primary"/>
                     </s:form>
                 </div>
