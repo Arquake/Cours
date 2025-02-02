@@ -26,8 +26,8 @@
         <s:iterator value="paris" var="pari">
             <li>
                 <p>sport : ${match.sport} - ${match.equipe1} vs ${match.equipe2} - ${match.quand}. Mise de ${montant} sur ${vainqueur}</p>
-                <s:form action="annulerParis">
-                    <s:hidden value="%{idPari}" name="pariId"/>
+                <s:form action="annulerPari">
+                    <s:hidden value="%{idPari}" name="pariId" id="pariId"/>
                     <s:submit value="Annuler" cssClass="btn btn-primary"/>
                 </s:form>
             </li>
