@@ -1,0 +1,35 @@
+= TP1 JFx - Définition des vues
+
+
+
+Nous avons une application permettant de gérer une collection de films partiellement développée (et non compilable dans l'état). Il manque uniquement les vues.
+
+
+== Questions
+
+On vous demande de développer les vues sous certaines contraintes. Vous trouverez à la fin de ce sujet le visuel des vues attendues
+
+. Développez la vue d'accueil (la classe *Menu*) en procédural
+. Développez les deux autres vues en utilisant FXML
+**  une vue permettant d'ajouter un film à la collection (dont le controleur de vue
+sera la classe *Ajout* à compléter)
+** une vue permettant de visualiser l'ensemble des films de la collection (dont le
+controleur de vue sera la classe *TousLesFilms* à compléter)
+
+
+
+
+
+
+:imagesdir: images
+
+
+.Page d'accueil
+image::accueil.png[Page d'accueil]
+
+
+.Tous les films
+image::tous-les-films.png[Tous les films]
+
+.Ajout d'un film
+image::ajout-film.png[Ajout d'un film]
