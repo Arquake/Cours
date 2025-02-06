@@ -1,10 +1,9 @@
-import com.opensymphony.xwork2.ActionSupport;
 import facade.FacadeParisStaticImpl;
 import modele.Match;
-import org.apache.struts2.interceptor.ApplicationAware;
-import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.ActionSupport;
+import org.apache.struts2.action.ApplicationAware;
+import org.apache.struts2.action.SessionAware;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,16 +32,16 @@ public class Parier extends ActionSupport implements ApplicationAware, SessionAw
     }
 
     @Override
-    public void setSession(Map<String, Object> session) {
-        this.session = session;
-    }
-
-    @Override
-    public void setApplication(Map<String, Object> map) {
+    public void withApplication(Map<String, Object> map) {
         FACADE = (FacadeParisStaticImpl) map.get("facade");
         if(Objects.isNull(FACADE)) {
             FACADE = new FacadeParisStaticImpl();
             map.put("facade", FACADE);
         }
+    }
+
+    @Override
+    public void withSession(Map<String, Object> session) {
+        this.session = session;
     }
 }

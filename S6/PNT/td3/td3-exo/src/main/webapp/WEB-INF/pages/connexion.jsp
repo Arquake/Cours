@@ -20,7 +20,7 @@
     </div>
     <s:form action="saisie">
         <div class="mb-3">
-            <label for="pseudoInput" class="form-label">Pseudo</label>
+            <s:label for="pseudoInput" class="form-label">Pseudo</s:label>
             <s:textfield
                     name="pseudo"
                     cssClass="form-control"
@@ -29,7 +29,7 @@
             <div id="pseudoHelp" class="form-text">Votre pseudo.</div>
         </div>
         <div class="mb-3">
-            <label for="passwordInput" class="form-label">Password</label>
+            <s:label for="passwordInput" class="form-label">Password</s:label>
             <s:password
                     name="password"
                     cssClass="form-control"
