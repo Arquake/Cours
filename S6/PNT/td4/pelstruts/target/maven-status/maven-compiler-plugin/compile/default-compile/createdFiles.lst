@@ -2,10 +2,13 @@ facade\exceptions\MatchClosException.class
 facade\exceptions\UtilisateurNonAdminException.class
 modele\Pari.class
 modele\Match.class
+ParisOuverts.class
+PariForm.class
 facade\exceptions\InformationsSaisiesIncoherentesException.class
 modele\Utilisateur.class
 facade\exceptions\OperationNonAuthoriseeException.class
 facade\exceptions\MontantNegatifOuNulException.class
+Parier.class
 facade\exceptions\ResultatImpossibleException.class
 Connexion.class
 facade\FacadeParisStaticImpl.class

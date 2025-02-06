@@ -15,9 +15,9 @@
 </head>
 <body class="container">
     <s:if test="hasActionErrors()">
-        <ul class="errors alert alert-danger">
+        <p class="errors alert alert-danger">
             <s:actionerror />
-        </ul>
+        </p>
     </s:if>
 
     <s:form action="connexion">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -6,49 +7,52 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Paris  En Ligne</title>
-    <jsp:useBean id="match" type="modele.Match" scope="request"/>
-    <jsp:useBean id="user" type="modele.Utilisateur" scope="session"/>
-    <jsp:useBean id="errorMise" type="java.lang.Boolean" scope="request"/>
-    <jsp:useBean id="verdict" type="java.lang.String" scope="request"/>
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    >
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
 </head>
 <body class="container">
-    <h2>${user.login}</h2>
+    <h2><s:property value="session.user.login" /></h2>
+
+    <s:if test="hasActionErrors()">
+        <div class="errors alert alert-danger">
+            <s:actionerror />
+        </div>
+    </s:if>
 
     <p>
-        Vous voulez parier sur le match : ${match.equipe1} vs ${match.equipe2} le ${match.quand}
-        <c:if test="${errorMise}">
-            <span style="color: red">Vous devez saisir un montant positif pour votre mise !</span>
-        </c:if>
+        Vous voulez parier sur le match :
+        <s:property value="match.equipe1"/> vs
+        <s:property value="match.equipe2"/> le
+        <s:property value="match.quand"/>
+
+
+        <!--
+            <s:if test="true"> }">
+                <span style="color: red"></span>
+            </s:if>
+        -->
     </p>
 
-    <form action="/pel/parier" method="post">
-        <label id="choice" for="verdict">Verdict du match</label>
-        <select name="verdict" id="verdict">
-            <option>nul</option>
-            <option <c:if test="${verdict==match.equipe1}">selected</c:if> >
-                ${match.equipe1}
-            </option>
-            <option <c:if test="${verdict==match.equipe2}">selected</c:if> >
-                ${match.equipe2}
-            </option>
-        </select>
+    <s:form action="parierSubmit">
+        <s:label for="vainqueur">Verdict du match</s:label>
+        <s:select
+                name="vainqueur"
+                id="vainqueur"
+                list="{'nul' ,match.equipe1, match.equipe2}"
+                cssClass="form-control" size="1"
+        />
 
-        <label id="montant">Montant</label>
-        <input type="number" name="mise">
+        <s:label for="montant">Montant</s:label>
+        <s:textfield type="number" name="montant" id="montant" />
 
-        <input type="number" name="matchId" value="${match.idMatch}" hidden="hidden">
+        <s:hidden name="idMatch" value="%{match.idMatch}" />
 
-        <button type="submit">parier !</button>
-    </form>
+        <s:submit value="Gamble !!!!!" cssClass="btn btn-primary"/>
+    </s:form>
 
-    <a href="/pel/connexion">Retour au menu</a>
+    <s:a action="connexion">Retour au menu</s:a>
 </body>
 </html>

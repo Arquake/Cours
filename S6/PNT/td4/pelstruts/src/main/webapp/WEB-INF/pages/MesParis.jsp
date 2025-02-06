@@ -25,10 +25,10 @@
     <ul>
         <s:iterator value="paris" var="pari">
             <li>
-                <p>sport : ${pari.match.sport} - ${pari.match.equipe1} vs ${pari.match.equipe2} - ${pari.match.quand}. Mise de ${pari.montant} sur ${pari.vainqueur}</p>
-                <s:form action="annulerParis">
-                    <s:hidden value="%{idPari}" name="pariId"/>
-                    <s:submit value="Annuler" class="btn btn-primary"/>
+                <p>sport : ${match.sport} - ${match.equipe1} vs ${match.equipe2} - ${match.quand}. Mise de ${montant} sur ${vainqueur}</p>
+                <s:form action="annulerPari">
+                    <s:hidden value="%{idPari}" name="pariId" id="pariId"/>
+                    <s:submit value="Annuler" cssClass="btn btn-primary"/>
                 </s:form>
             </li>
         </s:iterator>

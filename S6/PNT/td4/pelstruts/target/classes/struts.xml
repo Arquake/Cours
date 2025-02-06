@@ -36,6 +36,31 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+
+        <action name="parisouverts" class="ParisOuverts">
+            <result name="success">/WEB-INF/pages/ParisOuverts.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+        <action name="parier" class="Parier">
+            <result name="success">/WEB-INF/pages/Parier.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+        <action name="parierSubmit" class="PariForm">
+            <result name="parierError">/WEB-INF/pages/Parier.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">parisouverts</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
     </package>
 
 </struts>
