@@ -44,7 +44,7 @@ class Cours
 
     #[ORM\ManyToOne(inversedBy: 'cours')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $enseignant = null;
+    private ?User $enseignant = null;
 
     public function getId(): ?int
     {
@@ -159,12 +159,12 @@ class Cours
         return $this;
     }
 
-    public function getEnseignant(): ?user
+    public function getEnseignant(): ?User
     {
         return $this->enseignant;
     }
 
-    public function setEnseignant(?user $enseignant): static
+    public function setEnseignant(?User $enseignant): static
     {
         $this->enseignant = $enseignant;
 

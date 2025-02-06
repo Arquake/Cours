@@ -11,15 +11,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use cebe\markdown\Markdown;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 #[Route('/cours')]
 final class CoursController extends AbstractController
 {
     #[Route(name: 'app_cours_index', methods: ['GET'])]
-    public function index(CoursRepository $coursRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, CoursRepository $coursRepository): Response
     {
+        // Fetch query (without executing it)
+        $query = $coursRepository->createQueryBuilder('p')->getQuery();
+
+        // Paginate results
+        $pagination = $paginator->paginate(
+            $query, // Query or Doctrine QueryBuilder
+            $request->query->getInt('page', 1), // Get current page number, default 1
+            10 // Number of items per page
+        );
+
         return $this->render('cours/index.html.twig', [
-            'cours' => $coursRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

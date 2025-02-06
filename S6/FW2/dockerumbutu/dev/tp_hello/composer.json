@@ -14,6 +14,7 @@
         "doctrine/orm": "^3.3",
         "easycorp/easyadmin-bundle": "^4.23",
         "fakerphp/faker": "^1.24",
+        "knplabs/knp-paginator-bundle": "^6.6",
         "league/commonmark": "^2.6",
         "league/html-to-markdown": "^5.1",
         "phpdocumentor/reflection-docblock": "^5.6",

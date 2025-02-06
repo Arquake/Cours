@@ -17,6 +17,10 @@
                 <td>{{ cour.name }}</td>
             </tr>
             <tr>
+                <th>Enseignant en charge</th>
+                <td>{{ cour.enseignant.nom }} {{ cour.enseignant.prenom }}</td>
+            </tr>
+            <tr>
                 <th>Description</th>
                 <td>{{ cour.description | raw }}</td>
             </tr>
@@ -47,7 +51,7 @@
         </tbody>
     </table>
 
-    {% if app.user %}
+    {% if app.user and app.user == cour.enseignant %}
         <div style="display:flex; gap:1rem">
             <a class="btn btn-primary" href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
 
