@@ -17,7 +17,7 @@
             <result name="success">/WEB-INF/pages/Menu.jsp</result>
         </action>
 
-        <action name="logout" class="Connexion" method="logout">
+        <action name="logout" class="Logout">
             <result name="success" type="redirectAction">
                 <param name="actionName">home</param>
             </result>
@@ -52,7 +52,7 @@
         </action>
 
         <action name="parierSubmit" class="PariForm">
-            <result name="parierError">/WEB-INF/pages/Parier.jsp</result>
+            <result name="input">/WEB-INF/pages/Parier.jsp</result>
             <result name="success" type="redirectAction">
                 <param name="actionName">parisouverts</param>
             </result>

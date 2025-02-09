@@ -17,7 +17,7 @@
             <result name="success">/WEB-INF/pages/Menu.jsp</result>
         </action>
 
-        <action name="logout" class="Connexion" method="logout">
+        <action name="logout" class="Logout">
             <result name="success" type="redirectAction">
                 <param name="actionName">home</param>
             </result>

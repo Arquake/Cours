@@ -34,30 +34,34 @@ public class PariForm extends ActionSupport implements ApplicationAware, Session
     }
 
     @Override
-    public String execute() throws Exception {
-        if (session.containsKey("user") && FACADE.getMatch(idMatch) != null) {
-            try {
-                match = FACADE.getMatch(idMatch);
-                if (!vainqueur.equals(match.getEquipe1()) && !vainqueur.equals(match.getEquipe2()) ) {
-                    addActionError("Vous devez choisir une équipe valide");
-                    throw new Exception("Equipe invalide");
-                }
-                else if (montant <= 0) {
-                    addActionError("Mise inférieure ou égal à 0");
-                    throw new Exception("Mise nul");
-                }
-                FACADE.parier(
-                        ((Utilisateur) session.get("user")).getLogin(),
-                        idMatch,
-                        vainqueur,
-                        montant);
-                return SUCCESS;
-            }
-            catch (Exception ignore) {
-                return "parierError";
-            }
+    public void validate() {
+        match = FACADE.getMatch(idMatch);
+        if (match == null) {
+           addActionError("Le Match n'existe pas");
         }
-        return ERROR;
+        else if (!vainqueur.equals(match.getEquipe1()) && !vainqueur.equals(match.getEquipe2()) ) {
+            addActionError("Vous devez choisir une équipe valide");
+        }
+        else if (montant <= 0) {
+            addActionError("Mise inférieure ou égal à 0");
+        }
+    }
+
+    @Override
+    public String execute() throws Exception {
+        if (hasActionErrors()) {
+            return INPUT;
+        }
+        if (!session.containsKey("user") && FACADE.getMatch(idMatch) == null) {
+            return ERROR;
+        }
+        FACADE.parier(
+            ((Utilisateur) session.get("user")).getLogin(),
+            idMatch,
+            vainqueur,
+            montant);
+        return SUCCESS;
+
     }
 
     @Override

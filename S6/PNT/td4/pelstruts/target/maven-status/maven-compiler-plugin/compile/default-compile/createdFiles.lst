@@ -10,6 +10,7 @@ facade\exceptions\OperationNonAuthoriseeException.class
 facade\exceptions\MontantNegatifOuNulException.class
 Parier.class
 facade\exceptions\ResultatImpossibleException.class
+Logout.class
 Connexion.class
 facade\FacadeParisStaticImpl.class
 PariAnnule.class

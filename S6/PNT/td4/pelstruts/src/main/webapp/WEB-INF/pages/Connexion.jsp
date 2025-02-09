@@ -15,21 +15,17 @@
 </head>
 <body class="container">
     <s:if test="hasActionErrors()">
-        <p class="errors alert alert-danger">
-            <s:actionerror />
-        </p>
+        <s:actionerror cssClass="errors alert alert-danger"/>
     </s:if>
 
     <s:form action="connexion">
         <div class="form-group">
-            <s:label for="login">Login</s:label>
-            <s:textfield id="login" name="login"/>
+            <s:textfield id="login" name="login" label="Login" cssClass="form-control"/>
         </div>
         <div class="form-group">
-            <s:label for="password">Mot de passe</s:label>
-            <s:textfield id="password" name="password"/>
+            <s:textfield id="password" name="password" label="Mot De Passe" cssClass="form-control"/>
         </div>
-        <s:submit value="Soumettre"/>
+        <s:submit value="Soumettre" cssClass="btn btn-primary"/>
     </s:form>
 </body>
 </html>
