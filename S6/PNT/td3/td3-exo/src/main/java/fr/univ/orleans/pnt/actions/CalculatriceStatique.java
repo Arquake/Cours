@@ -3,12 +3,16 @@ package fr.univ.orleans.pnt.actions;
 
 import org.apache.struts2.ActionSupport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalculatriceStatique extends ActionSupport {
 
     private String operand;
     private int operand1;
     private int operand2;
     private int res;
+    private List<String> operands;
 
     public String calculate() throws Exception {
         switch (operand) {
@@ -66,5 +70,16 @@ public class CalculatriceStatique extends ActionSupport {
 
     public void setRes(int res) {
         this.res = res;
+    }
+
+    public java.util.Collection<String> getOperands() {
+        if (operands == null) {
+            operands = new ArrayList<>();
+            operands.add("+");
+            operands.add("-");
+            operands.add("*");
+            operands.add("/");
+        }
+        return operands;
     }
 }

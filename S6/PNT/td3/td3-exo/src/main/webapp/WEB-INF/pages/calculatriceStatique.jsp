@@ -37,7 +37,7 @@
             <s:select
                     cssClass="form-control"
                     name="operand"
-                    list="{'+','-','*','/'}"
+                    list="operands"
                     size="1"
                     id="operand"/>
         </div>
