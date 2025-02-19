@@ -10,7 +10,7 @@ public class Saisie extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        if (pseudo.length() < 3 && password.length() < 3) {
+        if (pseudo.length() < 3 || password.length() < 3) {
             addActionError("Le login ou mot de passe est trop court");
             return "errorSaisie";
         }

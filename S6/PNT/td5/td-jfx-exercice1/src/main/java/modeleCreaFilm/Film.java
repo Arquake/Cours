@@ -34,7 +34,4 @@ public class Film {
     public int getId() {
         return id;
     }
-
-
-
 }

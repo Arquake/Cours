@@ -24,29 +24,26 @@ public class Controleur {
 
     public Controleur(FacadeScreen facadeScreen, Stage stage) {
         this.facadeScreen = facadeScreen;
-        menu = Menu.creerVue(this,stage);
-        tousLesFilms = TousLesFilms.creerVue(this,stage);
-        ajout = Ajout.creerVue(this,stage);
-
-
+        menu = Menu.creerVue(stage, this);
+        tousLesFilms = TousLesFilms.creerVue(stage, this, facadeScreen);
+        ajout = Ajout.creerVue(stage, this);
     }
 
     private void showMenu() {
        menu.show();
     }
-    public void showFilms(){
 
+    public void showFilms(){
        tousLesFilms.show();
     }
+
     public void showAjout(){
         ajout.show();
     }
 
-
     public void run() {
         showMenu();
     }
-
 
     public void gotoConsulter() {
         showFilms();
@@ -71,10 +68,9 @@ public class Controleur {
             ajout.viderChamps();
             showAjout();
         }
-}
+    }
 
     public void gotoAjout() {
-
         showAjout();
     }
-    }
+}

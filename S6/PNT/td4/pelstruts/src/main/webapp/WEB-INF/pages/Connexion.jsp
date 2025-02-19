@@ -20,7 +20,7 @@
 
     <s:form action="connexion">
         <div class="form-group">
-            <s:textfield id="login" name="login" label="Login" cssClass="form-control"/>
+            <s:textfield id="login" name="login" label="Login" cssClass="form-control" />
         </div>
         <div class="form-group">
             <s:textfield id="password" name="password" label="Mot De Passe" cssClass="form-control"/>
