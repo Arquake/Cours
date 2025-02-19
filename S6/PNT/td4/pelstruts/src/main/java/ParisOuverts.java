@@ -1,4 +1,5 @@
 
+import environment.Environment;
 import facade.FacadeParisStaticImpl;
 import modele.Match;
 import org.apache.struts2.ActionSupport;
@@ -9,11 +10,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-public class ParisOuverts extends ActionSupport implements SessionAware, ApplicationAware {
-
-    private Map<String, Object> session;
-
-    private FacadeParisStaticImpl FACADE;
+public class ParisOuverts extends Environment {
 
     private Collection<Match> matchs;
 
@@ -32,19 +29,5 @@ public class ParisOuverts extends ActionSupport implements SessionAware, Applica
 
     public Map<String, Object> getSession() {
         return session;
-    }
-
-    @Override
-    public void withApplication(Map<String, Object> map) {
-        FACADE = (FacadeParisStaticImpl) map.get("facade");
-        if(Objects.isNull(FACADE)) {
-            FACADE = new FacadeParisStaticImpl();
-            map.put("facade", FACADE);
-        }
-    }
-
-    @Override
-    public void withSession(Map<String, Object> session) {
-        this.session = session;
     }
 }

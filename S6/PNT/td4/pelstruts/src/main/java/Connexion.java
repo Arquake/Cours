@@ -1,3 +1,4 @@
+import environment.Environment;
 import facade.FacadeParisStaticImpl;
 import facade.exceptions.InformationsSaisiesIncoherentesException;
 import facade.exceptions.UtilisateurDejaConnecteException;
@@ -9,13 +10,10 @@ import org.apache.struts2.action.SessionAware;
 import java.util.Map;
 import java.util.Objects;
 
-public class Connexion extends ActionSupport implements SessionAware, ApplicationAware {
+public class Connexion extends Environment {
 
     private String login;
     private String password;
-
-    private static FacadeParisStaticImpl FACADE;
-    private Map<String, Object> session;
 
     @Override
     public void validate() {
@@ -45,19 +43,5 @@ public class Connexion extends ActionSupport implements SessionAware, Applicatio
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public void withApplication(Map<String, Object> map) {
-        FACADE = (FacadeParisStaticImpl) map.get("facade");
-        if(Objects.isNull(FACADE)) {
-            FACADE = new FacadeParisStaticImpl();
-            map.put("facade", FACADE);
-        }
-    }
-
-    @Override
-    public void withSession(Map<String, Object> session) {
-        this.session = session;
     }
 }

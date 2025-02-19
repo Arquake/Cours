@@ -1,3 +1,4 @@
+import environment.Environment;
 import facade.FacadeParisStaticImpl;
 import modele.Pari;
 import modele.Utilisateur;
@@ -8,15 +9,11 @@ import org.apache.struts2.action.SessionAware;
 import java.util.Map;
 import java.util.Objects;
 
-public class PariAnnule extends ActionSupport implements SessionAware, ApplicationAware {
-
-    private Map<String, Object> session;
+public class PariAnnule extends Environment {
 
     private long pariId;
 
     private Pari pari;
-
-    private static FacadeParisStaticImpl FACADE;
 
     @Override
     public String execute() throws Exception {
@@ -38,19 +35,5 @@ public class PariAnnule extends ActionSupport implements SessionAware, Applicati
 
     public Map<String, Object> getSession() {
         return session;
-    }
-
-    @Override
-    public void withSession(Map<String, Object> session) {
-        this.session = session;
-    }
-
-    @Override
-    public void withApplication(Map<String, Object> map) {
-        FACADE = (FacadeParisStaticImpl) map.get("facade");
-        if(Objects.isNull(FACADE)) {
-            FACADE = new FacadeParisStaticImpl();
-            map.put("facade", FACADE);
-        }
     }
 }

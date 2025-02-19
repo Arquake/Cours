@@ -1,3 +1,4 @@
+import environment.Environment;
 import facade.FacadeParisStaticImpl;
 import modele.Pari;
 import modele.Utilisateur;
@@ -9,10 +10,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-public class MesParis extends ActionSupport implements SessionAware, ApplicationAware {
-
-    private static FacadeParisStaticImpl FACADE;
-    private Map<String, Object> session;
+public class MesParis extends Environment {
 
     private Collection<Pari> paris;
 
@@ -39,19 +37,5 @@ public class MesParis extends ActionSupport implements SessionAware, Application
 
     public Map<String, Object> getSession() {
         return session;
-    }
-
-    @Override
-    public void withSession(Map<String, Object> session) {
-        this.session = session;
-    }
-
-    @Override
-    public void withApplication(Map<String, Object> map) {
-        FACADE = (FacadeParisStaticImpl) map.get("facade");
-        if(Objects.isNull(FACADE)) {
-            FACADE = new FacadeParisStaticImpl();
-            map.put("facade", FACADE);
-        }
     }
 }
