@@ -1,0 +1,22 @@
+services:
+  framework-web-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: nicolas # À Modifier
+        UID: 1000         # À Modifier
+        MAIL: nicolas.vera@etu.univ-orleans.fr # À Modifier
+        NAME: "nicolas"        # À Modifier
+    container_name: tp-angular # À Modifier
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+    volumes:
+    - .:/var/www/html
+    ports:
+    - "8000:8000"
+    - "8020:4200"
+    environment:
+      PHP_IDE_CONFIG: serverName=contacts
+      PS1: "[ $$(whoami) | $$(pwd) ] "
