@@ -1,0 +1,33 @@
+= TP2 JFx - Utilisation de ListView et ComboBox
+
+
+
+Nous avons une application permettant de gérer une collection de films partiellement développée (et non compilable dans l'état). Il manque uniquement les vues permettant
+d'ajouter un film et d'afficher tous les films. Vous pourrez repartir des fichiers FXML de la séance précédente.
+
+
+== Questions
+
+Voici ce que nous voulons :
+
+
+. Nous voulons éviter la saisie d'un genre inconnu. Pour ceci,
+nous voulons une *Combobox* qui devra être alimentée par les genres connus dans le modèle.
+. Nous voulons afficher les films dans une *ListView*. Evidemment, il faudra
+être vigilant sur l'affichage et bien utiliser les techniques vues en CM pour configurer
+proprement l'affichage
+
+
+
+
+
+:imagesdir: images
+
+
+
+
+.Tous les films affichés dans une ListView de Films
+image::tous-les-films.png[Tous les films]
+
+.Ajout d'un film avec une ComboBox pour les genres
+image::ajout.png[Ajout d'un film]

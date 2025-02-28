@@ -27,13 +27,6 @@
         <s:property value="match.equipe1"/> vs
         <s:property value="match.equipe2"/> le
         <s:property value="match.quand"/>
-
-
-        <!--
-            <s:if test="true"> }">
-                <span style="color: red"></span>
-            </s:if>
-        -->
     </p>
 
     <s:form action="parierSubmit">

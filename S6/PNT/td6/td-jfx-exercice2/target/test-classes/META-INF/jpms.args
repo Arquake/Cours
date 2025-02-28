@@ -1,0 +1,4 @@
+--patch-module
+permissions=_
+--add-reads
+permissions=ALL-UNNAMED

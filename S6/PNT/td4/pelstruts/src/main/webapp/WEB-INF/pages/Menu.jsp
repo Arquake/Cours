@@ -23,7 +23,7 @@
             <s:a action="mesParis">Afficher mes paris</s:a>
         </li>
         <li>
-            <a href="/pel/logout">Déconnexion</a>
+            <s:a action="logout">Déconnexion</s:a>
         </li>
     </ul>
 </body>
