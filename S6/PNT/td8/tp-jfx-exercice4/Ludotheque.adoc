@@ -1,0 +1,18 @@
+= Ludotheque
+
+
+Vous avez un début d'application qui pour le moment ne contient que le modèle.
+
+
+== Votre mission
+
+Créer une application JFX comprenant les vues (en fxml) et les fonctionnalités ci-dessous :
+
+. Créer une vue contenant un formulaire permettant de saisir le nom d'un jeu, sa catégorie
+ainsi qu'une description et de valider les données.
+.. Si le jeu existe déjà, tous les champs doivent être réinitialisés et un message d'erreur est affiché.
+.. Si la catégorie sélectionnée n'existe pas, l'utilisateur est averti par un message d'erreur.
+.. S'il manque des informations, l'utilisateur est averti par un message d'erreur.
+. Si l'enregistrement s'est bien passé, on passe à la vue suivante.
+
+. La dernière vue doit afficher tous les jeux de la même catégorie que le jeu que l'on vient d'ajouter dans une ListView. Un bouton doit nous permettre de revenir à l'écran précédent en réinitialisant tous les champs.
