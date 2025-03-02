@@ -6,5 +6,4 @@ public interface VueInteractive {
 
         void setControleur(Controleur controleur);
 
-
 }
