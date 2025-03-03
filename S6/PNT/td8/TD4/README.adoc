@@ -1,0 +1,22 @@
+= TP3 JFx - Maîtrise du MVC orienté ordre
+
+
+
+Cette application doit vous dire quelque chose. C'est celle qui peut vous servir de correction
+pour l'exercice précédent.
+
+Cependant, le MVC utilisé, bien que correct, présente quelques inconvénients :
+
+* Contrôleur dépendant de JFx
+* Code peu flexible à l'évolution. Un changement de vue peut s'avérer périlleux car il faut toucher au contrôleur.
+
+Le but de cet exercice est de refactorer le code en introduisant tous les composants
+classique du MVC Ordre et en modifiant tout le code nécessaire pour introduire la notion
+d'ordres.
+
+Compléter le menu avec un bouton "Rechercher les films par genre". En cliquant sur le bouton, on arrive sur une vue qui propose une liste déroulante des genres.
+En sélectionnant un genre dans la liste, l'application affiche les films correspondant à ce genre.
+Pour l'affichage, vous passerez par la vue touslesfilms.fxml qui utilise une listeView puis vous pourrez créer une autre vue qui affichera le titre et le nom du réalisateur dans une tableView avec deux colonnes : titre et réalisateur.
+
+
+

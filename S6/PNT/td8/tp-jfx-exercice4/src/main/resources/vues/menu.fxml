@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.Menu">
+<VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.Menu">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" text="Créer jeu" textAlignment="CENTER">
          <font>
@@ -30,7 +30,7 @@
             <Label text="Description" GridPane.rowIndex="2" />
             <ComboBox fx:id="categories" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Créer" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#handleSubmit" text="Créer" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
