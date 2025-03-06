@@ -1,8 +1,4 @@
-<div *ngFor="let item of bookList">
-    <p>{{item.id}}</p>
-    <p>{{item.title}}</p>
-    <p>{{item.publisher}}</p>
-    <p>{{item.backcover}}</p>
-    <p>{{item.year}}</p>
-    <p>{{item.isbn}}</p>
+
+<div *ngFor="let item of bokkList">
+    <a routerLink='/book/{{item.id}}' routerLinkActive="router-link-active" >{{item.title}}</a>
 </div>

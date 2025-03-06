@@ -1,8 +1,11 @@
-<div *ngIf="book">
-    <p>{{book.id}}</p>
+<div *ngIf="book$ | async as book">
     <p>{{book.title}}</p>
     <p>{{book.publisher}}</p>
     <p>{{book.backcover}}</p>
     <p>{{book.year}}</p>
     <p>{{book.isbn}}</p>
+</div>
+<div>
+    <button (click)="modify()">Modifier</button>
+    <button (click)="delete()">Supprimer</button>
 </div>

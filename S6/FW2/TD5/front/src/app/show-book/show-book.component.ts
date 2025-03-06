@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 import { BokkService } from '../bokk.service';
-import { catchError, of } from 'rxjs';
-import { Book } from '../book';
-import { NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
+import { Book } from '../../entity/book';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-book',
-  imports: [NgIf],
+  imports: [NgIf, AsyncPipe],
   templateUrl: './show-book.component.html',
   styleUrl: './show-book.component.css'
 })
 export class ShowBookComponent {
-  book: Book | null;
+  book$: Observable<Book>;
 
-  constructor(private bokkService: BokkService, private route: ActivatedRoute) { this.book = null }
+  bookId = -1
 
-  ngOnInit() {
+  constructor(private bokkService: BokkService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params)=>{
-      let bookId = params['id']
-      this.bokkService.bookGet(bookId).pipe(
-        catchError((error) => {
-          return of({});
-        })
-      ).subscribe((res: any) => {
-        this.book = res;
-        console.log(this.book)
-      });
+      this.bookId = params['id']
     })
+    this.book$ = this.bokkService.bookGet(this.bookId);
+  }
+
+  modify() {
+    this.router.navigate(["/book", this.bookId, "edit"])
+  }
+
+  delete() {
+    this.bokkService.bookDelete(this.bookId).subscribe(()=>{this.router.navigate(["/books"])})
   }
     
 }

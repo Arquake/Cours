@@ -1,27 +1,28 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { Book } from '../book';
+import { Component, NgModule, OnInit, Signal, signal } from '@angular/core';
+import { Book } from '../../entity/book';
 import { BokkService } from '../bokk.service';
-import { catchError, of } from 'rxjs';
-import { NgFor } from '@angular/common';
+import { catchError, Observable, of } from 'rxjs';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-list-book',
-  imports: [NgFor],
+  imports: [NgFor, RouterLink, RouterLinkActive],
   templateUrl: './list-book.component.html',
   styleUrl: './list-book.component.css'
 })
-export class ListBookComponent implements OnInit {
-  bookList: Book[] = [];
+export class ListBookComponent {
+  bookList$: Observable<Book[]>;
 
-  constructor(private bokkService: BokkService) {}
+  bookList = signal<Book[]>([]);
 
-  ngOnInit() {
-    this.bokkService.bookGetALl().pipe(
-      catchError((error) => {
-        return of([]);
-      })
-    ).subscribe((res: any) => {
-      this.bookList = res.member;
+  bokkList: Book[] = [];
+
+  constructor(private bokkService: BokkService) {
+    this.bookList$ = this.bokkService.bookGetAll();
+    this.bookList$.subscribe((data: any)=>{
+      this.bookList.set(data.member); 
+      this.bokkList = data.member;
     });
   }
 }
