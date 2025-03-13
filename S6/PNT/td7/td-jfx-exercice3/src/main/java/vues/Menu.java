@@ -1,36 +1,44 @@
 package vues;
 
-import controleur.Controleur;
+import controleur.ControleurImpl;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import ordres.EcouteurOrdre;
+import ordres.LanceurOrdre;
+import ordres.TypeOrdre;
+import vues.abstractvue.AbstractVueInteractive;
+import vues.abstractvue.Vue;
 
-public class Menu extends Vue implements VueInteractive {
-   private Controleur controleur;
+public class Menu extends AbstractVueInteractive implements EcouteurOrdre {
 
-    public static Menu creerVue(Controleur controleur, Stage stage) {
-        Menu menu = new Menu();
-        menu.initialiserVue();
-        menu.setControleur(controleur);
-        menu.setStage(stage);
-        return menu;
+    private BorderPane parent;
+
+    public static Menu creerVue(GestionnaireVueImpl gestionnaire) {
+        Menu vue = new Menu();
+        vue.initialiserVue();
+        gestionnaire.ajouterVueInteractive(vue);
+        gestionnaire.ajouterEcouteurOrdre(vue);
+        return vue;
     }
 
     private void initialiserVue() {
-        BorderPane borderPane = new BorderPane();
+        parent = new BorderPane();
         Label label = new Label("Les films");
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font(42));
         label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 //        label.setPrefSize(label.getMaxWidth(),label.getMaxHeight());
-        VBox vBox = new VBox();
+        VBox mainbox = new VBox();
 
         //BorderPane.setAlignment(label, Pos.CENTER);
         //BorderPane.setAlignment(vBox,Pos.CENTER);
@@ -44,38 +52,45 @@ public class Menu extends Vue implements VueInteractive {
         gotoRechercher.setFont(Font.font(24));
         gotoRechercher.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-        vBox.getChildren().addAll( gotoConsulter, gotoAjouter, gotoRechercher);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(40);
+        mainbox.getChildren().addAll( gotoConsulter, gotoAjouter, gotoRechercher);
+        mainbox.setAlignment(Pos.CENTER);
+        mainbox.setSpacing(40);
 
         gotoConsulter.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                controleur.gotoConsulter();
+                getControleur().fireOrdre(TypeOrdre.SHOW_FILMS);
             }
         });
         gotoAjouter.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                controleur.gotoAjout();
+                getControleur().fireOrdre(TypeOrdre.SHOW_AJOUT);
             }
         });
         gotoRechercher.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                controleur.gotoRechercher();
+                getControleur().fireOrdre(TypeOrdre.SHOW_RECHERCHE);
             }
         });
 
-        borderPane.setCenter(vBox);
-        borderPane.setTop(label);
-        setScene( new Scene(borderPane, 640, 480));
+        parent.setCenter(mainbox);
+        parent.setTop(label);
+
+        this.setScene(new Scene(parent, 600, 400));
     }
 
     @Override
-    public void setControleur(Controleur controleur) {
-        this.controleur=controleur;
+    public void setAbonnement(LanceurOrdre g) {
+        g.abonnement(this, TypeOrdre.SHOW_MENU);
     }
 
+    @Override
+    public void traiter(TypeOrdre e) {}
 
+    @Override
+    protected Parent getTopParent() {
+        return parent;
+    }
 }

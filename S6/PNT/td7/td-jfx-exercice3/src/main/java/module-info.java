@@ -4,4 +4,5 @@ module permissions {
 
     opens vues to javafx.fxml;
     exports pnt;
+    opens vues.abstractvue to javafx.fxml;
 }

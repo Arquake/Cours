@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.Chevaux">
+   <top>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mon écurie" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="53.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <ListView fx:id="chevaux" onMouseClicked="#selectioncheval" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gotoajoutercheval" text="Ajouter un cheval" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>

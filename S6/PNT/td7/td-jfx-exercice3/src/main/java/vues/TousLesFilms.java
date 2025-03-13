@@ -1,6 +1,6 @@
 package vues;
 
-import controleur.Controleur;
+import controleur.ControleurImpl;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,14 +13,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modeleCreaFilm.Film;
-import modeleCreaFilm.GenreFilm;
+import ordres.EcouteurOrdre;
+import ordres.LanceurOrdre;
+import ordres.TypeOrdre;
+import vues.abstractvue.AbstractVueInteractive;
+import vues.abstractvue.Vue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class TousLesFilms extends Vue implements VueInteractive {
-    private Controleur controleur;
+public class TousLesFilms extends AbstractVueInteractive implements EcouteurOrdre {
 
     @FXML
     VBox mainVbox;
@@ -28,59 +31,50 @@ public class TousLesFilms extends Vue implements VueInteractive {
     @FXML
     ListView<Film> lesFilms;
 
+    Collection<Film> films;
+
     @FXML
     private void handleItemClick(MouseEvent event) {
         Film selectedItem = lesFilms.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            controleur.gotoInfo(selectedItem);
+            getControleur().gotoInfoFilm(selectedItem);
         }
     }
 
-    public Parent getTop() {
+    @Override
+    public Parent getTopParent() {
         return mainVbox;
     }
 
-    public static TousLesFilms creerVue(Controleur controleur, Stage stage) {
+    public static TousLesFilms creerVue(GestionnaireVueImpl gestionnaire) {
         FXMLLoader fxmlLoader = new FXMLLoader(TousLesFilms.class.getResource("tousLesFilms.fxml"));
         try {
             fxmlLoader.load();
         } catch (IOException e) {
             System.out.println("Probleme de construction de vue Formulaire");
         }
-        TousLesFilms vue = fxmlLoader.getController();
 
-        vue.setControleur(controleur);
-        vue.setStage(stage);
-        vue.setScene(new Scene(vue.getTop()));
+        TousLesFilms vue = fxmlLoader.getController();
+        vue.initialisation();
         vue.lesFilms.setOnMouseClicked(vue::handleItemClick);
+        gestionnaire.ajouterVueInteractive(vue);
+        gestionnaire.ajouterEcouteurOrdre(vue);
         return vue;
 
     }
     public void gotomenu(ActionEvent actionEvent) {
-        controleur.gotoMenu();
-    }
-
-
-    @Override
-    public void setControleur(Controleur controleur) {
-        this.controleur = controleur;
+        getControleur().gotoMenu();
     }
 
 
 
     @Override
     public void show() {
-        Collection<Film> films = controleur.getLesFilms();
-        showFilms(films);
+        films = getControleur().getFilms();
+        showFilms();
     }
 
-    public void show(GenreFilm genre) {
-        Collection<Film> films = controleur.getFilmsDuGenre(genre);
-        showFilms(films);
-    }
-
-    private void showFilms(Collection<Film> films) {
-        this.lesFilms.setItems(FXCollections.observableList(new ArrayList<>(films)));
+    private void showFilms() {
         this.lesFilms.setCellFactory(param -> new ListCell<Film>() {
             @Override
             protected void updateItem(Film item, boolean empty) {
@@ -92,6 +86,25 @@ public class TousLesFilms extends Vue implements VueInteractive {
                 }
             }
         });
-        super.show();
+    }
+
+
+    @Override
+    public void setAbonnement(LanceurOrdre g) {
+        g.abonnement(this, TypeOrdre.NOUVEAU_FILM, TypeOrdre.SHOW_FILMS, TypeOrdre.SHOW_FILMS_RECHERCHE);
+    }
+
+    @Override
+    public void traiter(TypeOrdre e) {
+        if (e == TypeOrdre.NOUVEAU_FILM || e == TypeOrdre.SHOW_FILMS) {
+            Collection<Film> films = getControleur().getFilms();
+            this.lesFilms.setItems(FXCollections.observableList(new ArrayList<>(films)));
+            showFilms();
+        }
+        else if (e == TypeOrdre.SHOW_FILMS_RECHERCHE) {
+            Collection<Film> films = getControleur().getFilmsParGenreRecherche();
+            this.lesFilms.setItems(FXCollections.observableList(new ArrayList<>(films)));
+            showFilms();
+        }
     }
 }

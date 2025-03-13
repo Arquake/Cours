@@ -1,9 +1,9 @@
 package vues;
 
-import controleur.Controleur;
+import controleur.ControleurImpl;
 
 public interface VueInteractive {
+        ControleurImpl getControleur();
 
-        void setControleur(Controleur controleur);
-
+        void setControleur(ControleurImpl controleur);
 }

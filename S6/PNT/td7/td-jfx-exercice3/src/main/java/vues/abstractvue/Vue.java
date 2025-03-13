@@ -1,11 +1,11 @@
-package vues;
+package vues.abstractvue;
 
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class Vue {
     private Stage stage;
-
 
     private Scene scene;
 
@@ -32,5 +32,7 @@ public abstract class Vue {
         this.scene = scene;
     }
 
+    protected abstract Parent getTopParent();
 
+    abstract void initialisation();
 }
