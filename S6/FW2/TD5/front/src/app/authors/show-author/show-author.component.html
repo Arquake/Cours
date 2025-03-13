@@ -1,0 +1,11 @@
+<div *ngIf="author$ | async as author">
+    <p>{{author.firstname}}</p>
+    <p>{{author.lastname}}</p>
+    <div *ngFor="let books of author.books">
+        <a routerLink='/book/{{books.id}}'>{{books.title}}</a>
+    </div>
+</div>
+<div>
+    <button (click)="modify()">Modifier</button>
+    <button (click)="delete()">Supprimer</button>
+</div>

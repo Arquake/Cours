@@ -4,6 +4,10 @@
     <p>{{book.backcover}}</p>
     <p>{{book.year}}</p>
     <p>{{book.isbn}}</p>
+    <div *ngFor="let person of book.author">
+        <a routerLink='/author/{{person.id}}'>{{person.firstname}} {{person.lastname}}</a>
+    </div>
+    
 </div>
 <div>
     <button (click)="modify()">Modifier</button>

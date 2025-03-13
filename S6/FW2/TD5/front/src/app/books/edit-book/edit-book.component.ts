@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BokkService } from '../bokk.service';
+import { BokkService } from '../../bokk.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Book } from '../../entity/book';
+import { Book } from '../../../entity/book';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -40,17 +40,22 @@ export class EditBookComponent {
   
   submit = () => {
     if (this.bookForm.valid) {
-      let formValues = this.bookForm.getRawValue()
-      this.bokkService.bookPatch(
-        this.bookId,
-        formValues.title!,
-        formValues.publisher!,
-        formValues.year!,
-        formValues.backcover!,
-        formValues.isbn!
-      ).subscribe((data:any)=> {
-        this.router.navigate([`/book/`, data.id])
-      })
+      
+      if (this.bookForm.valid) {
+        let formValues = this.bookForm.getRawValue()
+        
+        this.bokkService.bookPatch(
+          this.bookId,
+          formValues.title!,
+          formValues.publisher!,
+          Number(formValues.year!),
+          formValues.backcover!,
+          formValues.isbn!
+        ).subscribe((data:any)=> {
+          this.router.navigate([`/book/`, data.id])
+        })
+      }
+      
     }
   }
 }

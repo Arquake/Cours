@@ -1,0 +1,18 @@
+<form [formGroup]="bookForm" (submit)="submit()">
+    <input formControlName="title" >
+    <input formControlName="publisher" >
+    <input formControlName="year" >
+    <input formControlName="backcover" >
+    <input formControlName="isbn">
+    <div formControlName="authors">
+        <div *ngIf="$authors | async">
+            <div *ngFor="let a of authors">
+                <input type="checkbox" [value]="a.id" />
+                {{ a.firstname }} {{ a.lastname }}
+            </div>
+        </div>
+    </div>
+    
+
+    <button type="submit">Submit</button>
+</form>

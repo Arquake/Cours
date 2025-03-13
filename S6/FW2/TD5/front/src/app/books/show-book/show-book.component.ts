@@ -1,13 +1,13 @@
 import { Component, Signal, signal } from '@angular/core';
-import { BokkService } from '../bokk.service';
+import { BokkService } from '../../bokk.service';
 import { catchError, Observable, of } from 'rxjs';
-import { Book } from '../../entity/book';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Book } from '../../../entity/book';
+import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-show-book',
-  imports: [NgIf, AsyncPipe],
+  imports: [NgIf, CommonModule, AsyncPipe, RouterLink],
   templateUrl: './show-book.component.html',
   styleUrl: './show-book.component.css'
 })

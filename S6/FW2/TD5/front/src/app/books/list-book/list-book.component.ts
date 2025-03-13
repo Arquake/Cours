@@ -1,6 +1,6 @@
 import { Component, NgModule, OnInit, Signal, signal } from '@angular/core';
-import { Book } from '../../entity/book';
-import { BokkService } from '../bokk.service';
+import { Book } from '../../../entity/book';
+import { BokkService } from '../../bokk.service';
 import { catchError, Observable, of } from 'rxjs';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
