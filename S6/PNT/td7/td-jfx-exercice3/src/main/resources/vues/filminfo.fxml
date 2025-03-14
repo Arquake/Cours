@@ -7,11 +7,8 @@
    <children>
       <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="filmInfo" prefWidth="599.0" text="Film">
-               <graphic>
-                  <Label />
-               </graphic>
-            </TableColumn>
+          <TableColumn fx:id="titre" prefWidth="294.0" text="Titre" />
+            <TableColumn fx:id="realisateur" maxWidth="1.7976931348623157E308" prefWidth="305.0" text="Réalisateur" />
         </columns>
       </TableView>
       <Button mnemonicParsing="false" onAction="#gotomenu" text="Retour au menu" />

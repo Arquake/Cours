@@ -1,7 +1,9 @@
 package vues;
 
 import controleur.ControleurImpl;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modeleCreaFilm.Film;
@@ -32,7 +35,12 @@ public class FilmInfo extends AbstractVueInteractive implements EcouteurOrdre {
     TableView<Film> table;
 
     @FXML
-    private TableColumn<Film, String> filmInfo;
+    private TableColumn<Film, String> titre;
+
+    @FXML
+    private TableColumn<Film,String> realisateur;
+
+    Film film;
 
     public static FilmInfo creerVue(GestionnaireVueImpl gestionnaire) {
         FXMLLoader fxmlLoader = new FXMLLoader(FilmInfo.class.getResource("filminfo.fxml"));
@@ -45,6 +53,7 @@ public class FilmInfo extends AbstractVueInteractive implements EcouteurOrdre {
         FilmInfo vue = fxmlLoader.getController();
 
         vue.initialisation();
+        vue.initialisationTableView();
         gestionnaire.ajouterVueInteractive(vue);
         gestionnaire.ajouterEcouteurOrdre(vue);
         return vue;
@@ -52,6 +61,18 @@ public class FilmInfo extends AbstractVueInteractive implements EcouteurOrdre {
 
     public void show() {
         super.show();
+    }
+
+    public void initialisationTableView(){
+        titre.setCellValueFactory(cellData -> {
+            Film film = cellData.getValue();
+            return new SimpleStringProperty(film != null ? film.getTitre() : "");
+        });
+
+        realisateur.setCellValueFactory(cellData -> {
+            Film film = cellData.getValue();
+            return new SimpleStringProperty(film != null ? film.getRealisateur() : "");
+        });
     }
 
     @Override
@@ -71,11 +92,9 @@ public class FilmInfo extends AbstractVueInteractive implements EcouteurOrdre {
     @Override
     public void traiter(TypeOrdre e) {
         if (e == TypeOrdre.SHOW_FILM) {
-            Film film = getControleur().getFilmSelectionne();
-            table.getColumns().
-
-            title.setText((film.getTitre()));
-            realisateur.setText(film.getRealisateur());
+            film = getControleur().getFilmSelectionne();
+            table.getItems().clear();
+            table.getItems().add(film);
         }
     }
 }

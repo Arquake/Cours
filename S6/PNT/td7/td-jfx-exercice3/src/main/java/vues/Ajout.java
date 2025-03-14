@@ -85,7 +85,7 @@ public class Ajout extends AbstractVueInteractive implements EcouteurOrdre {
             afficherMessage("Genre inconnu", "Le genre sélectionné n'existe pas", Alert.AlertType.ERROR);
         }
         else if (e == TypeOrdre.NOM_DEJA_EXISTANT_ERROR) {
-            afficherMessage("Un des champs est vide", "Les champs ne doivent pas être vide", Alert.AlertType.ERROR);
+            afficherMessage("Un des champs est vide", "Le nom est déjà prit", Alert.AlertType.ERROR);
         }
         else if (e == TypeOrdre.NOUVEAU_FILM) {
             afficherMessage("Film créé", "Film créé !", Alert.AlertType.CONFIRMATION);
