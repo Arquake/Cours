@@ -4,10 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Book } from '../../../entity/book';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthorSummary } from '../../../entity/AuthorSummary';
+import { AuthorService } from '../../author.service';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-book',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf, NgFor, AsyncPipe],
   templateUrl: './edit-book.component.html',
   styleUrl: './edit-book.component.css'
 })
@@ -22,7 +25,11 @@ export class EditBookComponent {
     isbn: new FormControl('', Validators.required),
   })
 
-  constructor(private bokkService: BokkService, private route: ActivatedRoute, private router: Router) {
+  $authors: Observable<AuthorSummary[]>;
+  
+  authors: any[] = [];
+
+  constructor(private bokkService: BokkService, private route: ActivatedRoute, private router: Router, private authorService: AuthorService) {
     this.route.params.subscribe((params)=>{
       this.bookId = params['id']
     })
@@ -36,9 +43,24 @@ export class EditBookComponent {
         backcover: data.backcover
       })
     })
+
+    this.$authors = this.authorService.getAll();
+    this.$authors.subscribe((data: any)=>{
+      this.authors = data.member;
+      this.populateAuthors();
+    })
+  }
+
+  updateAuthors(i: number) {
+    this.authors[i].checked = !this.authors[i].checked
+  }
+
+  populateAuthors() {
+    this.authors = this.authors.map((data)=>{return {...data, "checked": /* si l'autheur n'est pas dans la liste du livre */}}) // Add new controls for each author
   }
   
   submit = () => {
+    let selectedAuthors = this.authors.filter((v)=>v.checked).map((data)=>`/api/authors/${data.id}`)
     if (this.bookForm.valid) {
       
       if (this.bookForm.valid) {
@@ -50,7 +72,8 @@ export class EditBookComponent {
           formValues.publisher!,
           Number(formValues.year!),
           formValues.backcover!,
-          formValues.isbn!
+          formValues.isbn!,
+          selectedAuthors
         ).subscribe((data:any)=> {
           this.router.navigate([`/book/`, data.id])
         })

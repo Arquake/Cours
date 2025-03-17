@@ -29,19 +29,19 @@ class Book
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('read:Book', 'write:Book')]
+    #[Groups(['read:Book', 'write:Book'])]
     private ?string $publisher = null;
 
     #[ORM\Column]
-    #[Groups('read:Book', 'write:Book')]
+    #[Groups(['read:Book', 'write:Book'])]
     private ?int $year = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups('read:Book', 'write:Book')]
+    #[Groups(['read:Book', 'write:Book'])]
     private ?string $backcover = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('read:Book', 'write:Book')]
+    #[Groups(['read:Book', 'write:Book'])]
     private ?string $isbn = null;
 
     /**

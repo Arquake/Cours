@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { BokkService } from '../../bokk.service';
 import { Router } from '@angular/router';
 import { AuthorService } from '../../author.service';
@@ -15,21 +15,14 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 })
 export class AjoutBookComponent {
 
-  bookForm = new FormGroup({
-    title: new FormControl('', Validators.required),
-    publisher: new FormControl('', Validators.required),
-    year: new FormControl(2000, Validators.required),
-    backcover: new FormControl('', Validators.required),
-    isbn: new FormControl('', Validators.required),
-    authors: new FormArray([], Validators.required)
-  })
+  bookForm: FormGroup;
 
   $authors: Observable<AuthorSummary[]>;
 
-  authors: AuthorSummary[] = [];
+  authors: any[] = [];
 
   submit = () => {
-    console.log(this.bookForm.getRawValue())
+    let selectedAuthors = this.authors.filter((v)=>v.checked).map((data)=>`/api/authors/${data.id}`)
     if (this.bookForm.valid) {
       let formValues = this.bookForm.getRawValue()
       
@@ -38,17 +31,39 @@ export class AjoutBookComponent {
         formValues.publisher!,
         formValues.year!,
         formValues.backcover!,
-        formValues.isbn!
+        formValues.isbn!,
+        selectedAuthors
       ).subscribe((data:any)=> {
+        console.log(data)
         this.router.navigate([`/book/`, data.id])
       })
     }
   }
 
-  constructor(private bookService: BokkService, private router: Router, private authorService: AuthorService) {
-    this.$authors = authorService.getAll();
+  
+
+  constructor(private bookService: BokkService, private router: Router, private authorService: AuthorService, private fb: FormBuilder) {
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      publisher: ['', Validators.required],
+      year: [2000, Validators.required],
+      backcover: ['', Validators.required],
+      isbn: ['', Validators.required]
+    });
+
+    this.$authors = this.authorService.getAll();
     this.$authors.subscribe((data: any)=>{
-      this.authors = data.member
+      this.authors = data.member;
+      this.populateAuthors();
     })
   }
+
+  updateAuthors(i: number) {
+    this.authors[i].checked = !this.authors[i].checked
+  }
+
+  populateAuthors() {
+    this.authors = this.authors.map((data)=>{return {...data, "checked": false}}) // Add new controls for each author
+  }
+  
 }

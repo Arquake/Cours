@@ -4,11 +4,10 @@
     <input formControlName="year" >
     <input formControlName="backcover" >
     <input formControlName="isbn">
-    <div formControlName="authors">
+    <div>
         <div *ngIf="$authors | async">
-            <div *ngFor="let a of authors">
-                <input type="checkbox" [value]="a.id" />
-                {{ a.firstname }} {{ a.lastname }}
+            <div *ngFor="let author of authors; let i = index">
+                <input type="checkbox" name="vx" (click)="updateAuthors(i)"> {{ author.firstname }} {{ author.lastname }}
             </div>
         </div>
     </div>

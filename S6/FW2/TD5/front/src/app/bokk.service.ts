@@ -16,15 +16,18 @@ export class BokkService {
     return this.http.get<Book[]>(this.apiLink + "/books")
   }
 
-  bookSetter = (title: string, publisher: string, year: number, backcover: string, isbn: string): Observable<Book> => {
+  bookSetter = (title: string, publisher: string, year: number, backcover: string, isbn: string, authors: string[]): Observable<Book> => {
+    let bookData = {
+      "title": title,
+      "publisher": publisher,
+      "year": year,
+      "backcover": backcover,
+      "isbn": isbn,
+      "author": authors
+    }
+
     return this.http.post<Book>(this.apiLink + "/books",
-      {
-        "title": title,
-        "publisher": publisher,
-        "year": year,
-        "backcover": backcover,
-        "isbn": isbn
-      },
+      bookData,
       {
         headers: new HttpHeaders({'Content-Type': 'application/ld+json'})
       }
@@ -39,14 +42,15 @@ export class BokkService {
     return this.http.get<Book>(this.apiLink+`/books/${id}`)
   }
 
-  bookPatch = (id:number, title: string, publisher: string, year: number, backcover: string, isbn: string): Observable<Book> => {
+  bookPatch = (id:number, title: string, publisher: string, year: number, backcover: string, isbn: string, authors: string[]): Observable<Book> => {
     return this.http.patch<Book>(this.apiLink + "/books/"+ id,
       {
         "title": title,
         "publisher": publisher,
         "year": year,
         "backcover": backcover,
-        "isbn": isbn
+        "isbn": isbn,
+        "author": authors
       },
       {
         headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})
