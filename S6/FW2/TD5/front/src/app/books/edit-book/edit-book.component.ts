@@ -6,11 +6,11 @@ import { Book } from '../../../entity/book';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthorSummary } from '../../../entity/AuthorSummary';
 import { AuthorService } from '../../author.service';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-book',
-  imports: [ReactiveFormsModule, NgIf, NgFor, AsyncPipe],
+  imports: [ReactiveFormsModule, NgIf, NgFor],
   templateUrl: './edit-book.component.html',
   styleUrl: './edit-book.component.css'
 })
