@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { BokkService } from '../../bokk.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 })
 export class EditBookComponent {
   book$: Observable<Book>;
+
   bookId = -1
   bookForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -29,11 +30,13 @@ export class EditBookComponent {
   
   authors: any[] = [];
 
+  authorPopulated: boolean = false
+
   constructor(private bokkService: BokkService, private route: ActivatedRoute, private router: Router, private authorService: AuthorService) {
     this.route.params.subscribe((params)=>{
       this.bookId = params['id']
     })
-    this.book$ = this.bokkService.bookGet(this.bookId);
+    this.book$ = this.bokkService.bookGet(this.bookId)
     this.book$.subscribe((data)=>{
       this.bookForm.setValue({
         title: data.title,
@@ -45,10 +48,12 @@ export class EditBookComponent {
     })
 
     this.$authors = this.authorService.getAll();
-    this.$authors.subscribe((data: any)=>{
-      this.authors = data.member;
+    this.$authors.subscribe((authorsData: any)=>{
+      this.authors = authorsData.member;
       this.populateAuthors();
     })
+
+    
   }
 
   updateAuthors(i: number) {
@@ -56,11 +61,18 @@ export class EditBookComponent {
   }
 
   populateAuthors() {
-    this.authors = this.authors.map((data)=>{return {...data, "checked": /* si l'autheur n'est pas dans la liste du livre */}}) // Add new controls for each author
-  }
+    let authorsInBook: AuthorSummary[];
+    this.book$.subscribe((data)=> {
+      authorsInBook = data.author
+      let authorsInBookIds = data.author.map((data)=>data.id)
+      this.authors = [...this.authors.map((data)=>{return {...data, "checked": authorsInBookIds.includes(data.id)}})]
+      this.authorPopulated = true
+    })
+    }
   
   submit = () => {
     let selectedAuthors = this.authors.filter((v)=>v.checked).map((data)=>`/api/authors/${data.id}`)
+    console.log(selectedAuthors)
     if (this.bookForm.valid) {
       
       if (this.bookForm.valid) {
@@ -80,5 +92,9 @@ export class EditBookComponent {
       }
       
     }
+  }
+
+  trackByAuthor(index: number, author: any): number {
+    return author.id;
   }
 }

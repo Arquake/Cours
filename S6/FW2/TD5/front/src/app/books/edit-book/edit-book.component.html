@@ -5,9 +5,9 @@
     <input formControlName="backcover" >
     <input formControlName="isbn" >
     <div>
-        <div *ngIf="$authors | async">
-            <div *ngFor="let author of authors; let i = index">
-                <input type="checkbox" name="vx" (click)="updateAuthors(i)"> {{ author.firstname }} {{ author.lastname }}
+        <div *ngIf="authorPopulated">
+            <div *ngFor="let author of authors; let i = index; trackBy: trackByAuthor">
+                <input type="checkbox" name="vx" (click)="updateAuthors(i)" [checked]="author.checked"> {{ author.firstname }} {{ author.lastname }}
             </div>
         </div>
     </div>
