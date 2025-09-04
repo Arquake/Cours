@@ -1,0 +1,220 @@
+openapi: 3.0.0
+info:
+  title: Gestion Café API
+  version: 1.0.0
+paths:
+  /api/cafews/compte:
+    post:
+      summary: Ajouter un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UtilisateurDTO'
+              description: Utilisateur à créer
+      responses:
+        '201':
+          description: Utilisateur créé. Clé secrète dans le body
+          headers:
+            cleSecrete:
+              schema:
+                type: string
+              description: URI de la resource créée
+          content:
+            text/plain:
+              schema:
+                type: string
+
+        '400':
+          description: Données manquantes ou incorrectes
+        '409':
+          description: Email déjà pris
+  /api/cafews/compte/{id}:
+    get:
+      summary: Obtenir les informations d'un utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de l'utilisateur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilisateurDTO'
+        '401':
+          description: Utilisateur inexistant
+  /api/cafews/recharge:
+    post:
+      summary: Ajouter une recharge de café
+      parameters:
+        - name: cleSecrete
+          in: header
+          description: clé secrète obtenue lors de l'inscription
+          required: true
+          schema:
+            type: string
+        - name: nbKilos
+          in: query
+          description: nombre de kilos déclarés
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '201':
+          description: Recharge créée. L'identifiant est accessible dans le body.
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URI de la resource créée
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Données incorrectes
+        '401':
+          description: Utilisateur inexistant
+
+    get:
+      summary: Obtenir les recharges de café selon des filtres optionnels
+      parameters:
+        - name: cleSecrete
+          in: header
+          description: clé secrète de l'utilisateur
+          required: true
+          schema:
+            type: string
+        - name: dateDebut
+          in: query
+          description : date de début de la période sélectionnée dd-MM-yyyy
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: dateFin
+          in: query
+          description : date de fin de la période sélectionnée dd-MM-yyyy
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: perso
+          in: query
+          description : permet de filtrer uniquement les recharges de l'utilisateur en question
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Liste des recharges de café
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RechargeCafeDTO'
+        '400':
+          description: Données incorrectes
+        '401':
+          description: Utilisateur inexistant
+
+
+  /api/cafews/recharge/{id}:
+    patch:
+      summary: Modifier une recharge de café
+      parameters:
+        - name: cleSecrete
+          in: header
+          description: clé secrète obtenue lors de l'inscription
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RechargeCafeDTO'
+      responses:
+        '202':
+          description: Date modifiée
+          content:
+            text/plain:
+              schema:
+                type: string
+        '200':
+          description: Recharge modifiée
+        '400':
+          description: Données manquantes ou incorrectes
+        '401':
+          description: Utilisateur inexistant
+        '403':
+          description: Opération non autorisée
+        '409':
+          description: Identifiant incohérent
+    get:
+      summary: Obtenir les détails d'une recharge de café
+      parameters:
+        - name: cleSecrete
+          in: header
+          description: clé secrète obtenue lors de l'inscription
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de la recharge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RechargeCafeDTO'
+        '401':
+          description: Utilisateur inexistant
+        '404':
+          description: Recharge inexistante
+
+components:
+  schemas:
+    UtilisateurDTO:
+      type: object
+      properties:
+        nom:
+          type: string
+        prenom:
+          type: string
+        email:
+          type: string
+    RechargeCafeDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description : identifiant aléatoire de la recharge
+        dateRecharge:
+          type: string
+          format: date
+          description: date de la recharge
+        nbKilos:
+          type: integer
+          format: int32
+          description: nombre de kilos déclarés
+        utilisateur:
+          $ref: '#/components/schemas/UtilisateurDTO'
+          description: utilisateur ayant fait la recharge

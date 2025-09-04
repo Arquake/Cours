@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.info.orleans.ws.vues.GestionCafes" fx:id="borderPane">
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="Recharges" />
+                  <ListView fx:id="recharges" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Filtres" />
+            <CheckBox fx:id="perso" mnemonicParsing="false" text="Perso" />
+            <Label text="Date début" />
+            <DatePicker fx:id="dateDebut" />
+            <Label text="Date fin" />
+            <DatePicker fx:id="dateFin" />
+            <Button mnemonicParsing="false" text="Appliquer" onAction="#appliquer" />
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Nouvelle recharge">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label text="Nombre de kilos" />
+            <TextField fx:id="nbKilos" />
+            <Button mnemonicParsing="false" text="Valider" onAction="#creerRecharge" />
+         </children>
+      </VBox>
+   </bottom>
+   <top>
+      <Label text="Gestion du café" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Button mnemonicParsing="false" text="Quitter" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
