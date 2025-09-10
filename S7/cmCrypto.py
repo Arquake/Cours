@@ -132,6 +132,7 @@ def rc4_getbits(st):
 
 k=[1,6,6,4]
 res = rc4_init(k)
+print(res)
 arr = '''0, 7, 1, 7, 2, 2, 3, 5, 4, 7, 7, 4, 5, 4, 5, 1, 7, 2, 5,
  6, 6, 3, 2, 5, 5, 7, 6, 1, 1, 2, 7, 1, 5, 5, 0, 4, 4, 7,
  6, 2, 4, 2, 0, 3, 1, 3, 1, 0, 4, 3, 1, 7, 1, 0, 3, 4, 0,
@@ -150,8 +151,25 @@ arr = '''0, 7, 1, 7, 2, 2, 3, 5, 4, 7, 7, 4, 5, 4, 5, 1, 7, 2, 5,
  4, 1, 1, 3, 2, 7, 3, 2, 2, 6, 6, 3, 3, 6, 2, 2, 4, 5, 5,
  0, 1, 0, 2, 6, 5, 6, 4, 4, 7, 4, 3, 4, 2, 6, 2, 3, 3, 2,
  5, 7, 5, 3, 2, 6, 1, 6, 6, 4, 2, 3, 5'''.replace("\n", "").split(", ")
-res[0] = arr
-print(rc4_getbits(res))
+arr = list(map(int, arr))
+narr = []
+for i in range(0,len(arr),2):
+    narr += [int(f"{arr[i]}{arr[i+1]}",8)]
+
+#res = (arr, res[1], res[2])
+#print(rc4_getbits(res))
+
+octalArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+octalArray += octalArray.lower() + "0123456789. "
 
 
-print(arr)
+resArr = ""
+currentIndex = -1
+for item in narr:
+    currentIndex += 1
+    if currentIndex == len(res[0]):
+        currentIndex = 0
+    print(f"{item} xor {res[0][currentIndex]}")
+    resArr += octalArray[item ^ res[0][currentIndex]]
+    
+print(resArr)

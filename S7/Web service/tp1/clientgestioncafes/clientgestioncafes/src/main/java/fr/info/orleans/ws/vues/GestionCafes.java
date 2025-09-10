@@ -173,8 +173,5 @@ public class GestionCafes implements VueInteractive, EcouteurOrdre {
             alert.setContentText("Le nombre de kilos doit être un entier strictement positif");
             alert.showAndWait();
         }
-
-
-
     }
 }

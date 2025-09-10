@@ -5,92 +5,45 @@ Content-Type: application/json; charset=utf-8
 {
   "nom": "Lucky",
   "prenom": "Luke",
-  "email": "lucky.luke@farwest.net "
+  "email": "lucky.luke@farwest.net"
 }
+
+> {% client.global.set("cleSecrete", response.headers.valueOf("cleSecrete")) %}
+
 
 ### Déposer une recharge avec Lucky Luke
 POST localhost:8080/api/cafews/recharge?nbKilos=12
 Content-Type: application/json; charset=utf-8
-cleSecrete: d5fb3641-ba29-4af6-a596-547159a626c9
+cleSecrete: {{cleSecrete}}
+
+> {% client.global.set("recharge", response.body) %}
 
 
 ### Récupération de la recharge créé
-GET localhost:8080/api/cafews/recharge/ebf7eb14-b1dc-415e-b58e-f3366cf37227
+GET localhost:8080/api/cafews/recharge/{{recharge}}
 Content-Type: application/json; charset=utf-8
-cleSecrete: d5fb3641-ba29-4af6-a596-547159a626c9
+cleSecrete: {{cleSecrete}}
 
-#{
-#  "dateRecharge": "04-09-2025",
-#  "nbKilos": 12,
-#  "utilisateurDTO": {
-#    "nom": "Lucky",
-#    "prenom": "Luke",
-#    "email": "lucky.luke@farwest.net "
-#  },
-#  "id": "ebf7eb14-b1dc-415e-b58e-f3366cf37227"
-#}
 
 ### Récupération de toutes les recharges de Lucky Luke
 GET localhost:8080/api/cafews/recharge?perso=true
 Content-Type: application/json; charset=utf-8
-cleSecrete: d5fb3641-ba29-4af6-a596-547159a626c9
+cleSecrete: {{cleSecrete}}
 
-#[
-#  {
-#    "dateRecharge": "04-09-2025",
-#    "nbKilos": 12,
-#    "utilisateurDTO": {
-#      "nom": "Lucky",
-#      "prenom": "Luke",
-#      "email": "lucky.luke@farwest.net "
-#    },
-#    "id": "ebf7eb14-b1dc-415e-b58e-f3366cf37227"
-#  }
-#]
 
 ### Changement de la date de la recharge précedemment créé
-PATCH localhost:8080/api/cafews/recharge/ebf7eb14-b1dc-415e-b58e-f3366cf37227
+PATCH localhost:8080/api/cafews/recharge/{{recharge}}
 Content-Type: application/xml; charset=utf-8
-cleSecrete: d5fb3641-ba29-4af6-a596-547159a626c9
+cleSecrete: {{cleSecrete}}
 
 <?xml version="1.0" encoding="UTF-8"?>
 <RechargeCafeDTO>
-    <id>ebf7eb14-b1dc-415e-b58e-f3366cf37227</id>
+    <id>{{recharge}}</id>
     <dateRecharge>04-04-2024</dateRecharge>
-    <nbKilos>12</nbKilos>
-    <utilisateur>
-        <nom>Lucky</nom>
-        <prenom>Luke</prenom>
-        <email>lucky.luke@farwest.net </email>
-    </utilisateur>
 </RechargeCafeDTO>
-
 
 
 ### Récupération de toutes les recharges depuis le 01-12-2023
 GET localhost:8080/api/cafews/recharge?dateDebut=01-12-2023
 Content-Type: application/json; charset=utf-8
-cleSecrete: d5fb3641-ba29-4af6-a596-547159a626c9
-
-#[
-#  {
-#    "dateRecharge": "10-02-2024",
-#    "nbKilos": 15,
-#    "utilisateurDTO": {
-#      "nom": "EXBRAYAT",
-#      "prenom": "Mathieu",
-#      "email": "mathieu.exbrayat@univ-orleans.fr"
-#    },
-#    "id": "ee3e88c5-8b75-47dd-9cdf-80528e39c7c3"
-#  },
-#  {
-#    "dateRecharge": "04-04-2024",
-#    "nbKilos": 12,
-#    "utilisateurDTO": {
-#      "nom": "Lucky",
-#      "prenom": "Luke",
-#      "email": "lucky.luke@farwest.net "
-#    },
-#    "id": "ebf7eb14-b1dc-415e-b58e-f3366cf37227"
-#  }
-#]
+cleSecrete: {{cleSecrete}}

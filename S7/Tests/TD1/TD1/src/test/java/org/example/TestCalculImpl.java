@@ -18,20 +18,26 @@ public class TestCalculImpl {
     }
 
     @Test
-    public void tooManyArgumentsTets() throws ExceptionNotEnoughArguments, ExceptionTooManyArguments {
+    public void tooManyArgumentsTets() {
         double[] values = {1, 1};
         Assertions.assertThrows(ExceptionTooManyArguments.class , () -> instance.calculer(values));
     }
 
     @Test
-    public void notEnoughArguments() throws ExceptionNotEnoughArguments, ExceptionTooManyArguments {
+    public void notEnoughArguments() {
         double[] values = {};
         Assertions.assertThrows(ExceptionNotEnoughArguments.class , () -> instance.calculer(values));
     }
 
     @Test
-    public void impossibleValue() throws ExceptionNotEnoughArguments, ExceptionTooManyArguments, ExceptionCalculUnprocessable {
+    public void impossibleValue() {
         double[] values = {0};
         Assertions.assertThrows(ExceptionCalculUnprocessable.class , () -> instance.calculer(values));
+    }
+
+    @Test
+    public void validTest() {
+        double[] values = {10};
+        Assertions.assertDoesNotThrow(()->instance.calculer(values));
     }
 }
