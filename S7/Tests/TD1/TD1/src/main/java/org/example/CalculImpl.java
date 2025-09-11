@@ -3,8 +3,7 @@ package org.example;
 import org.example.exceptions.ExceptionCalculUnprocessable;
 import org.example.exceptions.ExceptionNotEnoughArguments;
 import org.example.exceptions.ExceptionTooManyArguments;
-
-import java.util.Arrays;
+import org.example.interfaces.Calcul;
 
 public class CalculImpl implements Calcul {
 

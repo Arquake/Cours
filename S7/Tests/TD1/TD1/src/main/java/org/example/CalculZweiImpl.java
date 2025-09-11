@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.Calcul;
 import org.example.exceptions.ExceptionCalculUnprocessable;
 import org.example.exceptions.ExceptionNotEnoughArguments;
 import org.example.exceptions.ExceptionTooManyArguments;
+import org.example.interfaces.Calcul;
 
 public class CalculZweiImpl implements Calcul {
 

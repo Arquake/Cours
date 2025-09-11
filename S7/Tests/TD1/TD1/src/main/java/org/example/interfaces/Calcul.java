@@ -1,4 +1,4 @@
-package org.example;
+package org.example.interfaces;
 
 import org.example.exceptions.ExceptionCalculUnprocessable;
 import org.example.exceptions.ExceptionNotEnoughArguments;
