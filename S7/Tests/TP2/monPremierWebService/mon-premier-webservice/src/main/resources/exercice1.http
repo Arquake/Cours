@@ -1,0 +1,36 @@
+### Inscription d'un nouvel étudiant
+POST http://localhost:8080/mpws/etudiant
+Content-Type: application/x-www-form-urlencoded
+nom=Boichut&prenom=Yohan&adresse=Somewhere in Orleans
+> {%
+client.global.set("locationEtudiant", response.headers.valueOf("Location"));
+client.test("Request executed successfully", function() {
+client.assert(response.status === 201, "L'étudiant aurait dû être créé");
+});
+%}
+
+### Récupération des informations de l'étudiant créé
+GET {{locationEtudiant}}
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 200, "L'étudiant aurait dû être retrouvé !");
+});
+%}
+
+### Récupération d'un étudiant inexistant (404 attendu)
+GET http://localhost:8080/mpws/etudiant/aucunechance
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 404, "L'étudiant n'aurait pas dû être retrouvé");
+});
+%}
+
+### Récupération d'une collection de tous les étudiants
+GET http://localhost:8080/mpws/etudiant
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 200, "Les étudiants aurait dû être récupérés");
+});
+%}
+
+// 8 à créer des variables réutilisables dans d'autres appels
