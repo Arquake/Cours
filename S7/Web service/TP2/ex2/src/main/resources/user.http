@@ -1,0 +1,53 @@
+POST http://localhost:8080/api/registration
+Content-Type: Application/json;
+Accept: Application/json;
+
+{
+  "name":"name",
+  "password": "password"
+}
+
+### Connexion
+POST http://localhost:8080/api/connexion
+Content-Type: Application/json;
+Accept: Application/json;
+
+{
+  "name":"name",
+  "password": "password"
+}
+
+### Créer video
+POST http://localhost:8080/api/video
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
+
+{
+  "titre": "titre",
+  "description": "description",
+  "url": "url"
+}
+
+> {%
+client.global.set("videoLoc", response.headers.valueOf("Location"))
+%}
+### Récupérer la vidéo
+GET http://localhost:8080/{{videoLoc}}
+Content-Type: Application/json;
+Accept: Application/json;
+
+### Récupérer ses vidéos
+GET http://localhost:8080/api/user/video
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
+
+### Récupérer toutes les vidéos
+GET http://localhost:8080/api/user/video
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
