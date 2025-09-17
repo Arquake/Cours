@@ -1,6 +1,7 @@
 package fr.orleans.m1miage.wsi.ex2.facade;
 
 import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionVideoInvalidInformations;
+import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionVideoNotFound;
 import fr.orleans.m1miage.wsi.ex2.modele.Video;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,9 @@ public class FacadeVideo {
         return videos.values();
     }
 
-    public Video getVideo(UUID id) {
-        return videos.get(id);
+    public Video getVideo(UUID id) throws ExceptionVideoNotFound {
+        Video video = videos.get(id);
+        if (video == null) { throw new ExceptionVideoNotFound(); }
+        return video;
     }
 }

@@ -1,6 +1,9 @@
 package fr.orleans.m1miage.wsi.ex2.modele;
 
-import java.util.HashMap;
+import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionPlaylistNotFound;
+import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionUserNotFound;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -11,17 +14,17 @@ public class User {
     private String password;
     private UUID id;
 
-    private final Map<UUID, List<Video>> playlists;
+    private final List<Playlist> playlists;
 
     User() {
-        this.playlists = new HashMap<>();
+        this.playlists = new ArrayList<>();
     }
 
     public User(String nom, String password) {
         this.nom = nom;
         this.password = password;
         this.id = UUID.randomUUID();
-        this.playlists = new HashMap<>();
+        this.playlists = new ArrayList<>();
     }
 
     public String getNom() {
@@ -42,5 +45,23 @@ public class User {
 
     public UUID getId() {
         return id;
+    }
+
+    /**
+     * Crée une nouvelle playlist avec le nom donnée et retourne l'id de la dite playlist
+     * @param name le nom de la playlist
+     * @return l'id de la playlist
+     */
+    public UUID newPlaylist(String name) {
+        Playlist playlist = new Playlist(name);
+        playlists.add(playlist);
+        return playlist.getUuid();
+    }
+
+    public void addVideoToPlaylist(UUID uuid, Video video) throws ExceptionPlaylistNotFound {
+        if (playlists.stream().noneMatch(p -> p.getUuid().equals(uuid))) {
+            throw new ExceptionPlaylistNotFound();
+        }
+        playlists.stream().filter(p -> p.getUuid().equals(uuid)).findFirst().ifPresent(p -> {p.addVideo(video);});
     }
 }

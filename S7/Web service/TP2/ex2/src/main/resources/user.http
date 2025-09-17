@@ -51,3 +51,29 @@ Content-Type: Application/json;
 Accept: Application/json;
 name: name
 password: password
+
+### Créer une playlist
+POST http://localhost:8080/api/user/playlist
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
+
+{
+  "name": "première playlist"
+}
+
+> {%
+ client.global.set("playlistLoc", response.headers.valueOf("Location"))
+ %}
+
+### Ajouter une vidéo à la playlist
+POST http://localhost:8080/{{playlistLoc}}/video
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
+
+{
+  "videoId": "{{videoLoc}}"
+}

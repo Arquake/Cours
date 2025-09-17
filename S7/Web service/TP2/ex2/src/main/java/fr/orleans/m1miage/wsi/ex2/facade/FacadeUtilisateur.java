@@ -1,9 +1,9 @@
 package fr.orleans.m1miage.wsi.ex2.facade;
 
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionIncoherentUserInformations;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionInvalidUserData;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionUserAlreadyExist;
+import fr.orleans.m1miage.wsi.ex2.exceptions.*;
+import fr.orleans.m1miage.wsi.ex2.modele.Playlist;
 import fr.orleans.m1miage.wsi.ex2.modele.User;
+import fr.orleans.m1miage.wsi.ex2.modele.Video;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -50,5 +50,24 @@ public class FacadeUtilisateur {
             throw new ExceptionIncoherentUserInformations();
         }
         return user.getId();
+    }
+
+    /**
+     * Pour l'id d'un user donné et le nom de playlist, crée une playlist lié à l'utilisateur avec ce nom
+     * @param uuid l'id utilisateur
+     * @param playlistName le nom de la playlist
+     * @return l'id de la playlist
+     * @throws ExceptionUserNotFound l'utilisateur n'existe pas
+     */
+    public UUID createPlaylistForUser(UUID uuid, String playlistName) throws ExceptionUserNotFound {
+        if (!utilisateurs.containsKey(uuid)) { throw new ExceptionUserNotFound(); }
+        return utilisateurs.get(uuid).newPlaylist(playlistName);
+    }
+
+
+    public void addVideoToPlaylist(UUID userId, UUID playlistId, Video video) throws ExceptionUserNotFound, ExceptionPlaylistNotFound {
+        if (!utilisateurs.containsKey(userId)) { throw new ExceptionUserNotFound(); }
+        User user = utilisateurs.get(userId);
+        user.addVideoToPlaylist(playlistId, video);
     }
 }

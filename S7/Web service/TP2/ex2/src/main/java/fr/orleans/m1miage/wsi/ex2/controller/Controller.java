@@ -1,12 +1,10 @@
 package fr.orleans.m1miage.wsi.ex2.controller;
 
 import fr.orleans.m1miage.wsi.ex2.dtos.*;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionIncoherentUserInformations;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionInvalidUserData;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionUserAlreadyExist;
-import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionVideoInvalidInformations;
+import fr.orleans.m1miage.wsi.ex2.exceptions.*;
 import fr.orleans.m1miage.wsi.ex2.facade.FacadeUtilisateur;
 import fr.orleans.m1miage.wsi.ex2.facade.FacadeVideo;
+import fr.orleans.m1miage.wsi.ex2.modele.User;
 import fr.orleans.m1miage.wsi.ex2.modele.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,7 +77,7 @@ public class Controller {
         }
 
         Collection<Video> videos = facadeVideo.getVideoFromUser(userId);
-        List<UserVideoDTO> videosDto = videos.stream().map(video -> new UserVideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), userId.toString())).toList();
+        List<UserVideoDTO> videosDto = videos.stream().map(video -> new UserVideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString())).toList();
         return ResponseEntity.ok().body(videosDto);
     }
 
@@ -90,18 +88,28 @@ public class Controller {
         return ResponseEntity.ok().body(videosDto);
     }
 
-    @GetMapping("video/{id}")
+    @GetMapping("/video/{id}")
     ResponseEntity<UserVideoDTO> getVideoById(@PathVariable UUID id) {
-        Video video = facadeVideo.getVideo(id);
-        if (Objects.isNull(video)) {
+        Video video;
+        try {
+            video = facadeVideo.getVideo(id);
+        } catch (ExceptionVideoNotFound e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
         UserVideoDTO videoDto = new UserVideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString());
         return ResponseEntity.ok().body(videoDto);
     }
 
-    @PostMapping("user/playlist")
-    ResponseEntity<PlaylistDTO> createPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistCreationDTO playlistInfos) {
+    /**
+     * Crée une playlist
+     * @param name le nom de l'utilisateur
+     * @param password le pseudo de l'utilisateur
+     * @param playlistInfos les informations attendu pour créer la playlist
+     * @return La localisation de la playlist
+     */
+    @PostMapping("/user/playlist")
+    ResponseEntity<Void> createPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistCreationDTO playlistInfos) {
         UUID userId;
         try {
             userId = facadeUtilisateur.validationUtilisateur(name, password);
@@ -109,6 +117,47 @@ public class Controller {
             return ResponseEntity.status(401).build();
         }
 
-        
+        UUID playlistId;
+
+        try {
+            playlistId = facadeUtilisateur.createPlaylistForUser(userId, playlistInfos.getName());
+        } catch (ExceptionUserNotFound e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/api/user/playlist/"+playlistId).build();
+    }
+
+    /**
+     * Ajoute une vidéo à la playlist donnée dans l'url
+     * @param playlistId l'id de la playlist
+     * @param name le nom du user
+     * @param password le mdp du user
+     * @param videoDto les informations utiles à l'ajout de la video dans la playlist
+     * @return
+     */
+    @PostMapping("/user/playlist/{playlistId}/video")
+    ResponseEntity<Void> addVideoToPlaylist(@PathVariable UUID playlistId, @RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistVideoAdditionDTO videoDto) {
+        UUID userId;
+        try {
+            userId = facadeUtilisateur.validationUtilisateur(name, password);
+        } catch (ExceptionIncoherentUserInformations e) {
+            return ResponseEntity.status(401).build();
+        }
+
+        Video video;
+        try {
+            video = facadeVideo.getVideo(videoDto.getVideoId());
+        } catch (ExceptionVideoNotFound e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            facadeUtilisateur.addVideoToPlaylist(userId, playlistId, video);
+        } catch (ExceptionUserNotFound | ExceptionPlaylistNotFound e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
