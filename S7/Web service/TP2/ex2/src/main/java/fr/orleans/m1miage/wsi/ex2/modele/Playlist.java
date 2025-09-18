@@ -1,5 +1,6 @@
 package fr.orleans.m1miage.wsi.ex2.modele;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,11 +17,12 @@ public class Playlist {
     }
 
     private String playlistName = "";
-    private List<Video> videos;
+    private final List<Video> videos;
 
     public Playlist(String name) {
         this.playlistName = name;
         this.uuid = UUID.randomUUID();
+        this.videos = new ArrayList<>();
     }
 
     public UUID getUuid() {

@@ -62,6 +62,7 @@ public class User {
         if (playlists.stream().noneMatch(p -> p.getUuid().equals(uuid))) {
             throw new ExceptionPlaylistNotFound();
         }
-        playlists.stream().filter(p -> p.getUuid().equals(uuid)).findFirst().ifPresent(p -> {p.addVideo(video);});
+        playlists.stream().filter(p -> p.getUuid().equals(uuid)).findFirst().ifPresent(p -> {
+            System.out.println(p);p.addVideo(video);});
     }
 }

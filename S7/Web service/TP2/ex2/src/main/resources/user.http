@@ -38,6 +38,10 @@ GET http://localhost:8080/{{videoLoc}}
 Content-Type: Application/json;
 Accept: Application/json;
 
+> {%
+ client.global.set("videoId", response.body.id)
+ %}
+
 ### Récupérer ses vidéos
 GET http://localhost:8080/api/user/video
 Content-Type: Application/json;
@@ -68,12 +72,12 @@ password: password
  %}
 
 ### Ajouter une vidéo à la playlist
-POST http://localhost:8080/{{playlistLoc}}/video
+POST http://localhost:8080{{playlistLoc}}/video
 Content-Type: Application/json;
 Accept: Application/json;
 name: name
 password: password
 
 {
-  "videoId": "{{videoLoc}}"
+  "videoId": "{{videoId}}"
 }
