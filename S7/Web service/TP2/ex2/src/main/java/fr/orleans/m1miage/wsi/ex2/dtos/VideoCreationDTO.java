@@ -2,7 +2,7 @@ package fr.orleans.m1miage.wsi.ex2.dtos;
 
 import java.io.Serializable;
 
-public class UserVideoDTO implements Serializable {
+public class VideoCreationDTO implements Serializable {
 
     private String titre;
 
@@ -10,16 +10,13 @@ public class UserVideoDTO implements Serializable {
 
     private String url;
 
-    private String id;
+    public VideoCreationDTO() {
+    }
 
-    public UserVideoDTO(String titre, String description, String url, String id) {
+    public VideoCreationDTO(String titre, String description, String url) {
         this.titre = titre;
         this.description = description;
         this.url = url;
-        this.id = id;
-    }
-
-    public UserVideoDTO() {
     }
 
     public String getTitre() {
@@ -44,13 +41,5 @@ public class UserVideoDTO implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

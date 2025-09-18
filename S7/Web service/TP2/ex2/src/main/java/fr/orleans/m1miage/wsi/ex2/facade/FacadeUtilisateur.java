@@ -7,7 +7,6 @@ import fr.orleans.m1miage.wsi.ex2.modele.Video;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @Component
 public class FacadeUtilisateur {
@@ -69,5 +68,21 @@ public class FacadeUtilisateur {
         if (!utilisateurs.containsKey(userId)) { throw new ExceptionUserNotFound(); }
         User user = utilisateurs.get(userId);
         user.addVideoToPlaylist(playlistId, video);
+    }
+
+    public User getUserById(UUID uuid) throws ExceptionUserNotFound {
+        if (!utilisateurs.containsKey(uuid)) { throw new ExceptionUserNotFound(); }
+        return utilisateurs.get(uuid);
+    }
+
+    public Collection<Playlist> getPlaylistsByUser(UUID id) throws ExceptionUserNotFound {
+        if (!utilisateurs.containsKey(id)) { throw new ExceptionUserNotFound(); }
+        return utilisateurs.get(id).getPlaylists();
+    }
+
+    public void removeVideoFromUserPlaylist(UUID playlistId, UUID userId, UUID videoId) throws ExceptionUserNotFound, ExceptionPlaylistNotFound, ExceptionVideoNotFound {
+        if (!utilisateurs.containsKey(userId)) { throw new ExceptionUserNotFound(); }
+        User user = utilisateurs.get(userId);
+        user.removeVideoFromPlaylist(playlistId, videoId);
     }
 }

@@ -1,3 +1,4 @@
+### Créer un utilisateur
 POST http://localhost:8080/api/registration
 Content-Type: Application/json;
 Accept: Application/json;
@@ -81,3 +82,17 @@ password: password
 {
   "videoId": "{{videoId}}"
 }
+
+### Récupère le profil de l'utilisateur
+GET http://localhost:8080/api/user
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password
+
+### Supprime la vidéo de la playlist
+DELETE http://localhost:8080/{{playlistLoc}}/video/{{videoId}}
+Content-Type: Application/json;
+Accept: Application/json;
+name: name
+password: password

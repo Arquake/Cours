@@ -2,11 +2,9 @@ package fr.orleans.m1miage.wsi.ex2.modele;
 
 import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionPlaylistNotFound;
 import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionUserNotFound;
+import fr.orleans.m1miage.wsi.ex2.exceptions.ExceptionVideoNotFound;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class User {
 
@@ -64,5 +62,21 @@ public class User {
         }
         playlists.stream().filter(p -> p.getUuid().equals(uuid)).findFirst().ifPresent(p -> {
             System.out.println(p);p.addVideo(video);});
+    }
+
+    public Collection<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void removeVideoFromPlaylist(UUID playlistId, UUID videoId) throws ExceptionPlaylistNotFound, ExceptionVideoNotFound {
+        if (playlists.stream().noneMatch(p -> p.getUuid().equals(playlistId))) { throw new ExceptionPlaylistNotFound(); }
+        final Playlist[] playlist = new Playlist[1];
+        playlists.stream().filter(p -> p.getUuid().equals(playlistId)).findFirst().ifPresent(p -> {
+            playlist[0] = p;
+        });
+        if (playlist[0].getVideos().stream().noneMatch(v -> v.getUuid().equals(videoId))) {
+            throw new ExceptionVideoNotFound();
+        }
+        playlist[0].removeVideo(videoId);
     }
 }

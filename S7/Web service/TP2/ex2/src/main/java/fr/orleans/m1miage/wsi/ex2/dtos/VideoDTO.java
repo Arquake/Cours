@@ -10,13 +10,16 @@ public class VideoDTO implements Serializable {
 
     private String url;
 
-    public VideoDTO() {
-    }
+    private String id;
 
-    public VideoDTO(String titre, String description, String url) {
+    public VideoDTO(String titre, String description, String url, String id) {
         this.titre = titre;
         this.description = description;
         this.url = url;
+        this.id = id;
+    }
+
+    public VideoDTO() {
     }
 
     public String getTitre() {
@@ -41,5 +44,13 @@ public class VideoDTO implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
