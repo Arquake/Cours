@@ -1,0 +1,244 @@
+= TP3. Sécuriser un Web-service
+:toc:
+
+== Objectifs
+
+* Concevoir et implémenter un service REST _sécurisé_, avec authentification basique.
+* Stocker les données d'authentification de manière sécurisée (avec chiffrement).
+* Gérer plusieurs rôles utilisateur.
+
+
+== Prologue : mise en place d'un Web-service sécurisé
+
+En suivant le tutoriel de Frédéric Moal (`https://youtu.be/0D2myzV5h3A`), déployez un Web-service vide mais où la sécurité est activée (dépendances Maven).
+
+En résumé, vous devrez retrouver dans vos dépendances Maven
+
+[source, xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+----
+
+
+== Un Web-service pour le suivi de projet
+
+Vous devrez mettre en place un Web-service (dont vous disposez du modèle) sur le thème décrit ci-dessous.
+
+IMPORTANT: Les sources des classes du modèle sont fournies dans le dossier `src/model`.
+Vous devrez toutefois générer vous-même les classes d'exception.
+
+
+=== Fonctionnalités attendues
+
+Pour aider le suivi de projets, un professeur de Web-service décide de mettre en place une application permettant aux étudiants de poser des questions.
+Les professeurs peuvent répondre aux questions ouvertes (non encore répondues).
+Les étudiants peuvent alors consulter les réponses aux questions qu'ils ont posées.
+
+Votre API devra proposer _au minimum_ les fonctionnalités suivantes :
+
+* *Inscrire un nouvel utilisateur*.
+** __sans authentification.__
+** Les informations du compte sont composées _a minima_ d'une adresse e-mail et d'un mot de passe ; vous pouvez ajouter d'autres informations, p.ex. nom, prénom, date de naissance.
+** Les informations du compte à inscrire sont fournies au format JSON dans le corps de la requête.
+* *Poser une question*.
+** __authentification nécessaire avec un rôle **étudiant**.__
+* *Consulter les questions auxquelles un enseignant a répondu*.
+** __authentification nécessaire avec un rôle **étudiant**.__
+** Un étudiant ne peut consulter que les questions qu'il a posées (pas les autres questions).
+* *Répondre à une question en attente de réponse*.
+** __authentification nécessaire avec un rôle **enseignant**.__
+* *Lister toutes les questions en attente de réponse*.
+** __authentification nécessaire avec un rôle **enseignant**.__
+
+
+=== Travail à réaliser
+
+. Dans la classe principale de votre application, vous devez nourrir votre façade avec des données.
++
+Transformez tout d'abord votre façade en un objet _scannable_ par SpringBoot (c.-à-d. utilisez l'annotation `@Component`).
+_Ajoutez_ ensuite dans la classe principale de votre application le code suivant (tout en gardant le code déjà présent dans la classe) :
++
+[source, java]
+----
+public class Application {
+
+    @Autowired
+    FacadeUtilisateurs facadeUtilisateurs;
+
+    public static void main(String[] args) {
+        // ...
+    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return args -> {
+            facadeUtilisateurs.inscrireUtilisateur("yohan.boichut@univ-orleans.fr",
+                    "monMotDePasse");
+            facadeUtilisateurs.inscrireUtilisateur("gerard.menvussaa@etu.univ-orleans.fr",
+                    "sonMotDePasse");
+        };
+    }
+}
+----
+
+L'inconvénient du code ci-dessus est que les mots de passes sont stockés en clair dans la façade (ce qui est une très mauvaise idée).
+Nous avons donc besoin de chiffrer les mots de passe avant de les stocker.
+
+Ajouter la classe *CryptoConfig* dans un package *security.config* :
+
+
+[source, java]
+----
+@Configuration
+public class CryptoConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+}
+----
+
+
+
+Modifiez ainsi le morceau de programme concernant la façade pour chiffrer les mots de passe au moment de l'appel à la façade.
+
+[start=2]
+. Complétez le tableau ci-dessous avec l'ensemble des URIs de votre Web-service, en précisant les paramètres entrants et sortants, le contexte d'utilisation, les statuts de retour (y compris erreurs), _etc._
++
+.URIs de votre service REST
+[cols="2m,1a,6a"]
+|===
+| URI | Méthode | Description
+
+| /utilisateur
+| POST
+| Inscrire un utilisateur.
+--
+Requête::
+Corps de la requête au format JSON, avec adress e-mail, mot de passe, et les autres informations du compte (p.ex. nom, prénom, date de naissance).
+Réponses::
+* 201 Created : L'inscription a été effectuée.
+** L'entête contiendra le champ `Location` (URI de l'utilisateur inscrit).
+** Le corps de la réponse (type de contenu `application/json`) contiendra, *au format JSON*, les données _non sensibles_ (i.e. tout sauf le mot de passe) de l'utilisateur nouvellement inscrit.
+
+* 409 Conflict : Un utilisateur existe déjà avec cette adresse e-mail.
+** Le corps de la réponse contiendra, *au format JSON*, le détail de l'erreur rencontrée (en particulier un message d'erreur précisant le problème).
+
+_À compléter_
+--
+
+| /utilisateur/{idUtilisateur}/question
+| POST
+| Poser une question (avec un rôle *étudiant*).
+--
+Requête::
+----
+{
+    "question": "Ma question"
+}
+----
+Réponses::
+* 201 Created : La question a bien été ajoutée.
+
+_À compléter_
+--
+
+| /utilisateur/{idUtilisateur}/question
+| GET
+| Consulter les questions d'un utilisateur (avec un rôle *étudiant*).
+--
+Requête::
+Pas de corps, tout est dans l'URI.
+Réponses::
+* 200 OK
+
+_À compléter_
+--
+|===
+
+[start=3]
+
+. Configurez votre projet avec une classe *SecurityConfig* dans le package *security.config*.
+[source, java]
+----
+@Configuration
+public class SecurityConfig {
+
+
+    /**
+     * Configuration des permissions d'accès aux différentes URIs du WebService.
+     */
+    @Bean
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(CsrfConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                    /// Request matchers pour sécuriser les routes
+                        .anyRequest().denyAll())
+                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        return http.build();
+    }
+
+}
+----
+
+[start=4]
+
+. Codez votre API en utilisant Spring Boot, avec une *authentification Basic*. Springboot a besoin de localiser les utilisateurs
+pour assurer l'authentification. Il a donc besoin d'un UserDetailService.
+
+`UserDetailService` permet de faire une vraie authentification dynamique, en se basant sur les personnes enregistrées dans la façade.
+Il vous faudra créer une classe implémentant *UserDetailService* et contenant votre façade. De cette façon le lien sera fait entre
+Spring Security et votre façade.
+
+Injectez dans le constructeur de SecurityConfig la façade utilisateurs.
+Créez la classe *CustomUserDetailsService* et ajoutez le bean *userDetailsService* dans *SecurityConfig* :
+
+[source, java]
+----
+/**
+     * Service de génération des détails d'authentification d'un utilisateur.
+     */
+    @Bean
+    protected UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService(facadeUtilisateurs);
+    }
+
+----
+
+
+Concernant les rôles des utilisateurs, nous proposons le principe suivant :
+--
+* les personnes qui ont une adresse email de la forme `...@etu.univ-orleans.fr` auront le rôle *ETUDIANT* ;
+* les personnes qui ont une adresse email de la forme `...@univ-orleans.fr` auront les rôles *ENSEIGNANT* et *ETUDIANT*.
+--
+
+
+[start=5]
+
+. Écrire un script permettant de valider votre Web-service.
+Pensez à mettre un scénario où un nouvel utilisateur s'inscrit à la plateforme.
+Montrez également que ce nouvel utilisateur ne peut pas accéder aux fonctionnalités du Web-service, et qu'un code 403 est retourné sur chacune des fonctionnalités.
+

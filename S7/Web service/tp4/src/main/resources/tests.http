@@ -1,0 +1,94 @@
+### Inscription d'un nouvel utilisateur
+POST http://localhost:8080/api/utilisateurs
+Content-Type: application/x-www-form-urlencoded
+
+email=sandra.nicouette@univ-orleans.fr&password=nidraps
+
+
+### Listing des questions (par un étudiant -> doit retourner 403)
+GET http://localhost:8080/api/questions
+Authorization: Basic mouss.arazeh@etu.univ-orleans.fr 1984
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 403, "Un étudiant ne peut pas accéder à cette ressource");
+});
+%}
+
+
+### Listing des questions (par un enseignant -> doit retourner 200 + les questions)
+GET http://localhost:8080/api/questions
+Accept: application/json
+Authorization: Basic anna.conda@univ-orleans.fr 42andCounting
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Un enseignant doit pouvoir accéder à cette ressource");
+  });
+%}
+
+
+### Listing des questions sans réponse (par un enseignant -> doit retourner 200 + les questions)
+GET http://localhost:8080/api/questions?filtre=sansReponse
+Accept: application/json
+Authorization: Basic anna.conda@univ-orleans.fr 42andCounting
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Un enseignant doit pouvoir accéder à cette ressource");
+  });
+
+%}
+
+### Ajout d'une question (par un étudiant)
+POST http://localhost:8080/api/utilisateurs/1/questions
+Content-Type: text/plain
+Authorization: Basic mouss.arazeh@etu.univ-orleans.fr 1984
+
+Quelle est la couleur du cheval blanc d'Henry 4 ?
+
+
+> {%
+client.global.set("uriquestion", response.headers.valueOf("Location"));
+client.global.set("idQuestion", response.body["idQuestion"]);
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "L'étudiant aurait dû pouvoir créer cette question");
+});
+%}
+
+
+### Affichage d'une question posée (par un étudiant)
+GET {{uriquestion}}
+Authorization: Basic mouss.arazeh@etu.univ-orleans.fr 1984
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "L'étudiant aurait dû pouvoir récupérer cette question");
+});
+%}
+
+
+### Ajout d'une réponse à une question (par un enseignant)
+PATCH http://localhost:8080/api/questions/{{idQuestion}}
+Content-Type: text/plain
+Authorization: Basic anna.conda@univ-orleans.fr 42andCounting
+
+Normalement, blanc...
+
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Le professeur aurait dû pouvoir répondre à la question");
+});
+%}
+
+
+### Listing des questions d'un étudiant ayant eu une réponse (par un étudiant)
+GET http://localhost:8080/api/utilisateurs/1/questions?filtre=avecReponses
+Authorization: Basic mouss.arazeh@etu.univ-orleans.fr 1984
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "L'étudiant aurait dû ses questions");
+});
+%}
