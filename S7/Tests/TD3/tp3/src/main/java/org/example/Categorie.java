@@ -1,3 +1,5 @@
+package org.example;
+
 public class Categorie {
 
     public int valCategorie(int an) {

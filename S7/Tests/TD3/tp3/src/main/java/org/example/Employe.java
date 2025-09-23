@@ -1,10 +1,10 @@
-package modele;
+package org.example;
 
 public class Employe {
      int annee;//anciennete dans l'entreprise
     double salaireDeBase;//salaire de depart à l'embauche
 
-    public employe(int a, double s){
+    public Employe(int a, double s){
         annee=a;
         salaireDeBase=s;
     }
