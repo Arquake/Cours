@@ -25,7 +25,13 @@ public class Employe {
 
     //salaire effectif de l employe calcule selon son anciennete sa categorie
     public double salaire() {
-      return 0;
+        Categorie cat = new Categorie();
+        int categorie = cat.valCategorie(annee);
+        return switch (categorie) {
+            case 2 -> 1.1 * salaireDeBase;
+            case 3 -> 1.2 * salaireDeBase;
+            default -> salaireDeBase;
+        };
     }
 
 }
