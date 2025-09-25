@@ -50,10 +50,10 @@ public class User {
      * @param name le nom de la playlist
      * @return l'id de la playlist
      */
-    public UUID newPlaylist(String name) {
+    public Playlist newPlaylist(String name) {
         Playlist playlist = new Playlist(name);
         playlists.add(playlist);
-        return playlist.getUuid();
+        return playlist;
     }
 
     public void addVideoToPlaylist(UUID uuid, Video video) throws ExceptionPlaylistNotFound {

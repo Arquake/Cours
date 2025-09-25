@@ -27,6 +27,8 @@ public class Controleur {
 
         String id = facade.enregistrerEtudiant(nom, prenom, adresse);
 
+        
+
         return ResponseEntity.status(HttpStatus.CREATED).header("Location", "http://localhost:8080/mpws/etudiant/"+id).body("");
     }
 

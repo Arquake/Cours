@@ -15,29 +15,28 @@ public class AlgoTri <X extends Comparable > {
             modifie = false;
             resultat = new ArrayList<X>();
             ListIterator<X> it = l.listIterator();
-            int i = 0;
-            while (it.hasNext()) {
+            while (it.hasNext()) { // conditionnel, 19: tant que it a un object suivant
                 X courant = it.next();
                 X suivant;
-                if (it.hasNext()) {
+                if (it.hasNext()) { // conditionnel, si it a un élément disponible après
                     suivant = it.next();
-                    if (suivant != null && suivant.compareTo(courant) < 0) {
+                    if (suivant != null && suivant.compareTo(courant) < 0) { // conditionnel, si suivant !null et suivant < courant
                         resultat.add(suivant);
                         resultat.add(courant);
                         modifie = true;
-                    } else {
-                        if (suivant.compareTo(courant)>0) {
+                    } else { // conditionnel, si suivant == null ou suivant >= courant
+                        if (suivant.compareTo(courant)>0) { // si suivant > courant
                             resultat.add(courant);
                             it.previous();
                         }
                     }
                 }
-                else {
+                else { // conditionnel, il n'y a pas d'objet suivant
                     resultat.add(courant);
                 }
-            }//while (it.hasNext())
+            }
             l = resultat;
-        } while (modifie);
+        } while (modifie); // conditionnel, si modifie == true
         return resultat;
     }
 

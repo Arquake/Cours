@@ -12,11 +12,22 @@ public class VideoDTO implements Serializable {
 
     private String id;
 
-    public VideoDTO(String titre, String description, String url, String id) {
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public VideoDTO(String titre, String description, String url, String id, String userId) {
         this.titre = titre;
         this.description = description;
         this.url = url;
         this.id = id;
+        this.userId = userId;
     }
 
     public VideoDTO() {

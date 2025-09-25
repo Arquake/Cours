@@ -11,14 +11,25 @@ import java.util.UUID;
 
 public class UserDTO implements Serializable {
 
+    private UUID id;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     private String name;
     private Collection<Playlist> playlists;
     private Collection<Video> videos;
 
-    public UserDTO(String name, Collection<Playlist> playlists, Collection<Video> videos) {
+    public UserDTO(String name, Collection<Playlist> playlists, Collection<Video> videos, UUID id) {
         this.name = name;
         this.playlists = playlists;
         this.videos = videos;
+        this.id = id;
     }
 
     public UserDTO() {

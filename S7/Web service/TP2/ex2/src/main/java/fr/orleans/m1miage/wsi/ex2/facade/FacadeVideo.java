@@ -16,11 +16,11 @@ public class FacadeVideo {
         this.videos = new HashMap<>();
     }
 
-    public UUID ajouterVideo(String titre, String description, String url, UUID userId) throws ExceptionVideoInvalidInformations {
+    public Video ajouterVideo(String titre, String description, String url, UUID userId) throws ExceptionVideoInvalidInformations {
         if (titre.isBlank() || description.isBlank() || url.isBlank()) { throw new ExceptionVideoInvalidInformations(); }
         Video video = new Video(url, description, titre, userId);
         videos.put(video.getUuid(), video);
-        return video.getUuid();
+        return video;
     }
 
     public Collection<Video> getVideoFromUser(UUID userId) {

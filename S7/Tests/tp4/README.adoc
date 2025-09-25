@@ -1,0 +1,32 @@
+= Test Structurel/Test fonctionnel
+
+
+== package modele.operations
+
+
+Nous voulons assurer que le code présent dans le package *operations* est fonctionnel.
+
+Questions :
+
+
+. Une classe abstraite ne peut être instanciée directement. MAIS, le pouvoir des mocks fait
+qu'il est tout à fait possible de tester tout de même le code de cette classe.
+En utilisant le mocking partiel, validez le code de la classe *Operations*. Vous allez tout d'abord devoir refactorer le code de la classe pas vraiment adapté au mocking partiel.
+
+. Créez les classes de tests pour chacune des filles. Nous avez juste à valider le code
+uniquement présent dans chaque fille.
+
+
+
+
+
+
+== package facade
+
+Nous voulons faire du test d'intégration. Plus précisément, à partir de l'interface *CalculatriceDynamiqueDuFutur* vous devrez proposez des tests qui valideront les futurs implémentations de cette interface (structure avec classe de test abstraite).
+
+Question :
+
+. Créez une classe abstraite *TestIntegrationCalculatriceDuFutur* et définissez tous les jeux de tests qui permettront de valider le bon fonctionnement des futurs implémentations
+
+. Vérifiez que la classe *CalculatriceDynamiqueDuFuturImpl* passe les tests d'intégrations prévus.

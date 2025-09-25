@@ -57,4 +57,12 @@ public class Video {
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setUserUUID(UUID userUUID) {
+        this.userUUID = userUUID;
+    }
 }

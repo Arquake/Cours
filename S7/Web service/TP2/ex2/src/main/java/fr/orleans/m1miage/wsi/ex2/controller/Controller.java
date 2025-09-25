@@ -1,5 +1,6 @@
 package fr.orleans.m1miage.wsi.ex2.controller;
 
+import fr.orleans.m1miage.wsi.ex2.Factory;
 import fr.orleans.m1miage.wsi.ex2.dtos.*;
 import fr.orleans.m1miage.wsi.ex2.exceptions.*;
 import fr.orleans.m1miage.wsi.ex2.facade.FacadeUtilisateur;
@@ -7,10 +8,10 @@ import fr.orleans.m1miage.wsi.ex2.facade.FacadeVideo;
 import fr.orleans.m1miage.wsi.ex2.modele.Playlist;
 import fr.orleans.m1miage.wsi.ex2.modele.User;
 import fr.orleans.m1miage.wsi.ex2.modele.Video;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
@@ -18,87 +19,123 @@ import java.util.*;
 @RequestMapping("/api")
 public class Controller {
 
-    @Autowired
     FacadeUtilisateur facadeUtilisateur;
 
-    @Autowired
     FacadeVideo facadeVideo;
 
+    Factory factory;
+
+    public Controller(FacadeUtilisateur facadeUtilisateur, FacadeVideo facadeVideo, Factory factory) {
+        this.facadeUtilisateur = facadeUtilisateur;
+        this.facadeVideo = facadeVideo;
+        this.factory = factory;
+    }
+
+    /**
+     * permet au user de créer un compte
+     * @param user les données relative à la création du compte user
+     * @return le user créé
+     * @throws ExceptionInvalidUserData
+     * @throws ExceptionUserAlreadyExist
+     */
     @PostMapping("/registration")
-    ResponseEntity<Void> registerUser(@RequestBody UserConnexionDTO user) {
+    ResponseEntity<UserDTO> registerUser(@RequestBody UserConnexionDTO user, UriComponentsBuilder builder) throws ExceptionInvalidUserData, ExceptionUserAlreadyExist {
         if (Objects.isNull(user)) {
-            return ResponseEntity.badRequest().build();
+            throw new ExceptionInvalidUserData();
         }
-        try {
-            UUID id = facadeUtilisateur.inscriptionUtilisateur(user.getName(), user.getPassword());
-            return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/api/user/"+id).build();
-        } catch (ExceptionInvalidUserData | ExceptionUserAlreadyExist e) {
-            return ResponseEntity.badRequest().build();
-        }
+        User newUser = facadeUtilisateur.inscriptionUtilisateur(user.getName(), user.getPassword());
+
+        UserDTO dto = factory.userDTOFactory(newUser);
+
+        String path = builder.path("/api/user/{id}").buildAndExpand(dto.getId()).toUriString();
+        return ResponseEntity.status(HttpStatus.CREATED).header("Location", path).body(dto);
     }
 
+    /**
+     * permet au user de s'authentifier
+     * @param user les données du user
+     * @return le user
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionUserNotFound
+     */
     @PostMapping("/connexion")
-    ResponseEntity<Void> connexionUser(@RequestBody UserConnexionDTO user) {
+    ResponseEntity<UserDTO> connexionUser(@RequestBody UserConnexionDTO user) throws ExceptionIncoherentUserInformations, ExceptionUserNotFound {
         if (Objects.isNull(user)) {
-            return ResponseEntity.badRequest().build();
+            throw new ExceptionIncoherentUserInformations();
         }
 
-        try {
-            facadeUtilisateur.validationUtilisateur(user.getName(), user.getPassword());
-            return ResponseEntity.ok().build();
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.badRequest().build();
-        }
+        UUID userId = facadeUtilisateur.validationUtilisateur(user.getName(), user.getPassword());
+        User currentUser = facadeUtilisateur.getUserById(userId);
+        UserDTO userDto = factory.userDTOFactory(currentUser, facadeVideo.getVideoFromUser(userId));
+
+        return ResponseEntity.ok().body(userDto);
     }
 
+    /**
+     * permet au user de créer une vidéo rattaché à son compte
+     * @param video la video à créer
+     * @param name le login du user
+     * @param password le mdp du user
+     * @return la vidéo créé
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionVideoInvalidInformations
+     */
     @PostMapping("/video")
-    ResponseEntity<Void> addVideo(@RequestBody VideoCreationDTO video, @RequestHeader("name") String name, @RequestHeader("password") String password) {
+    ResponseEntity<VideoDTO> addVideo(@RequestBody VideoCreationDTO video, @RequestHeader("name") String name, @RequestHeader("password") String password, UriComponentsBuilder builder) throws ExceptionIncoherentUserInformations, ExceptionVideoInvalidInformations {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
 
-        try {
-            UUID uuid = facadeVideo.ajouterVideo(video.getTitre(), video.getDescription(), video.getUrl(), userId);
-            return ResponseEntity.status(201).header("Location", "/api/video/"+uuid.toString()).build();
-        } catch (ExceptionVideoInvalidInformations e) {
-            return ResponseEntity.badRequest().build();
-        }
+        Video vid = facadeVideo.ajouterVideo(video.getTitre(), video.getDescription(), video.getUrl(), userId);
+
+        VideoDTO dto = factory.videoDTOFactory(vid);
+
+        String path = builder.path("/api/video/{id}").buildAndExpand(vid.getUuid()).toUriString();
+        return ResponseEntity
+                .status(201)
+                .header("Location", path)
+                .body(dto);
     }
 
+    /**
+     * retourne toutes les vidéos existantes
+     * @return une collection des vidéos existantes
+     */
     @GetMapping("/video")
     ResponseEntity<Collection<VideoDTO>> getAllVideos() {
         Collection<Video> videos = facadeVideo.getAllVideos();
-        Collection<VideoDTO> videosDto = videos.stream().map(video -> new VideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString())).toList();
+        Collection<VideoDTO> videosDto = videos.stream().map(video -> factory.videoDTOFactory(video)).toList();
         return ResponseEntity.ok().body(videosDto);
     }
 
+    /**
+     * récupère la vidéo avec l'id donné
+     * @param id l'id de la vidéo
+     * @return la vidéo
+     * @throws ExceptionVideoNotFound
+     */
     @GetMapping("/video/{id}")
-    ResponseEntity<VideoDTO> getVideoById(@PathVariable UUID id) {
+    ResponseEntity<VideoDTO> getVideoById(@PathVariable UUID id) throws ExceptionVideoNotFound {
         Video video;
-        try {
-            video = facadeVideo.getVideo(id);
-        } catch (ExceptionVideoNotFound e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        video = facadeVideo.getVideo(id);
 
         VideoDTO videoDto = new VideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString());
         return ResponseEntity.ok().body(videoDto);
     }
 
+    /**
+     * récupérer toutes les vidéos d'un user
+     * @param name le login de l'utilisateur
+     * @param password le mdp de l'utilisateur
+     * @return la collection des videos de l'utilisateur
+     * @throws ExceptionIncoherentUserInformations
+     */
     @GetMapping("/user/video")
-    ResponseEntity<Collection<VideoDTO>> getAllVideosFromUser(@RequestHeader("name") String name, @RequestHeader("password") String password) {
+    ResponseEntity<Collection<VideoDTO>> getAllVideosFromUser(@RequestHeader("name") String name, @RequestHeader("password") String password) throws ExceptionIncoherentUserInformations {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
 
         Collection<Video> videos = facadeVideo.getVideoFromUser(userId);
-        List<VideoDTO> videosDto = videos.stream().map(video -> new VideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString())).toList();
+        List<VideoDTO> videosDto = videos.stream().map(video -> factory.videoDTOFactory(video)).toList();
         return ResponseEntity.ok().body(videosDto);
     }
 
@@ -107,44 +144,40 @@ public class Controller {
      * @param name le login de l'utilisateur
      * @param password le mdp de l'utilisateur
      * @return Les informations de l'utilisateur
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionUserNotFound
      */
     @GetMapping("/user")
-    ResponseEntity<UserDTO> getOneself(@RequestHeader("name") String name, @RequestHeader("password") String password) {
+    ResponseEntity<UserDTO> getOneself(@RequestHeader("name") String name, @RequestHeader("password") String password) throws ExceptionIncoherentUserInformations, ExceptionUserNotFound {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
+
         User user;
-        try {
-            user = facadeUtilisateur.getUserById(userId);
-        } catch (ExceptionUserNotFound e) {
-            return ResponseEntity.badRequest().build();
-        }
+        user = facadeUtilisateur.getUserById(userId);
 
         Collection<Video> videos = facadeVideo.getVideoFromUser(userId);
 
-        UserDTO userDto = new UserDTO(user.getNom(), user.getPlaylists(), videos);
+        UserDTO userDto = new UserDTO(user.getNom(), user.getPlaylists(), videos, userId);
 
         return ResponseEntity.ok().body(userDto);
     }
 
+    /**
+     * Retourne toutes les playlist de l'utilisateur connecté
+     * @param name le nom de l'utilisateur
+     * @param password le pseudo de l'utilisateur
+     * @return les playlists de l'utilisateur
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionUserNotFound
+     */
     @GetMapping("/user/playlist")
-    ResponseEntity<UserPlaylistsDTO> getPlaylistByUser(@RequestHeader("name") String name, @RequestHeader("password") String password) {
+    ResponseEntity<UserPlaylistsDTO> getPlaylistByUser(@RequestHeader("name") String name, @RequestHeader("password") String password) throws ExceptionIncoherentUserInformations, ExceptionUserNotFound {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
+
 
         Collection<Playlist> playlists;
-        try {
-            playlists = facadeUtilisateur.getPlaylistsByUser(userId);
-        } catch (ExceptionUserNotFound e) {
-            return ResponseEntity.status(400).build();
-        }
+        playlists = facadeUtilisateur.getPlaylistsByUser(userId);
         UserPlaylistsDTO userPlaylistsDto = new UserPlaylistsDTO(playlists);
         return ResponseEntity.ok().body(userPlaylistsDto);
     }
@@ -154,26 +187,24 @@ public class Controller {
      * @param name le nom de l'utilisateur
      * @param password le pseudo de l'utilisateur
      * @param playlistInfos les informations attendues pour créer la playlist
-     * @return La localisation de la playlist
+     * @return La localisation de la playlist et la playlist
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionUserNotFound
      */
     @PostMapping("/user/playlist")
-    ResponseEntity<Void> createPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistCreationDTO playlistInfos) {
+    ResponseEntity<PlaylistDTO> createPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistCreationDTO playlistInfos, UriComponentsBuilder builder) throws ExceptionIncoherentUserInformations, ExceptionUserNotFound {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
 
-        UUID playlistId;
+        Playlist playlist;
 
-        try {
-            playlistId = facadeUtilisateur.createPlaylistForUser(userId, playlistInfos.getName());
-        } catch (ExceptionUserNotFound e) {
-            return ResponseEntity.badRequest().build();
-        }
+        playlist = facadeUtilisateur.createPlaylistForUser(userId, playlistInfos.getName());
 
-        return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/api/user/playlist/"+playlistId).build();
+        PlaylistDTO playlistDto = factory.playlistDTOFactory(playlist);
+
+        String path = builder.path("/api/user/playlist/{idPlaylist}").buildAndExpand(playlistDto.getUuid()).toUriString();
+
+        return ResponseEntity.status(HttpStatus.CREATED).header("Location", path).body(playlistDto);
     }
 
     /**
@@ -183,28 +214,20 @@ public class Controller {
      * @param password le mdp du user
      * @param videoDto les informations utiles à l'ajout de la video dans la playlist
      * @return nothing
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionVideoNotFound
+     * @throws ExceptionUserNotFound
+     * @throws ExceptionPlaylistNotFound
      */
     @PostMapping("/user/playlist/{playlistId}/video")
-    ResponseEntity<Void> addVideoToPlaylist(@PathVariable UUID playlistId, @RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistVideoAdditionDTO videoDto) {
+    ResponseEntity<Void> addVideoToPlaylist(@PathVariable UUID playlistId, @RequestHeader("name") String name, @RequestHeader("password") String password, @RequestBody PlaylistVideoAdditionDTO videoDto) throws ExceptionIncoherentUserInformations, ExceptionVideoNotFound, ExceptionUserNotFound, ExceptionPlaylistNotFound {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
 
         Video video;
-        try {
-            video = facadeVideo.getVideo(videoDto.getVideoId());
-        } catch (ExceptionVideoNotFound e) {
-            return ResponseEntity.badRequest().build();
-        }
+        video = facadeVideo.getVideo(videoDto.getVideoId());
 
-        try {
-            facadeUtilisateur.addVideoToPlaylist(userId, playlistId, video);
-        } catch (ExceptionUserNotFound | ExceptionPlaylistNotFound e) {
-            return ResponseEntity.badRequest().build();
-        }
+        facadeUtilisateur.addVideoToPlaylist(userId, playlistId, video);
 
         return ResponseEntity.ok().build();
     }
@@ -216,21 +239,17 @@ public class Controller {
      * @param idPlaylist l'id de la playlist de l'utilisateur
      * @param idVideo l'id de la video dans la playlist à supprimer
      * @return rien
+     * @throws ExceptionIncoherentUserInformations
+     * @throws ExceptionVideoNotFound
+     * @throws ExceptionUserNotFound
+     * @throws ExceptionPlaylistNotFound
      */
     @DeleteMapping("/user/playlist/{idPlaylist}/video/{idVideo}")
-    ResponseEntity<Void> deleteVideoFromPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @PathVariable UUID idPlaylist, @PathVariable UUID idVideo) {
+    ResponseEntity<Void> deleteVideoFromPlaylist(@RequestHeader("name") String name, @RequestHeader("password") String password, @PathVariable UUID idPlaylist, @PathVariable UUID idVideo) throws ExceptionIncoherentUserInformations, ExceptionVideoNotFound, ExceptionUserNotFound, ExceptionPlaylistNotFound {
         UUID userId;
-        try {
-            userId = facadeUtilisateur.validationUtilisateur(name, password);
-        } catch (ExceptionIncoherentUserInformations e) {
-            return ResponseEntity.status(401).build();
-        }
+        userId = facadeUtilisateur.validationUtilisateur(name, password);
 
-        try {
-            facadeUtilisateur.removeVideoFromUserPlaylist(idPlaylist, userId, idVideo);
-        } catch (ExceptionUserNotFound | ExceptionPlaylistNotFound | ExceptionVideoNotFound e) {
-            return ResponseEntity.badRequest().build();
-        }
+        facadeUtilisateur.removeVideoFromUserPlaylist(idPlaylist, userId, idVideo);
         return ResponseEntity.ok().build();
     }
 }

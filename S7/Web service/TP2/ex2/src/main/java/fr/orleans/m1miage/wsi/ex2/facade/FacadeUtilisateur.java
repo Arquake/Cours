@@ -24,14 +24,14 @@ public class FacadeUtilisateur {
      * @throws ExceptionInvalidUserData Si le name ou password est vide ou contient des espaces
      * @throws ExceptionUserAlreadyExist Si un utilisateur avec ce nom existe déjà
      */
-    public UUID inscriptionUtilisateur(String name, String password) throws ExceptionInvalidUserData, ExceptionUserAlreadyExist {
+    public User inscriptionUtilisateur(String name, String password) throws ExceptionInvalidUserData, ExceptionUserAlreadyExist {
         if (name.isBlank() || name.contains(" ") || password.isBlank() ||password.contains(" ")) { throw new ExceptionInvalidUserData(); }
         boolean alreadyPresent = utilisateurs.keySet().stream().filter(uuid -> utilisateurs.get(uuid).getNom().equals(name)).count() == 1;
         if (alreadyPresent) { throw new ExceptionUserAlreadyExist(); }
 
         User newUser = new User(name, password);
         utilisateurs.put(newUser.getId(), newUser);
-        return newUser.getId();
+        return newUser;
     }
 
     /**
@@ -58,7 +58,7 @@ public class FacadeUtilisateur {
      * @return l'id de la playlist
      * @throws ExceptionUserNotFound l'utilisateur n'existe pas
      */
-    public UUID createPlaylistForUser(UUID uuid, String playlistName) throws ExceptionUserNotFound {
+    public Playlist createPlaylistForUser(UUID uuid, String playlistName) throws ExceptionUserNotFound {
         if (!utilisateurs.containsKey(uuid)) { throw new ExceptionUserNotFound(); }
         return utilisateurs.get(uuid).newPlaylist(playlistName);
     }

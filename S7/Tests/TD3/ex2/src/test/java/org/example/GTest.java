@@ -30,8 +30,8 @@ class GTest {
 
     @Test
     void bigCutSmallN() throws InvalidValueException {
-        doReturn(Integer.toUnsignedLong(1)).when(fibo).calculer(1);
-        doReturn(Integer.toUnsignedLong(4)).when(syra).calculer(1);
+        doReturn(1L).when(fibo).calculer(1);
+        doReturn(4L).when(syra).calculer(1);
         //doReturn(4).when(g).calculer(1,4, Cut.BIG_CUT);
 
         long resFibo = fibo.calculer(1);
@@ -41,8 +41,8 @@ class GTest {
 
     @Test
     void smallCutSmallN() throws InvalidValueException {
-        doReturn(Integer.toUnsignedLong(1)).when(fibo).calculer(1);
-        doReturn(Integer.toUnsignedLong(4)).when(syra).calculer(1);
+        doReturn(1L).when(fibo).calculer(1);
+        doReturn(4L).when(syra).calculer(1);
         //doReturn(Integer.toUnsignedLong(4)).when(g).calculer(1,4, Cut.SMALL_CUT);
 
         long resFibo = fibo.calculer(1);
@@ -52,7 +52,7 @@ class GTest {
 
     @Test
     void bigCutBigN() throws InvalidValueException {
-        doReturn(Integer.toUnsignedLong(89)).when(fibo).calculer(10);
+        doReturn(89L).when(fibo).calculer(10);
         doReturn(Integer.toUnsignedLong(4)).when(syra).calculer(10);
         //doReturn(Integer.toUnsignedLong(89)).when(g).calculer(89,4, Cut.BIG_CUT);
 
