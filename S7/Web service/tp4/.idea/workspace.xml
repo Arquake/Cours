@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ead50131-c86b-4950-9483-ee5519beacfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Tests/TD2/AlgoTri.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Tests/TD2/ex6/src/main/java/org/example/AlgoTri.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Tests/TD3/ex2/src/test/java/org/example/GTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Tests/TD3/ex2/src/test/java/org/example/GTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Tests/tp4.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/dtos/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionIncoherentUserInformations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionIncoherentUserInformations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionInvalidUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionInvalidUserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionUserAlreadyExist.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionUserAlreadyExist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionVideoInvalidInformations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/exceptions/ExceptionVideoInvalidInformations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/facade/FacadeVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/facade/FacadeVideo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Tests/tp4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Tests/tp4/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="33C15gKdrCL5EHWpytKLcNMjxud" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,16 +28,21 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.tp4-tester [install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Tests/tp4",
+    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Web service/tp4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -57,6 +56,13 @@
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="tp4" />
       <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="tp4-tester" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.univ.orleans.info.m1.ws.tp4.StartApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -79,6 +85,8 @@
       <option name="presentableId" value="Default" />
       <updated>1758806059065</updated>
       <workItem from="1758806060169" duration="320000" />
+      <workItem from="1759126600326" duration="61000" />
+      <workItem from="1759126710801" duration="503000" />
     </task>
     <servers />
   </component>

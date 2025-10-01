@@ -1,0 +1,14 @@
+fr\univ\orleans\info\m1\ws\tp4\modele\exceptions\UtilisateurInexistantException.class
+fr\univ\orleans\info\m1\ws\tp4\security\config\SecurityConfig.class
+fr\univ\orleans\info\m1\ws\tp4\modele\exceptions\LoginDejaUtiliseException.class
+fr\univ\orleans\info\m1\ws\tp4\modele\Question.class
+fr\univ\orleans\info\m1\ws\tp4\security\config\CryptoConfig.class
+fr\univ\orleans\info\m1\ws\tp4\modele\exceptions\AccessIllegalAUneQuestionException.class
+fr\univ\orleans\info\m1\ws\tp4\modele\Utilisateur.class
+fr\univ\orleans\info\m1\ws\tp4\modele\exceptions\QuestionInexistanteException.class
+fr\univ\orleans\info\m1\ws\tp4\modele\FacadeUtilisateurs.class
+fr\univ\orleans\info\m1\ws\tp4\StartApplication.class
+fr\univ\orleans\info\m1\ws\tp4\security\services\CustomUserDetailsService.class
+fr\univ\orleans\info\m1\ws\tp4\modele\FacadeApplication.class
+fr\univ\orleans\info\m1\ws\tp4\controleur\ControleurServiceQuestionsReponses.class
+fr\univ\orleans\info\m1\ws\tp4\modele\Role.class
