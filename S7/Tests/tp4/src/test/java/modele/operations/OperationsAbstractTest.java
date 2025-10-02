@@ -10,6 +10,9 @@ public abstract class OperationsAbstractTest {
     @Spy
     Operations operations;
 
+    @Spy
+    Operations nextOperation;
+
     @BeforeEach
     void init() {
         operations = spy(Operations.class);

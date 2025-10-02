@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -105,6 +106,7 @@ class OperationsTest extends OperationsAbstractTest {
         List<String> returnedExpectedArray = new ArrayList<>();
         returnedExpectedArray.add("-"); // next
         returnedExpectedArray.add(null); // current
+
 
         doReturn(returnedExpectedArray).when(operations).getOperations();
 

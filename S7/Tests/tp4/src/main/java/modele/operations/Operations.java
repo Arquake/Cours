@@ -48,6 +48,19 @@ public abstract class Operations {
         return others;
     }
 
+    public String getNomOperation() {
+        return nomOperation;
+    }
 
+    public void setNomOperation(String nomOperation) {
+        this.nomOperation = nomOperation;
+    }
 
+    public Operations getNext() {
+        return next;
+    }
+
+    public void setNext(Operations next) {
+        this.next = next;
+    }
 }
