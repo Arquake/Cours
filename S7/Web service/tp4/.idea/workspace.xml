@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ead50131-c86b-4950-9483-ee5519beacfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Tests/tp4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Tests/tp4/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Data/tp1/.Rhistory" beforeDir="false" afterPath="$PROJECT_DIR$/../../Data/tp1/.Rhistory" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +32,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Web service/tp4",
+    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Tests/tp4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,6 +86,10 @@
       <workItem from="1758806060169" duration="320000" />
       <workItem from="1759126600326" duration="61000" />
       <workItem from="1759126710801" duration="503000" />
+      <workItem from="1759317197340" duration="713000" />
+      <workItem from="1759404692295" duration="11000" />
+      <workItem from="1759404990309" duration="19000" />
+      <workItem from="1759405056716" duration="52000" />
     </task>
     <servers />
   </component>

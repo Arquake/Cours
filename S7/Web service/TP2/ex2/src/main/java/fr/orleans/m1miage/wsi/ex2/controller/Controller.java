@@ -118,7 +118,7 @@ public class Controller {
         Video video;
         video = facadeVideo.getVideo(id);
 
-        VideoDTO videoDto = new VideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString());
+        VideoDTO videoDto = new VideoDTO(video.getTitre(), video.getDecription(), video.getUrl(), video.getUuid().toString(), video.getUserUUID().toString());
         return ResponseEntity.ok().body(videoDto);
     }
 

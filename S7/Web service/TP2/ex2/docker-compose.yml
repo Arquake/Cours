@@ -1,0 +1,11 @@
+
+services:
+  back_java:
+    build:
+      context: ./
+      dockerfile: ./meow.Dockerfile
+    container_name: TP2_EX2
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app

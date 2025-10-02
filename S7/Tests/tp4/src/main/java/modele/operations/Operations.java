@@ -18,7 +18,9 @@ public abstract class Operations {
         this.next = next;
     }
 
-    protected abstract double getResultat(double operande1, double operande2);
+    protected double getResultat(double operande1, double operande2) {
+        return 0d;
+    }
 
     public  double getResultat(String operation, double operande1, double operande2) throws NonSupporteeException {
         if (this.nomOperation.equals(operation)) {
