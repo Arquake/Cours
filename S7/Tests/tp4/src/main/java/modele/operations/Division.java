@@ -9,7 +9,7 @@ public class Division extends Operations {
     }
 
     @Override
-    protected double getResultat(double operande1, double operande2) {
+    public double getResultat(double operande1, double operande2) {
         return operande1/operande2;
     }
 }

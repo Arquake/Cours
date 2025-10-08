@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.custom.i18n.resources" value="mesTextes"/>
+
+    <package name="/" extends="struts-default">
+        <default-action-ref name="index"/>
+        <action name="index">
+            <result>/WEB-INF/vues/login.jsp</result>
+        </action>
+
+        <action name="login" class="actions.Login">
+            <result name="success">/WEB-INF/vues/menu.jsp</result>
+            <result name="input">/WEB-INF/vues/login.jsp</result>
+        </action>
+
+        <action name="goMatchs" class="actions.GoMatchs">
+            <result>/WEB-INF/vues/afficherMatchs.jsp</result>
+        </action>
+
+        <action name="goResultat" class="actions.GoResultat">
+            <result name="success">/WEB-INF/vues/resultat.jsp</result>
+            <result name="input">/WEB-INF/vues/afficherMatchs.jsp</result>
+        </action>
+
+        <action name="resultat" class="actions.Resultat">
+            <result name="success">/WEB-INF/vues/confimerResultat.jsp</result>
+            <result name="input">/WEB-INF/vues/resultat.jsp</result>
+        </action>
+
+        <action name="goAjouterMatch" class="actions.Environnement">
+            <result>/WEB-INF/vues/ajouterMatch.jsp</result>
+        </action>
+        <action name="ajouterMatch" class="actions.AjouterMatch">
+            <result name="success">/WEB-INF/vues/confimerAjouterMatch.jsp</result>
+            <result name="input">/WEB-INF/vues/ajouterMatch.jsp</result>
+        </action>
+        <action name="goMatchsOuvertAuxParis" class="actions.GoMatchsOuvertAuxParis">
+            <result>/WEB-INF/vues/afficherMatchsOuvertsAuxParis.jsp</result>
+        </action>
+
+        <action name="goParier" class="actions.GoParier">
+            <result name="success">/WEB-INF/vues/parier.jsp</result>
+            <result name="input">/WEB-INF/vues/afficherMatchsOuvertsAuxParis.jsp</result>
+        </action>
+
+        <action name="parier" class="actions.Parier">
+            <result name="success">/WEB-INF/vues/confirmerParier.jsp</result>
+            <result name="input">/WEB-INF/vues/parier.jsp</result>
+        </action>
+
+        <action name="goMesParis" class="actions.GoMesParis">
+            <result>/WEB-INF/vues/afficherMesParis.jsp</result>
+        </action>
+        <action name="goAnnulerPari" class="actions.GoAnnulerPari">
+            <result name="success">/WEB-INF/vues/annulerPari.jsp</result>
+            <result name="input">/WEB-INF/vues/afficherMesParis.jsp</result>
+        </action>
+        <action name="annulerPari" class="actions.AnnulerPari">
+            <result name="success">/WEB-INF/vues/confirmerAnnulerPari.jsp</result>
+            <result name="input">/WEB-INF/vues/annulerPari.jsp</result>
+        </action>
+
+
+        <action name="goMenu" class="actions.Environnement">
+            <result>/WEB-INF/vues/menu.jsp</result>
+        </action>
+        <action name="logout" class="actions.Logout">
+            <result>/WEB-INF/vues/login.jsp</result>
+        </action>
+    </package>
+
+</struts>

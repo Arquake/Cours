@@ -18,7 +18,8 @@ class OperationsTest extends OperationsAbstractTest {
 
     @Override
     protected Operations getInstance() {
-        return spy(Operations.class);
+        return
+            spy(Operations.class);
     }
 
     @Test
@@ -50,14 +51,14 @@ class OperationsTest extends OperationsAbstractTest {
     }
 
     @Test
-    void validResultWithAssignedSigns() {
+    void validResultWithAssignedSigns() throws NonSupporteeException {
         doReturn(6d).when(operations).getResultat(3d,3d);
 
         Assertions.assertDoesNotThrow(()->operations.getResultat(3d,3d));
     }
 
     @Test
-    void resultWithAssignedSigns() {
+    void resultWithAssignedSigns() throws NonSupporteeException {
         doReturn(6d).when(operations).getResultat(3d,3d);
 
         Assertions.assertEquals(6d,operations.getResultat(3d,3d));

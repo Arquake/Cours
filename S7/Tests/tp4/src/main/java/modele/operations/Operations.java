@@ -10,10 +10,10 @@ public abstract class Operations {
     private String nomOperation;
     private Operations next;
 
-    public Operations() {
+    Operations() {
     }
 
-    public Operations(String nomOperation, Operations next) {
+    Operations(String nomOperation, Operations next) {
         this.nomOperation = nomOperation;
         this.next = next;
     }
@@ -23,6 +23,7 @@ public abstract class Operations {
     }
 
     public  double getResultat(String operation, double operande1, double operande2) throws NonSupporteeException {
+        System.out.println(operation);
         if (this.nomOperation.equals(operation)) {
             return this.getResultat(operande1,operande2);
         }

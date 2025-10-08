@@ -1,0 +1,25 @@
+= Tests applications web
+
+
+
+
+
+
+== Tests structurels Struts
+
+
+Comme vu en cours, nous avons testé structurellement l'action *AjouterMatch*. Vous pouvez retrouver le code sur Célène.
+
+
+Voici une nouvelle application permettant de gérer des bons plans et des modérateurs.
+
+. Testez l'action *Candidater*. Identifiez les paramètres, variables de sessions, variables d'applications nécessaires.
+Atteignez la couverture 100% des lignes de code.
+. Testez l'action *ModifierBonPlan*.  Identifiez les paramètres, variables de sessions, variables d'applications nécessaires.
+Atteignez la couverture 100% des lignes de code.
+
+N'oubliez pas les points importants :
+
+* Test structurel : donc couverture de tous les arcs à minima
+* Maîtrisez le test structurel struts : exécution des tests sans lancer de serveur
+* Utilisation de mocks car on reste sur du test structurel

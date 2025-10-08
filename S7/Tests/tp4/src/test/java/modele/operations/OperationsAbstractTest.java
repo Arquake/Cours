@@ -15,7 +15,7 @@ public abstract class OperationsAbstractTest {
 
     @BeforeEach
     void init() {
-        operations = spy(Operations.class);
+        operations = spy(this.getInstance());
     }
 
     protected abstract Operations getInstance();

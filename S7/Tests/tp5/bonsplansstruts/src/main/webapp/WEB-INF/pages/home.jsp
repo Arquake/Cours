@@ -1,0 +1,33 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: yoh
+  Date: 17/05/2024
+  Time: 10:26
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>MEILLEURSPLANS.COM</title>
+</head>
+<body>
+<H1>MEILLEURSPLANS.COM</H1>
+
+<s:if test="hasActionMessages()">
+    <span style="color: green; "><s:actionmessage/></span>
+</s:if>
+
+
+<s:if test="hasActionErrors()">
+    <span style="color: red; "><s:actionerror/></span>
+</s:if>
+
+<s:form action="identification" method="POST">
+    <s:textfield name="email" label="E-mail"/>
+    <s:password name="password" label="Mot de passe"/>
+    <s:submit/>
+</s:form>
+
+</body>
+</html>
