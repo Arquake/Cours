@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation"
+              value="false"/>
+
+
+
+    <package name="default" namespace="/" extends="struts-default">
+        <default-action-ref name="home"></default-action-ref>
+
+        <action name="home">
+            <result>/WEB-INF/pages/home.jsp</result>
+        </action>
+
+        <action name="identification" class="actions.Identification">
+            <result name="input">
+                /WEB-INF/pages/home.jsp
+            </result>
+            <result name="success">/WEB-INF/pages/menu.jsp</result>
+        </action>
+
+
+        <action name="gotocandidatures" class="actions.GotoCandidatures">
+            <result name="success">/WEB-INF/pages/traitementdemandes.jsp</result>
+        </action>
+
+
+        <action name="candidater" class="actions.Candidater">
+            <result name="success">/WEB-INF/pages/menu.jsp</result>
+            <result name="input">/WEB-INF/pages/menu.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
+        </action>
+
+
+        <action name="gotoajouterbonplan">
+            <result>/WEB-INF/pages/nouveaubonplan.jsp</result>
+        </action>
+
+
+        <action name="validercandidature" class="actions.ValiderCandidature">
+            <result name="success">/WEB-INF/pages/traitementdemandes.jsp</result>
+            <result name="input">/WEB-INF/pages/traitementdemandes.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
+        </action>
+
+
+
+
+
+        <action name="refusercandidature" class="actions.RefuserCandidature">
+            <result name="success">/WEB-INF/pages/traitementdemandes.jsp</result>
+            <result name="input">/WEB-INF/pages/traitementdemandes.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
+        </action>
+
+
+        <action name="saisirnouveaubonplan" class="actions.SaisirNouveauBonPlan">
+            <result name="success">/WEB-INF/pages/menu.jsp</result>
+            <result name="input">/WEB-INF/pages/nouveaubonplan.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
+        </action>
+
+
+        <action name="gotolesbonsplans" class="actions.GotoBonsPlans">
+            <result>/WEB-INF/pages/bonsplans.jsp</result>
+        </action>
+
+
+        <action name="gotomesbonsplans" class="actions.GotoMesBonsPlans">
+            <result>/WEB-INF/pages/bonsplans.jsp</result>
+        </action>
+
+
+        <action name="selectionnerbonplan" class="actions.GotoModifierBonPlan">
+            <result>/WEB-INF/pages/modifierbonplan.jsp</result>
+        </action>
+
+
+
+        <action name="modifierbonplan" class="actions.ModifierBonPlan">
+            <result name="success">/WEB-INF/pages/bonsplans.jsp</result>
+            <result name="input">/WEB-INF/pages/modifierbonplan.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
+        </action>
+
+
+        <action name="backtomenu" class="actions.GotoMenu">
+            <result name="success">/WEB-INF/pages/menu.jsp</result>
+        </action>
+
+    </package>
+</struts>
