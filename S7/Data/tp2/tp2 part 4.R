@@ -60,7 +60,7 @@ s.class(data.frame(Apb,Meurtre),Region,
         col=1:4,	    # colorie barycentres/Region
         cstar=0,			# supprime les "étoiles"
         cpoint=0,			# supprime les symboles de point
-        clabel=1.2,		# taille labels barycentres
+        clabel=0.6,		# taille labels barycentres
         axesell=F)		# supprime les axes des ellipoides
 
 

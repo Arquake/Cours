@@ -1,5 +1,14 @@
 package veras.fr.tp3.model;
 
+import org.springframework.stereotype.Service;
+import veras.fr.tp3.exceptions.AccesIllegalAUneQuestionException;
+import veras.fr.tp3.exceptions.QuestionInexistanteException;
+import veras.fr.tp3.exceptions.UtilisateurInexistantException;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Service
 public class FacadeApplication {
 
     /**

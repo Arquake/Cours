@@ -1,12 +1,25 @@
 package veras.fr.tp3.model;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import veras.fr.tp3.config.CryptoConfig;
+import veras.fr.tp3.exceptions.LoginDejaUtiliseException;
+import veras.fr.tp3.exceptions.UtilisateurInexistantException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
 public class FacadeUtilisateurs {
 
     /** Stocke l'ensemble des utilisateurs inscrits */
     private Map<String,Utilisateur> utilisateursMap;
 
-    public FacadeUtilisateurs() {
+    private final CryptoConfig cryptoConfig;
+
+    public FacadeUtilisateurs(CryptoConfig cryptoConfig) {
         utilisateursMap = new HashMap<>();
+        this.cryptoConfig = cryptoConfig;
     }
 
     /**
@@ -44,7 +57,8 @@ public class FacadeUtilisateurs {
         if (utilisateursMap.containsKey(login)) {
             throw new LoginDejaUtiliseException();
         } else {
-            Utilisateur utilisateur = new Utilisateur(login, motDePasse);
+            String encryptedPassword = cryptoConfig.passwordEncoder().encode(motDePasse);
+            Utilisateur utilisateur = new Utilisateur(login, encryptedPassword);
             utilisateursMap.put(utilisateur.getLogin(), utilisateur);
             return utilisateur.getIdUtilisateur();
         }
@@ -58,7 +72,8 @@ public class FacadeUtilisateurs {
      */
     public boolean verifierMotDePasse(String login, String motDePasse) {
         if (utilisateursMap.containsKey(login)) {
-            return utilisateursMap.get(login).verifierMotDePasse(motDePasse);
+            String encryptedPassword = utilisateursMap.get(login).getMotDePasse();
+            return cryptoConfig.passwordEncoder().matches(motDePasse, encryptedPassword);
         } else {
             return false;
         }

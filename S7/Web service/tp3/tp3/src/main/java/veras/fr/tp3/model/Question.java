@@ -1,5 +1,7 @@
 package veras.fr.tp3.model;
 
+import java.util.UUID;
+
 public class Question {
 
     private String idQuestion;

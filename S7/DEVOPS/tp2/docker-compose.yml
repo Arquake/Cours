@@ -1,0 +1,11 @@
+
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - 8080:80
+  db:
+    image: mariadb:latest
+    environment:
+      - MARIADB_ROOT_PASSWORD=admin
