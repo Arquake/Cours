@@ -240,3 +240,25 @@ s.class(acp$li, fac=NE, cstar=0, cpoint=0,clabel=1.7,
 
 #### END ####
 
+
+## EX 2
+
+## 1
+
+setwd("C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Data/tp3")
+jussac <- read.table("jussac.txt", header=TRUE, row.names = 1)
+
+head(jussac)
+
+# Il faut la normée car les variables n'ont pas les même mesures et unités
+# Avec une ACP normée on a moins d'inertie car on réduit les axes
+
+
+# 2 : Il  un type J qui n'est dans aucun autre individus
+
+jussac <- jussac[, -1]
+as.factor(jussac[,7])
+
+actifs <- jussac[jussac$Type != "J"]
+indsuc <- jussac[jussac$Type == "J"]
+

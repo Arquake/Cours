@@ -1,8 +1,12 @@
-POST http://localhost:8080/api/login
+POST http://localhost:8080/utilisateur
 Content-Type: application/json;
 Accept: application/json;
 
 {
-  "login": "yohan.boichut@univ-orleans.fr",
+  "login": "yohan2.boichut@univ-orleans.fr",
   "password": "monMotDePasse"
 }
+
+###
+GET http://localhost:8080/utilisateur/test/yohan2.boichut@univ-orleans.fr
+Accept: application/json;

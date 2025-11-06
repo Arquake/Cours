@@ -19,21 +19,23 @@ public class CandidaterTest extends StrutsJUnit4TestCase {
 
     Map<String, Object> application;
     Map<String, Object> session;
+    FacadeBonsPlans facadeBonsPlans;
 
     @Before
     public void init() {
         session = new HashMap<>();
         application = new HashMap<>();
+
+        facadeBonsPlans = mock(FacadeBonsPlans.class);
+
+        session.put("token", "");
+        application.put("facadeBonsPlans", facadeBonsPlans);
     }
 
     @Test
     public void toutBon() throws Exception {
 
-        FacadeBonsPlans facadeBonsPlans = mock(FacadeBonsPlans.class);
-
         doNothing().when(facadeBonsPlans).candidaterModerateur("");
-
-        application.put("facadeBonsPlans", facadeBonsPlans);
 
         ActionProxy actionProxy = getActionProxy("/candidater");
         actionProxy.getInvocation().getInvocationContext().setApplication(application);
@@ -47,11 +49,7 @@ public class CandidaterTest extends StrutsJUnit4TestCase {
     @Test
     public void utilisateurInconnu() throws Exception {
 
-        FacadeBonsPlans facadeBonsPlans = mock(FacadeBonsPlans.class);
-
         doThrow(UtilisateurInconnuException.class).when(facadeBonsPlans).candidaterModerateur("");
-
-        application.put("facadeBonsPlans", facadeBonsPlans);
 
         ActionProxy actionProxy = getActionProxy("/candidater");
         actionProxy.getInvocation().getInvocationContext().setApplication(application);
@@ -65,11 +63,7 @@ public class CandidaterTest extends StrutsJUnit4TestCase {
     @Test
     public void tokenExpire() throws Exception {
 
-        FacadeBonsPlans facadeBonsPlans = mock(FacadeBonsPlans.class);
-
         doThrow(TokenExpireException.class).when(facadeBonsPlans).candidaterModerateur("");
-
-        application.put("facadeBonsPlans", facadeBonsPlans);
 
         ActionProxy actionProxy = getActionProxy("/candidater");
         actionProxy.getInvocation().getInvocationContext().setApplication(application);
@@ -83,11 +77,7 @@ public class CandidaterTest extends StrutsJUnit4TestCase {
     @Test
     public void alreadyDone() throws Exception {
 
-        FacadeBonsPlans facadeBonsPlans = mock(FacadeBonsPlans.class);
-
         doThrow(CandidatureDejaDeposeeException.class).when(facadeBonsPlans).candidaterModerateur("");
-
-        application.put("facadeBonsPlans", facadeBonsPlans);
 
         ActionProxy actionProxy = getActionProxy("/candidater");
         actionProxy.getInvocation().getInvocationContext().setApplication(application);

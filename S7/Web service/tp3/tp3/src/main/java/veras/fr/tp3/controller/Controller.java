@@ -1,58 +1,57 @@
 package veras.fr.tp3.controller;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import veras.fr.tp3.Dtos.QuestionDTO;
-import veras.fr.tp3.Dtos.UtilisateurConnexionDto;
+import veras.fr.tp3.Dtos.QuestionDTOOut;
 import veras.fr.tp3.Dtos.UtilisateurCreationDTO;
 import veras.fr.tp3.Dtos.UtilisateurDTO;
+import veras.fr.tp3.exceptions.AccesIllegalAUneQuestionException;
+import veras.fr.tp3.exceptions.LoginDejaUtiliseException;
+import veras.fr.tp3.exceptions.QuestionInexistanteException;
 import veras.fr.tp3.exceptions.UtilisateurInexistantException;
+import veras.fr.tp3.factory.QuestionFactory;
 import veras.fr.tp3.factory.UtilisateurFactory;
+import veras.fr.tp3.model.FacadeApplication;
 import veras.fr.tp3.model.FacadeUtilisateurs;
-import veras.fr.tp3.model.Utilisateur;
 
-import java.security.Principal;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/utilisateur")
 public class Controller {
 
     FacadeUtilisateurs facadeUtilisateurs;
     UtilisateurFactory utilisateurFactory;
+    FacadeApplication facadeApplication;
 
-    public Controller(FacadeUtilisateurs facadeUtilisateurs, UtilisateurFactory utilisateurFactory) {
+    public Controller(FacadeUtilisateurs facadeUtilisateurs, UtilisateurFactory utilisateurFactory, FacadeApplication facadeApplication) {
         this.facadeUtilisateurs = facadeUtilisateurs;
         this.utilisateurFactory = utilisateurFactory;
+        this.facadeApplication = facadeApplication;
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner() {
-        return args -> {
-            facadeUtilisateurs.inscrireUtilisateur("yohan.boichut@univ-orleans.fr",
-                    "monMotDePasse");
-            facadeUtilisateurs.inscrireUtilisateur("gerard.menvussaa@etu.univ-orleans.fr",
-                    "sonMotDePasse");
-        };
-    }
-
-    @RequestMapping("/login")
     @PostMapping
-    public ResponseEntity<UtilisateurDTO> login(@RequestBody UtilisateurConnexionDto utilisateurConnexionDto) throws UtilisateurInexistantException {
-         if(!facadeUtilisateurs.verifierMotDePasse(utilisateurConnexionDto.login(), utilisateurConnexionDto.password())) {
-             throw new UtilisateurInexistantException();
-         }
+    public ResponseEntity<UtilisateurDTO> register(@RequestBody UtilisateurCreationDTO utilisateurCreationDTO) throws LoginDejaUtiliseException, UtilisateurInexistantException {
+        int utilisateur = facadeUtilisateurs.inscrireUtilisateur(utilisateurCreationDTO.login(), utilisateurCreationDTO.password());
 
-         Utilisateur currentUser = facadeUtilisateurs.getUtilisateurByLogin(utilisateurConnexionDto.login());
-         return ResponseEntity.ok(utilisateurFactory.createUtilisateurDtoWithUtilisateur(currentUser));
+        try {
+            return ResponseEntity.created(new URI("/utilisateur/"+utilisateur)).body(UtilisateurFactory.createUtilisateurDtoWithUtilisateur(facadeUtilisateurs.getUtilisateurByLogin(utilisateurCreationDTO.login())));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @PostMapping("/utilisateur/{idUtilisateur}/question")
-    public ResponseEntity<QuestionDTO> poserQuestion(@RequestParam("idUtilisateur") Integer idUser) {
-        
+
+    @PostMapping("/{idUtilisateur}/question")
+    public ResponseEntity<QuestionDTOOut> poserQuestion(@PathVariable("idUtilisateur") Integer idUser, @RequestBody QuestionDTO questionDTO) throws QuestionInexistanteException, AccesIllegalAUneQuestionException, UtilisateurInexistantException, URISyntaxException {
+        String questionId = facadeApplication.ajouterUneQuestion(idUser, questionDTO.question());
+        return ResponseEntity.created(new URI("/utilisateur/"+idUser+"/question/"+questionId)).body(QuestionFactory.questionToQuestionOutDTO(facadeApplication.getQuestionByIdPourUnUtilisateur(idUser, questionId)));
     }
 
+    @GetMapping("/test/{login}")
+    public ResponseEntity<String> test(@PathVariable("login") String login) throws UtilisateurInexistantException {
+        return ResponseEntity.ok().body(facadeUtilisateurs.getUtilisateurByLogin(login).getMotDePasse());
+    }
 }

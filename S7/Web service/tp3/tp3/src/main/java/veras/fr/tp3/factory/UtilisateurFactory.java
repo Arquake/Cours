@@ -10,7 +10,7 @@ public class UtilisateurFactory {
     public UtilisateurFactory() {
     }
 
-    public UtilisateurDTO createUtilisateurDtoWithUtilisateur(Utilisateur user) {
+    public static UtilisateurDTO createUtilisateurDtoWithUtilisateur(Utilisateur user) {
         return new UtilisateurDTO(user.getIdUtilisateur(), user.getLogin());
     }
 }

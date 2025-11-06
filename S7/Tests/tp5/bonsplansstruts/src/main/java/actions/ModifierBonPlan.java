@@ -89,13 +89,12 @@ public class ModifierBonPlan extends Environnement {
     }
 
     @Override
-    public String execute() throws TokenExpireException, UtilisateurInconnuException, BonPlanInconnuException {
-       ;
+    public String execute() throws BonPlanInconnuException {
 
         try {
             LocalDateTime debut = DateBuilderFromString.builder.stringToLocalDateTime(dateDebut);
             LocalDateTime fin = DateBuilderFromString.builder.stringToLocalDateTime(dateFin);
-            BonPlan bonPlan = getFabriqueBonPlan().creer(id, description, theme, lien, prix, debut, fin);
+            bonPlan = getFabriqueBonPlan().creer(id, description, theme, lien, prix, debut, fin);
             getFacadeBonsPlans().modifierBonPlan(getToken(), bonPlan);
             addActionMessage("Le bon plan a bien été modifié");
             return SUCCESS;
