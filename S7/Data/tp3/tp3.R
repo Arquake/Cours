@@ -259,6 +259,21 @@ head(jussac)
 jussac <- jussac[, -1]
 as.factor(jussac[,7])
 
-actifs <- jussac[jussac$Type != "J"]
-indsuc <- jussac[jussac$Type == "J"]
+actifs <- jussac[jussac$Type != "J",]
+indsuc <- jussac[jussac$Type == "J",]
+
+summary(actifs)
+
+raceCl <- factor(actifs$)
+
+
+
+
+
+
+
+
+
+
+
 

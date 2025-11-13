@@ -1,0 +1,5 @@
+         brun  chatain roux blond    
+marron    68   119     26    7    
+noisette  15   54      14   10    
+vert       5   29      14   16    
+bleu      20   84      17   94    

@@ -8,5 +8,20 @@ Accept: application/json;
 }
 
 ###
-GET http://localhost:8080/utilisateur/test/yohan2.boichut@univ-orleans.fr
+POST http://localhost:8080/utilisateur/yohan2.boichut@univ-orleans.fr/question
+Content-Type: application/json; encoding=utf-8
 Accept: application/json;
+Authorization: Basic eW9oYW4yMi5ib2ljaHV0QHVuaXYtb3JsZWFucy5mcjptb25Nb1REZVBhc3Nl
+
+{
+"question" : "question"
+}
+
+###
+GET http://localhost:8080/utilisateur/yohan2.boichut@univ-orleans.fr/question
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+services:
+  go_shell:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go_shell
+    volumes:
+      - ./:/go_shell
+    tty: true
+    stdin_open: true

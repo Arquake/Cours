@@ -14,9 +14,12 @@ import veras.fr.tp3.factory.QuestionFactory;
 import veras.fr.tp3.factory.UtilisateurFactory;
 import veras.fr.tp3.model.FacadeApplication;
 import veras.fr.tp3.model.FacadeUtilisateurs;
+import veras.fr.tp3.model.Question;
+import veras.fr.tp3.model.Utilisateur;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/utilisateur")
@@ -33,7 +36,7 @@ public class Controller {
     }
 
     @PostMapping
-    public ResponseEntity<UtilisateurDTO> register(@RequestBody UtilisateurCreationDTO utilisateurCreationDTO) throws LoginDejaUtiliseException, UtilisateurInexistantException {
+    public ResponseEntity<UtilisateurDTO> register(@RequestBody UtilisateurCreationDTO utilisateurCreationDTO) throws LoginDejaUtiliseException {
         int utilisateur = facadeUtilisateurs.inscrireUtilisateur(utilisateurCreationDTO.login(), utilisateurCreationDTO.password());
 
         try {
@@ -45,13 +48,18 @@ public class Controller {
 
 
     @PostMapping("/{idUtilisateur}/question")
-    public ResponseEntity<QuestionDTOOut> poserQuestion(@PathVariable("idUtilisateur") Integer idUser, @RequestBody QuestionDTO questionDTO) throws QuestionInexistanteException, AccesIllegalAUneQuestionException, UtilisateurInexistantException, URISyntaxException {
-        String questionId = facadeApplication.ajouterUneQuestion(idUser, questionDTO.question());
-        return ResponseEntity.created(new URI("/utilisateur/"+idUser+"/question/"+questionId)).body(QuestionFactory.questionToQuestionOutDTO(facadeApplication.getQuestionByIdPourUnUtilisateur(idUser, questionId)));
+    public ResponseEntity<QuestionDTOOut> poserQuestion(@PathVariable("idUtilisateur") String idUser, @RequestBody QuestionDTO questionDTO) throws QuestionInexistanteException, AccesIllegalAUneQuestionException, UtilisateurInexistantException, URISyntaxException {
+        if (!facadeUtilisateurs.isEtudiant(idUser)) {
+            throw new AccesIllegalAUneQuestionException();
+        }
+        String questionId = facadeApplication.ajouterUneQuestion(facadeUtilisateurs.getUtilisateurIntId(idUser), questionDTO.question());
+        return ResponseEntity.created(new URI("/utilisateur/"+idUser+"/question/"+questionId)).body(QuestionFactory.questionToQuestionOutDTO(facadeApplication.getQuestionByIdPourUnUtilisateur(facadeUtilisateurs.getUtilisateurIntId(idUser), questionId)));
     }
 
-    @GetMapping("/test/{login}")
-    public ResponseEntity<String> test(@PathVariable("login") String login) throws UtilisateurInexistantException {
-        return ResponseEntity.ok().body(facadeUtilisateurs.getUtilisateurByLogin(login).getMotDePasse());
+    @GetMapping("/{login}/question")
+    public ResponseEntity<Collection<QuestionDTOOut>> test(@PathVariable("login") String login) throws UtilisateurInexistantException {
+        Utilisateur user = facadeUtilisateurs.getUtilisateurByLogin(login);
+        Collection<Question> questions = facadeApplication.getToutesLesQuestionsByUser(user.getIdUtilisateur());
+        return ResponseEntity.ok().body(QuestionFactory.questionDTOOutCollection(questions));
     }
 }

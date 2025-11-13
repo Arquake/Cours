@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ead50131-c86b-4950-9483-ee5519beacfd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Data/tp1/.Rhistory" beforeDir="false" afterPath="$PROJECT_DIR$/../../Data/tp1/.Rhistory" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TP2/ex2/src/main/java/fr/orleans/m1miage/wsi/ex2/controller/Controller.java" afterDir="false" />
+    <list default="true" id="9ec443a1-c4f0-4c1a-b2c1-67102af7a3fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/factory/QuestionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/factory/QuestionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/model/FacadeUtilisateurs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/tp3/src/main/java/veras/fr/tp3/model/FacadeUtilisateurs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/tp3/src/main/resources/test.http" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/tp3/src/main/resources/test.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/StartApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/controleur/ControleurServiceQuestionsReponses.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/FacadeApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/FacadeUtilisateurs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/Utilisateur.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/AccessIllegalAUneQuestionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/LoginDejaUtiliseException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/QuestionInexistanteException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/UtilisateurInexistantException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/security/config/CryptoConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/security/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/univ/orleans/info/m1/ws/tp4/security/services/CustomUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tests.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/StartApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/controleur/ControleurServiceQuestionsReponses.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/FacadeApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/FacadeUtilisateurs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/Question.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/Utilisateur.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/AccessIllegalAUneQuestionException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/LoginDejaUtiliseException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/QuestionInexistanteException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/modele/exceptions/UtilisateurInexistantException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/security/config/CryptoConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/security/config/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fr/univ/orleans/info/m1/ws/tp4/security/services/CustomUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tests.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tp4-tester-1.1.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tp4-tester-1.1.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp4.adoc" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,78 +59,37 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="33C15gKdrCL5EHWpytKLcNMjxud" />
+  <component name="ProjectId" id="35NYs2q6EVZ71OguMXwHpxOvEUH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.tp4-tester [install].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Tests/tp4",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Web service/tp3&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="tp4" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="tp4" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="tp4-tester" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.univ.orleans.info.m1.ws.tp4.StartApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
-      </set>
-    </attachedChunks>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ead50131-c86b-4950-9483-ee5519beacfd" name="Changes" comment="" />
-      <created>1758806059065</created>
+      <changelist id="9ec443a1-c4f0-4c1a-b2c1-67102af7a3fa" name="Changes" comment="" />
+      <created>1762952200214</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1758806059065</updated>
-      <workItem from="1758806060169" duration="320000" />
-      <workItem from="1759126600326" duration="61000" />
-      <workItem from="1759126710801" duration="503000" />
-      <workItem from="1759317197340" duration="713000" />
-      <workItem from="1759404692295" duration="11000" />
-      <workItem from="1759404990309" duration="19000" />
-      <workItem from="1759405056716" duration="52000" />
+      <updated>1762952200214</updated>
+      <workItem from="1762952201273" duration="96000" />
+      <workItem from="1762952305599" duration="30000" />
+      <workItem from="1762952342241" duration="15000" />
+      <workItem from="1762952364626" duration="79000" />
     </task>
     <servers />
   </component>

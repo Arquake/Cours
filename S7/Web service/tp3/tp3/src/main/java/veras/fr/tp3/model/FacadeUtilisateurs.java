@@ -1,6 +1,5 @@
 package veras.fr.tp3.model;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import veras.fr.tp3.config.CryptoConfig;
 import veras.fr.tp3.exceptions.LoginDejaUtiliseException;
@@ -42,7 +41,7 @@ public class FacadeUtilisateurs {
      * @return l'utilisateur.
      * @throws UtilisateurInexistantException s'il n'existe pas d'utilisateur avec ce login
      */
-    public Utilisateur getUtilisateurByLogin(String login) throws UtilisateurInexistantException {
+    public Utilisateur getUtilisateurByLogin(String login) {
         return utilisateursMap.get(login);
     }
 
@@ -77,5 +76,12 @@ public class FacadeUtilisateurs {
         } else {
             return false;
         }
+    }
+
+    public boolean isEtudiant(String login) throws UtilisateurInexistantException {
+        if (!utilisateursMap.containsKey(login)) {
+            throw new UtilisateurInexistantException();
+        }
+        return utilisateursMap.get(login).getLogin().contains("@univ-orleans.fr") || utilisateursMap.get(login).getLogin().contains("@etu.univ-orleans.fr");
     }
 }
