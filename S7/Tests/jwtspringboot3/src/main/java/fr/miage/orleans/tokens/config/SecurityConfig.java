@@ -56,8 +56,8 @@ public class SecurityConfig {
                         .anyRequest().denyAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
-                .exceptionHandling((exceptions) -> exceptions
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
                         .accessDeniedHandler(new BearerTokenAccessDeniedHandler()));
         return http.build();
@@ -73,9 +73,7 @@ public class SecurityConfig {
         // Créer un JWKSource avec la JWKSet
         JWKSource<SecurityContext> jwkSource = (jwkSelector, context) -> jwkSet.getKeys();
 
-        NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(jwkSource);
-
-        return nimbusJwtEncoder;
+        return new NimbusJwtEncoder(jwkSource);
     }
 
     @Bean
@@ -86,7 +84,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder delegatingPasswordEncoder() {
-        String idForEncode = "bcrypt";;
+        String idForEncode = "bcrypt";
         PasswordEncoder defaultEncoder = new BCryptPasswordEncoder();
         Map<String, PasswordEncoder> encoders = Map.of(
                 idForEncode, defaultEncoder,

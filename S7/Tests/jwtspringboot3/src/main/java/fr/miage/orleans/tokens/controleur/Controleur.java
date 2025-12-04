@@ -85,7 +85,7 @@ public class Controleur {
                                                     UriComponentsBuilder base)
             throws UtilisateurInexistantException
     {
-        int id = Integer.valueOf((String)jwt.getTokenAttributes().get("idUtilisateur"));
+        int id = Integer.parseInt((String)jwt.getTokenAttributes().get("idUtilisateur"));
 
         if (idUtilisateur == id) {
             Question question = facadeApplication.ajouterUneQuestion(idUtilisateur, libelleQuestion);
