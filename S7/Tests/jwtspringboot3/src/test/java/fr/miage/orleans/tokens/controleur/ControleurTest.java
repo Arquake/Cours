@@ -160,9 +160,9 @@ class ControleurTest {
         Utilisateur utilisateur = new Utilisateur(email, password);
 
         String libelle = "Tu préfère moi ou ton père ?";
-        String location = "/api/utilisateur/"+utilisateur.getIdUtilisateur();
+        String location = "/api/utilisateurs/"+utilisateur.getIdUtilisateur();
 
-       String trueToken = "Bearer " + genereToken.apply(utilisateur);
+        String trueToken = "Bearer " + genereToken.apply(utilisateur);
 
         Question q = new Question(utilisateur.getIdUtilisateur(), libelle);
 
@@ -170,7 +170,8 @@ class ControleurTest {
 
         mockMvc.perform(post(URI.create(location + "/questions"))
                         .header("Authorization", trueToken)
-                        .param("libelleQuestion", libelle)
+                        .content(libelle)
+                        .contentType(MediaType.TEXT_PLAIN)
                         )
                 .andExpect(status().isCreated());
     }

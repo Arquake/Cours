@@ -120,7 +120,7 @@ public class SecurityConfig {
             Instant now = Instant.now();
             long expiry = 36000L;
 
-            String scope = Arrays.stream(getRoles(personne.getEmail())).map(x -> x.toString()).collect(Collectors.joining(" "));
+            String scope = Arrays.stream(getRoles(personne.getEmail())).map(String::toString).collect(Collectors.joining(" "));
             JwtClaimsSet claims = JwtClaimsSet.builder()
                     .issuer("self")
                     .issuedAt(now)
