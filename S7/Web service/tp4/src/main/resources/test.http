@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/utilisateurs?email=test@univ-orleans.fr&password=moi
+Content-Type: application/json; encoding=utf-8
+Accept: application/json; encoding=utf-8
+
+###
+POST http://localhost:8080/api/utilisateurs/test@univ-orleans.fr/questions
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdEB1bml2LW9ybGVhbnMuZnIiLCJleHAiOjE3NjUzMzE3NjIsImlhdCI6MTc2NTI5NTc2Miwic2NvcGUiOlsiRU5TRUlHTkFOVCIsIkVUVURJQU5UIl19.1pwl_WTAZsI5heiRbaWN3r4cOZjmLDlY1ycTRqOtPJg
+Content-Type: application/json
+Accept: application/json
+
+"test"
+
+
