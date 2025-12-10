@@ -42,7 +42,7 @@ public class SecurityConfig {
      * Configuration des permissions d'accès aux différentes URIs du WebService.
      */
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/utilisateurs").permitAll()
