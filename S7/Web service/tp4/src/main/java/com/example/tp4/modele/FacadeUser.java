@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class FacadeUser implements UserDetailsManager {
 
-    private Map<String,UserDetails> users;
+    private final Map<String,UserDetails> users;
 
     public FacadeUser() {
         this.users = new HashMap<>();
