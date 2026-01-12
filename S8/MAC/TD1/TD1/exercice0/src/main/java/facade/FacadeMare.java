@@ -1,5 +1,7 @@
 package facade;
 
+import Mortier.LBD;
+import Mortier.PointImpact;
 import mare.Mare;
 import mare.Poisson;
 
@@ -73,6 +75,17 @@ public class FacadeMare {
 
     }
 
+    public void declencherLBD(LBD lbd) {
+        maMare.getPoissons().forEach(poisson -> {
+            if (poisson.getX() >= (lbd.getP().getX() - lbd.getRayon())
+                    && poisson.getX() <= (lbd.getP().getX() + lbd.getRayon())
+                    && poisson.getY() >= (lbd.getP().getY() - lbd.getRayon())
+                    && poisson.getY() <= (lbd.getP().getY() + lbd.getRayon())
+            ) {
+                System.out.println(poisson + " est assomé");
+            }
+        });
+    }
 
     public Collection<Poisson> getMaMare() {
         return maMare.getPoissons();
