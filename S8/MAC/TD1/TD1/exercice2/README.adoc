@@ -1,0 +1,16 @@
+# Fabriques de clones
+
+1. Comment adapteriez-vous le design pattern `Fabrique` afin de ne
+fournir qu’une seule instance d’un objet fabriqué lorsqu’il est demandé,
+au lieu d’en fournir une nouvelle à chaque fois ? Donnez le diagramme de
+classe correspondant.
+
+1. Donnez le code Java complet d'une fabrique d'animaux, `Chien` ou
+`Chat`, qui renvoie toujours le même chien ou chat. Ecrire le "main" qui
+vérifie que le code complet fonctionne.
+
+1. Vous voulez maintenant écrire une fabrique de clone : à chaque
+demande de création, vous renvoyez non plus la même instance, mais un
+clone de l'instance originale. Donnez le diagramme de classe
+correspondant ainsi que le code Java de la fabrique de chiens et chats
+clonés.

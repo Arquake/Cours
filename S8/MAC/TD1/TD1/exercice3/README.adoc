@@ -1,0 +1,62 @@
+:imagesdir: src/main/resources/images
+# Mangez des fruits !
+
+On dispose de la classe `Hobbit` contenant la méthode
+`manger(Fruit f)`.
+
+Dans le cadre d’une application permettant à des Hobbits de manger des
+fruits, les classes suivantes sont fournies :
+
+image:Hobbit.png[width=173,height=113]
+
+```java
+    public class ArbreFruitier {
+        private String type;
+        public ArbreFruitier(String type) {
+            this.type = type;
+        }
+        public Fruit cueille() {
+            if (this.type.equals("pommier") {
+                return new Fruit("pomme");
+            else if (this.type.equals("poirier") {
+                return new Fruit("poire");
+            }
+        }
+        public String toString() {
+            return this.type;
+        }
+    }
+
+    public class Fruit {
+        private String type;
+        public Fruit(String type) {
+            this.type = type;
+        }
+        public String toString() {
+            return this.type;
+        }
+    }
+
+    public class TheMain {
+        public static void main(String[] args) {
+            ArbreFruitier pommier = new ArbreFruitier("pommier");
+            ArbreFruitier poirier = new ArbreFruitier("poirier");
+            Hobbit maraudeur = new Hobbit("Merry");
+            maraudeur.mange(pommier.cueille());
+            maraudeur.mange(poirier.cueille());
+        }
+    }
+```
+
+## Questions
+
+1. Critiquez la conception illustrée par ce code. Des remarques
+courtes et précises sont attendues.
+
+1. Corrigez les erreurs de conception que vous avez relevées en
+proposant un diagramme UML et donnez le code Java de la nouvelle application.
+
+Vous justifierez clairement pourquoi votre proposition est préférable,
+en précisant par exemple, le cas échéant, comment vous avez tiré profit
+de l’application du principe d’inversion des dépendances et du design
+pattern “factory method”.

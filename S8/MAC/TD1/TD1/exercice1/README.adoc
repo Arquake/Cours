@@ -1,0 +1,46 @@
+# Paiment en ligne
+
+Vous avez développé un superbe site de vente en ligne de solution de
+sujets d'examens ! Vous avez donc une superbe classe `Panier` qui permet
+aux étudiants de choisir tranquillement parmi les sujets, les corrigés
+qui veulent acheter, puis de payer leur panier par carte bancaire.
+
+```java
+public class Panier {
+    List<Corrige> corriges;
+    public Panier(){
+          this.corriges = new ArrayList<Corrige>();
+   }
+    public void addItem(Corrige corrige){
+        this.corriges.add(corrige);
+    }
+    public void removeItem(Corrige corrige){
+        this.corriges.remove(corrige);
+    }
+    public int calculerTotal(){
+        int sum = 0;
+        for(Corrige corrige : corriges){
+            sum += corrige.getPrice();
+        }
+        return sum;
+    }
+    public void pay(String nom, String noCarte, String crypto,
+        String expire){
+        int amount = calculerTotal();
+        System.out.println("Paiement de " + amount + "€ par " + nom + "
+                CB " + noCarte + "/" + crypto + " expire:" + expire);
+    }
+}
+```
+
+Mais vous avez une forte demande pour proposer en plus du paiement par
+`CB` un paiement par `Paypal`, avec juste l'email et le numéro d'autorisation
+`Paypal`, beaucoup plus discret qu'avec le nom du porteur de la carte
+bancaire !
+
+## Question
+
+1. Proposez une nouvelle modélisation du système de paiement pour pouvoir
+choisir entre `CB` et `Paypal` ; écrivez le code correspondant en Java ainsi
+qu'un main qui effectue un paiement par CB et par Paypal d'un même
+panier.

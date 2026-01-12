@@ -1,0 +1,39 @@
+# Les Body builders...
+
+Nous prenons la classe suivante `Personne`.
+
+```java
+public class Personne {
+        private String nom;
+        private String prenom;
+        private String adresse;
+        private String ville;
+        private String email;
+        private String numeroTelephone;
+        private Collection<Contact> contacts;
+        private Personne(){}
+        /**
+        getters/setters
+        **/
+    }
+
+    public class Contact {
+        public enum SocialNetwork {FACEBOOK, LINKED, TWITTER, INSTAGRAM};
+        SocialNetworl reseau;
+        String idContactReseau;
+        public Contact(SocialNetwork sn, String id) {
+            this.reseau = sn;
+            this.idContactReseau = id;
+        }
+        /**
+        getters/setters
+        **/
+    }
+```
+
+Pour ce genre de classes, il est très pénible de définir les constructeurs. Une solution est de passer par un `Builder` qui
+nous permettra de définir uniquement quelques propriétés de l'instance et finalement créer l'instance.
+
+## Question
+
+1. Définir un builder pour la classe `Personne`. Ce Builder devra aussi permettra d'ajouter un par un les réseaux sociaux.

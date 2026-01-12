@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0eaf13dd-8c16-440f-aa49-268f9216129d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tp4/modele/FacadeUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tp4/modele/FacadeUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tp4/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tp4/security/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,7 @@
     "Spring Boot.Tp4Application.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Nicolas/Documents/travelApp/travelBackend",
+    "last_opened_file_path": "C:/Users/Nicolas/OneDrive/Documents/Cours/S7/Web service/tp4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,6 +110,7 @@
       <updated>1765264424174</updated>
       <workItem from="1765264425258" duration="9733000" />
       <workItem from="1765357518598" duration="4356000" />
+      <workItem from="1765523301686" duration="1379000" />
     </task>
     <servers />
   </component>

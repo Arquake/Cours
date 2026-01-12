@@ -1,0 +1,21 @@
+# La pêche aux poissons
+
+
+Nous avons un modèle permettant de gérer une mare rectangulaire avec des poissons faisant des allers-retours sur la longueur
+de la mare.
+En détail, nous avons une façade permettant de créer une mare avec des dimensions données ainsi qu'un nombre de poissons
+donné. Une fois la mare créée, il suffit de lancer l'animation. Vous pouvez également la stopper grâce à la façade.
+
+## Questions
+
+1. Le code n'est pas forcément d'une qualité folle. Il va falloir intégrer la possibilité de lancer des grenades dans la mare
+à une position donnée. Cette grenade, dans un rayon d'action propre à chaque grenade, assommera tous les poissons dans le rayon.
+Un poisson assommé, comme un canard, se déplace beaucoup moins bien. Faites évoluer le modèle de telle sorte que la nouvelle fonctionnalité soit
+intégrée.
+
+1. Dans un rayon deux fois plus grand que le rayon assommant, les poissons dans ce rayon seront affolés. Vous pourrez improviser
+un déplacement chaotique dans cette phase pour les poissons affolés. Faites évoluer le modèle pour intégrer cette nouvelle demande.
+
+
+
+
