@@ -1,5 +1,7 @@
-package mare;
+package fr.miage.orleans.mac.mare;
 
+
+import java.util.Random;
 
 public class Poisson {
 
@@ -20,12 +22,17 @@ public class Poisson {
      */
     private boolean estAssomme;
 
+    private boolean panicking;
+
+    private final Random rand;
+
     /**
      * Sens de déplacement du poisson
      */
     private int sensDeplacement;
 
     public Poisson(int x, int y, Mare mare) {
+        this.rand = new Random();
         this.x = x;
         this.y = y;
         this.estAssomme = false;
@@ -69,6 +76,21 @@ public class Poisson {
                 this.sensDeplacement *= -1;
             }
             this.x = this.x + this.sensDeplacement;
+
+            if (panicking && rand.nextBoolean()) {
+                switch (rand.nextInt(0,3)) {
+                    case 0:
+                        if (this.y >= this.mare.getDimY()) return;
+                        this.y++;
+                        break;
+                    case 1:
+                        if (this.y <= 0) return;
+                        this.y--;
+                        break;
+                    default:
+                        return;
+                }
+            }
         }
     }
 
@@ -79,5 +101,21 @@ public class Poisson {
                 ", y=" + y +
                 ", sensDeplacement=" + sensDeplacement +
                 '}';
+    }
+
+    public void setEstAssomme(boolean estAssomme) {
+        this.estAssomme = estAssomme;
+    }
+
+    public boolean isEstAssomme() {
+        return estAssomme;
+    }
+
+    public boolean isPanicking() {
+        return panicking;
+    }
+
+    public void setPanicking(boolean panicking) {
+        this.panicking = panicking;
     }
 }

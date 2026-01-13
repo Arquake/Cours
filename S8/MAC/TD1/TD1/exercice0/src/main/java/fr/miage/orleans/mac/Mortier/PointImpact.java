@@ -1,4 +1,4 @@
-package Mortier;
+package fr.miage.orleans.mac.Mortier;
 
 public class PointImpact {
     private int x;

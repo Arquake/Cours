@@ -1,9 +1,8 @@
-package facade;
+package fr.miage.orleans.mac.facade;
 
-import Mortier.LBD;
-import Mortier.PointImpact;
-import mare.Mare;
-import mare.Poisson;
+import fr.miage.orleans.mac.Mortier.LBD;
+import fr.miage.orleans.mac.mare.Mare;
+import fr.miage.orleans.mac.mare.Poisson;
 
 import java.util.Collection;
 
@@ -77,12 +76,20 @@ public class FacadeMare {
 
     public void declencherLBD(LBD lbd) {
         maMare.getPoissons().forEach(poisson -> {
-            if (poisson.getX() >= (lbd.getP().getX() - lbd.getRayon())
+            if (
+                    poisson.getX() >= (lbd.getP().getX() - lbd.getRayon())
                     && poisson.getX() <= (lbd.getP().getX() + lbd.getRayon())
                     && poisson.getY() >= (lbd.getP().getY() - lbd.getRayon())
                     && poisson.getY() <= (lbd.getP().getY() + lbd.getRayon())
             ) {
                 System.out.println(poisson + " est assomé");
+            } else if (
+                    poisson.getX() >= (lbd.getP().getX() - lbd.getRayon() - 8)
+                    && poisson.getX() <= (lbd.getP().getX() + lbd.getRayon() + 8)
+                    && poisson.getY() >= (lbd.getP().getY() - lbd.getRayon() - 8)
+                    && poisson.getY() <= (lbd.getP().getY() + lbd.getRayon() + 8)
+            ) {
+                System.out.println(poisson + " devienne paniqué");
             }
         });
     }

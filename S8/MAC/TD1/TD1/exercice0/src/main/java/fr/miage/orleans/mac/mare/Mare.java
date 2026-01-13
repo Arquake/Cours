@@ -1,4 +1,4 @@
-package mare;
+package fr.miage.orleans.mac.mare;
 
 import java.util.ArrayList;
 import java.util.Collection;
