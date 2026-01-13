@@ -1,0 +1,24 @@
+L’objectif est de réaliser une application permettant d’afficher les
+données provenant d’une station météo.
+
+On vous fournit au départ une classe `DonneesMeteo`, capable de récupérer
+les mesures des capteurs, et qui possède les quatre méthodes :
+`getTemperature()`, `getHumidite()`, `getPression()`, qui renvoient les
+valeurs mesurées par les capteurs, ainsi qu’une méthode
+`actualiserMesures()`, qui est appelée à chaque fois que les mesures ont
+changé. Cette classe connaît de plus un ensemble d’objets de type `Affichage`,
+à qui elle communique les informations actualisées.
+
+1.  Proposer, sous la forme d’un diagramme de classes UML, une nouvelle
+modélisation de ce problème, en utilisant le patron de conception
+`Observateur` (`Observer`). Écrire le code `Java` le code correspondant à la modélisation.
+
+1.  On veut ajouter un nouvel affichage pour la station météo : l’indice
+`Humidex`, qui représente la température «ressentie», est calculé à
+partir de la température et de l’humidité.
+Écrire le code `Java` permettant d'intégrer cette modification de spécification.
+
+1. La solution précédente transmet les mêmes observations à toutes les vues, alors
+que certaines ne sont pas utiles (en particulier, l’affichage des prévisions ne concerne
+que la pression, qui n’est en revanche pas utile pour les prévisions).
+En utilisant des **évènements**, proposer une solution permettant d’éviter ce problème.

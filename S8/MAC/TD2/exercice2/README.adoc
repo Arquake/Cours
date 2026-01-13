@@ -1,0 +1,28 @@
+# https://blogotheque.net/categories/take-away-shows/[Take away shows]
+
+Un gestionnaire de salles de concerts souhaiterait automatiser, pour les étudiantes et étudiants
+qui le souhaitent, l’annonce de nouvelles dates de concerts prévues dans les salles qu’il gère.
+
+Il vous fournit le programme principal suivant, décrivant selon lui correctement ses attentes.
+
+```java
+include::src/main/java/programme/Programme.java[]
+```
+
+1. Quel design pattern se cache d’après vous derrière ses attentes ? Le mettre en place.
+
+1. Bien entendu, la demande initiale du gestionnaire n’était pas complète : il souhaiterait également offrir
+la possibilité aux personnes abonnées à ses salles de choisir le type d’annonces qu’ells
+désirent recevoir. Seul le style de musique est demandé dans les choix possibles.
+Proposez une modification à votre code pour répondre à ces besoins, en justifiant les choix.
+En particulier, qui doit filtrer les annonces reçues : la salle éméttrice ou la personne abonnée ?
+
+1. À la surprise générale, la demande du gestionnaire n’était pas complète et il souhaiterait
+que les abonnées puissent également s’enregistrer avec d’autres paramètres, comme par
+exemple ne recevoir que des annonces pour certains jours de la semaine, ayant piscine les autres.
+Proposez une nouvelle modification pour gérer cela (des `Predicate` peuvent vous être utiles).
+
+1. Pour aller plus loin, le gestionnaire souhaiterait permettre à ses abonnés d’avoir un
+comportement automatique lors de l’annonce de nouvelles dates : par exemple, acheter automatiquement
+les billets, afficher simplement l’annonce ou ne rien faire. Quel design pattern pourrait être ajouté pour
+compléter votre conception ?
