@@ -16,7 +16,13 @@ public class Programme {
         astro.enregistrer(etu1);
         paloma.enregistrer(etu1);
         // etu 3 : que le bouillon
-        bouillon.enregistrer(etu3);
+        astro.enregistrer(etu3);
+
+
+        astro.sabonnerAuStyle(etu1, Style.FOLK);
+        astro.addActionToUser(Action.AUTO_BUY, etu1);
+        astro.addActionToUser(Action.AUTO_SHOW, etu1);
+        astro.ajouterJourIndisponible(etu1, 2);
 
         astro.programmer( "SHANNON WRIGHT + JUNIPER", "", Style.FOLK, LocalDateTime.of(2025, 03, 04, 20, 00));
         astro.programmer( "A PLACE TO BURY STRANGERS + MADELINE GOLDSTEIN", "", Style.FOLK, LocalDateTime.of(2025, 04, 12, 20, 00));
