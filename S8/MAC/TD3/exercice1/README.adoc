@@ -1,0 +1,10 @@
+# Fashion week
+
+Le but de cet exercice est de modéliser des personnes. Ces personnes ne peuvent pas sortir sans vêtements.
+Par contre, elles peuvent respirer et manger.
+
+Donc par défaut, la fonctionnalité `sortir` n'existe pas.
+Cependant, comme par magie, avec un chapeau tout devient possible.
+Par contre, il est plus compliqué de respirer et encore plus difficile de manger.
+
+Modéliser ce problème en utilisant le pattern `décorateur`.

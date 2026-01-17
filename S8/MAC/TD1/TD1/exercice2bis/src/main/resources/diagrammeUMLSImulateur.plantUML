@@ -1,0 +1,34 @@
+[plantuml, notations, svg]
+----
+skinparam classAttributeIconSize 0
+
+interface MonInterface <<interface>> {
+    + uneMéthode()
+}
+
+class MaClasse {
+    Type donnée
+    + uneMéthode()
+    + (abstract) uneAutreMéthode() : TypeRetour
+}
+
+class ClasseAbstraite <<abstract>> {
+    - uneMéthodePrivée()
+}
+
+class AutreClasse2 {
+    Collection<MaClasse> composition
+    + ajouter(MaClasse)
+    + enlever(MaClasse)
+}
+
+class SousClasse {
+    uneAutreMethode() { code source }
+}
+
+SousClasse -u-|> MaClasse : est un
+MaClasse .r.|> MonInterface : implémente
+MaClasse --> ClasseAbstraite : > à un
+MaClasse <--* AutreClasse2 : < à plusieurs
+MaClasse .l.> TypeRetour : instancie/utilise un
+----

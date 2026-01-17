@@ -1,0 +1,16 @@
+# Expressions arithmétiques et visualisation
+
+Nous voulons modéliser des expressions arithmétiques traditionnelles sur les entiers.
+
+1.  Quel(s) patron(s) de conception est(sont) intéressant(s) pour représenter
+les expressions ? Introduire une fonction permettant d'évaluer l'expression i.e. réduire l'expression à un entier.
+2.  Nous voulons afficher l'expression arithmétique sous différentes formes :
+
+* `RPN` (_Reverse Polish Notation_) : sous cette forme,  l'expression `(1+2)* (4-5)` sera `(* (+ 1 2) (- 4 5))`.
+* parenthèsées.
+
+Proposer une solution
+permettant d'afficher une expression sous ses deux formes au moins et
+l’implémenter. Il faut évidemment que cette solution soit extensible
+pour tout autre affichage supplémentaire.
+

@@ -1,7 +1,6 @@
 package fr.miage.orleans.mac;
 
-import fr.miage.orleans.mac.models.Corrige;
-import fr.miage.orleans.mac.models.Panier;
+import fr.miage.orleans.mac.models.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,7 +10,12 @@ public class Main {
             panierUn.addItem(new Corrige());
         }
 
-        panierUn.pay("moi", "1234567890123456", "374", "15min");
-        panierUn.payByPaypal("moi@moi.moi", "kys");
+        IInformations paypal = new PaypalInformation("moi@moi.moi", "kys");
+        IInformations cb = new CBInformations("moi", "1234567890123456", "374", "15min");
+
+        panierUn.setMoyenDePaiement(paypal);
+        panierUn.pay();
+        panierUn.setMoyenDePaiement(cb);
+        panierUn.pay();
     }
 }

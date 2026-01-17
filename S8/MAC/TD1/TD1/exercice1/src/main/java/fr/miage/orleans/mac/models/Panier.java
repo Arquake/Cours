@@ -5,8 +5,13 @@ import java.util.List;
 
 public class Panier {
     List<Corrige> corriges;
+    IInformations moyenDePaiement;
     public Panier(){
+        this.moyenDePaiement = null;
         this.corriges = new ArrayList<>();
+    }
+    public void setMoyenDePaiement(IInformations moyenDePaiement) {
+        this.moyenDePaiement = moyenDePaiement;
     }
     public void addItem(Corrige corrige){
         this.corriges.add(corrige);
@@ -21,14 +26,9 @@ public class Panier {
         }
         return sum;
     }
-    public void pay(String nom, String noCarte, String crypto,
-                    String expire){
+    public void pay(){
         int amount = calculerTotal();
-        System.out.println("Paiement de " + amount + "€ par " + nom + "CB " + noCarte + "/" + crypto + " expire:" + expire);
-    }
+        moyenDePaiement.showInformations(amount);
 
-    public void payByPaypal(String email, String numeroUtilisation){
-        int amount = calculerTotal();
-        System.out.println("Paiement de " + amount + "€ sur " + email + " avec le code " + numeroUtilisation);
     }
 }

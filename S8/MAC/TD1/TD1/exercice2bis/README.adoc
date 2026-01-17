@@ -1,0 +1,23 @@
+= Eco-systèmes
+
+== Simulateur
+
+Vous trouvez un stage au MOBE à Orléans et vous devez mettre en place
+un simulateur d'éco-systèmes.
+Vous récupérez le code du précédent stagiaire pour ne pas partir de zéro :
+
+```java
+include::src/main/java/ecologie/SimulateurEcoSystemes.java[]
+```
+
+== Questions
+
+. Critiquez le code récupéré.
+
+. Proposez un diagramme de classes `UML` permettant de corriger les erreurs de conception que vous avez relevées.
++
+include::src/main/resources/diagrammeUMLSImulateur.plantUML[]
+
+. Donnez le code `Java` de la nouvelle application.
+
+. Prouvez que votre solution est plus extensible en ajoutant un nouvel éco-système de votre choix dans le simulateur.

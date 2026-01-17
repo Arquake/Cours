@@ -1,0 +1,46 @@
+# Logique trivaluée
+
+Dans cet exercice nous nous placerons dans le contexte de la logique
+trivaluée dans laquelle il existe trois valeurs : aux habituelles
+valeurs `Vrai` et `Faux` vient s’ajouter la valeur `Inconnu` permettant
+d’exprimer l’absence d’information sur la valeur de vérité d’une donnée.
+
+Les opérateurs booléens classiques sont étendus pour prendre en compte
+la nouvelle valeur ajoutée :
+
+* l’opérateur unaire `Non` réalise la
+négation, la négation de la valeur `Inconnu` vaut `Inconnu`
+* l’opérateur
+binaire `Et` qui réalise la conjonction («et logique») entre deux
+booléens trivalués. La table de vérité en est la suivante :
+
+## Table de A et B
+
+[cols=",,,",options="header",]
+|==================================
+|*A \ B* |*Vrai* |*Faux* |*inconnu*
+|*Vrai* |Vrai |faux |Inconnu
+|*Faux* |Faux |faux |Faux
+|*inconnu* |Inconnu |faux |Inconnu
+|==================================
+
+Le code fourni dans le sujet représente des formules (avec un faible niveau d'abstraction sur les opérateurs).
+L'intérêt de l'interface Formule n'est pas évident mais sera expliqué après.
+
+### La conception
+
+1. Expliquer l'intérêt de ne pas utiliser un `type enum` pour représenter les constantes `Vrai`,
+`Faux` et `Inconnu` (penser par exemple au constructeur de la Formule `Et`)
+1. Un patron de conception se cache dans la conception de `Formule`, saurez-vous le trouver ?
+
+### L'implémentation
+
+Supposons maintenant que l'on souhaite évaluer la valeur de vérité d'une `Formule`.
+Une solution *maladroite* consisterait à ajouter une méthode d'évaluation dans ce diagramme de classes :
+cela revient à dire que la `Formule` et son évaluation sont directement liées, ce qui n'est pas le cas.
+On peut également imaginer différentes manières d'afficher la Formule, qu'il ne serait pas raisonnable de gérer dans la classe.
+
+1. En utilisant le design pattern `Visiteur`, rendre les `Formule` visitables et
+implémenter un visiteur `Evaluation` permettant d'évaluer n'importe quelle formule.
+1. Donner le code JAVA d’un programme principal `main`
+qui crée l’expression : `Non(Vrai Et Non(Inconnu))` puis l’évalue.
