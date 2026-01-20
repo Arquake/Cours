@@ -40,7 +40,7 @@ SELECT * FROM R
 INTERSECT ALL
 SELECT * FROM S;
 
-{(0,1),(0,1),(2,4),(2,4),(3,4),(3,4)}
+{(0,1),(2,4),(3,4)}
 
 -------------
 ----- 5 -----
@@ -171,7 +171,7 @@ SELECT R.a*R.a AS a, S.b*S.b AS b FROM (
 
 R NATURAL JOIN S
 
-{(0,1,2), (0,1,2), (2,3,5), (0,1,2), (0,1,2), (2,4,5), (3,4,5)}
+{(0,1,2), (2,3,5) (2,4,5), (3,4,5)}
 
 -------------
 ----- 2 -----
@@ -226,7 +226,7 @@ R JOIN T ON R.b=T.c
 ----- 7 -----
 -------------
 
-SELECT COUNT(b) FROM R
+SELECT COUNT(b) FROM R GROUP BY b
 
 5
 
@@ -235,7 +235,7 @@ SELECT COUNT(b) FROM R
 -------------
 
 SELECT a,SUM(b) FROM R
-GROUP BY a
+GROUP BY b
 ORDER BY a
 
 {
@@ -258,10 +258,10 @@ ORDER BY a
 ----- 10 -----
 --------------
 
-SELECT SUM(S.c),R.a,R.b FROM 
+SELECT SUM(S.c) AS 'c',R.a AS 'a',R.b AS 'b' FROM 
 (
     R JOIN S ON R.b<S.b
-)
+) GROUP BY c ORDER BY c,a,b
 
 {
     (15,0,1),
@@ -272,10 +272,10 @@ SELECT SUM(S.c),R.a,R.b FROM
 ----- 11 -----
 --------------
 
-SELECT R.a,T.d,AVG(b+c) FROM 
+SELECT R.a AS 'a',T.d AS 'd',AVG(b+c) AS 'avg' FROM 
 (
     R JOIN T ON (R.a+T.d)=5
-)
+) GROUP BY avg ORDER BY a,d,avg
 
 {
     (0,5,6),
@@ -286,10 +286,16 @@ SELECT R.a,T.d,AVG(b+c) FROM
 ----- 12 -----
 --------------
 
-SELECT MAX(R.a), MIN(T.c) FROM 
+SELECT b, MAX(R.a) AS 'a', MIN(T.c) AS 'c' FROM 
 (
-    SELECT a,b,c,MAX(d)
-)
+    SELECT a,b,c,MAX(d) FROM
+    (
+        SELECT * FROM R
+        CROSS JOIN
+        SELECT * FROM T
+    )
+    GROUP BY d
+) GROUP BY a,c ORDER BY b,a,c
 
 -- {
 --     (0,1,5,6),(2,3,5,6),(2,4,5,6),(3,4,5,6)
@@ -313,12 +319,39 @@ SELECT * FROM R ORDER BY b,a
 ----- 13 -----
 --------------
 
-SELECT * FROM
+SELECT DISTINCT a,c FROM
     (
-        T JOIN ON SELECT a,c,SUM(b) "bSum" FROM (R CROSS JOIN S)
+        SELECT * FROM T NATURAL JOIN 
+        (
+            SELECT a,c,SUM(b) AS "bSum" 
+            FROM (SELECT * FROM R NATURAL JOIN (SELECT * FROM S)) 
+            GROUP BY a,c
+        ) 
     )
 WHERE d>bSum
+ORDER BY a
 
-{
-    (3,4),(2,4),(2,3),(0,1),(0,1)
-}
+-- R NATURAL JOIN S
+-- {(0,1,2), (2,3,5) (2,4,5), (3,4,5)}
+
+-- SUM(b)
+-- {0,2,1), (2,5,7), (3,5,4)}
+
+-- T NATURAL JOIN xxx (format a,c,SUM(b), d
+-- {(0,2,1,3), (2,5,7,5), (2,5,7,6), (3,5,4,5), (3,5,4,6)}
+
+-- DISTINCT d>SUM(b)
+-- {(0,2), (3,5)}
+
+
+-----------------
+----- EXO 3 -----
+-----------------
+
+-------------
+----- 1 -----
+-------------
+
+πactor(σdirector='Lucas' (movie))
+
+SELECT DISTINCT actor FROM movie WHERE 
