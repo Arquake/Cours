@@ -171,7 +171,7 @@ SELECT R.a*R.a AS a, S.b*S.b AS b FROM (
 
 R NATURAL JOIN S
 
-{(0,1,2), (2,3,5) (2,4,5), (3,4,5)}
+{(0,1,2), (0,1,2), (0,1,2), (0,1,2), (2,3,5) (2,4,5), (3,4,5)}
 
 -------------
 ----- 2 -----
@@ -196,7 +196,7 @@ R NATURAL JOIN T
 R JOIN S ON R.b<S.b
 
 {
-    (0,1,2,5),(0,1,3,5)(0,1,4,5),
+    (0,1,2,5),(0,1,3,5)(0,1,4,5),(0,1,2,5),(0,1,3,5)(0,1,4,5),
     (2,3,4,5),
 }
 
@@ -207,6 +207,7 @@ R JOIN S ON R.b<S.b
 R JOIN T ON (R.a+T.d)=5
 
 {
+    (0,1,5,5),
     (0,1,5,5),
     (2,3,2,3),
     (2,4,2,3),
@@ -354,4 +355,78 @@ ORDER BY a
 
 πactor(σdirector='Lucas' (movie))
 
-SELECT DISTINCT actor FROM movie WHERE 
+SELECT DISTINCT actor FROM movie WHERE director='Lucas'
+
+-------------
+----- 2 -----
+-------------
+
+πmovieGoer((seen)⨝(σdirector='Lucas' (movie)))
+
+SELECT DISTINCT movieGoer FROM 
+(
+    SELECT * FROM seen
+    NATURAL JOIN
+    movie WHERE director='Lucas'
+)
+
+-------------
+----- 3 -----
+-------------
+
+πmovieGoer(seen) ∩ πmovieGoer(likes)
+
+SELECT DISTINCT movieGoer FROM seen
+INTERSECT
+SELECT DISTINCT movieGoer FROM likes
+
+-------------
+----- 4 -----
+-------------
+
+πmovieGoer (seen) ⨝ (likes)
+
+SELECT DISTINCT movieGoer FROM 
+(
+    SELECT * FROM seen
+    NATURAL JOIN
+    SELECT * FROM likes
+)
+
+-------------
+----- 5 -----
+-------------
+
+πmovieGoer ((likes) ÷ ((seen) ⨝ (likes)))
+
+SELECT DISTINCT movieGoer FROM likes
+MINUS
+(
+    SELECT * FROM seen
+    NATURAL JOIN
+    SELECT * FROM likes
+)
+
+-------------
+----- 6 -----
+-------------
+
+σmovieSeen=(γcount(title)→totalMovies (movie)) (γmovieGoer,count(title)→moviesSeen(seen))
+
+SELECT movieGoer FROM (
+	SELECT DISTINCT movieGoer,title FROM seen
+)  AS gens
+GROUP BY title
+HAVING COUNT(gens.title)=(SELECT DISTINCT * FROM movie AS mc WHERE gens.title=mc.tile)
+
+-------------
+----- 7 -----
+-------------
+
+πmovieGoer(σfilmsVu=filmsLike (γmovieGoer,count(filmsVu)→filmsVu (seen) ⨝ γmovieGoer,count(filmsLike)→filmsVu (likes)))
+
+SELECT DISTINCT movieGoer FROM (
+	SELECT DISTINCT movieGoer,title FROM seen
+)  AS gens
+GROUP BY title
+HAVING COUNT(gens.title)=(SELECT DISTINCT * FROM movie AS mc WHERE gens.title=mc.tile)
