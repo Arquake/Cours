@@ -1,0 +1,22 @@
+= Gestion des opérations
+
+
+
+Nous voulons avoir une calculatrice facile à mettre à jour au niveau des fonctionnalités.
+Un ex-étudiant de MIAGE propose avec aplomb : "L'idéal serait d'avoir une chaîne de responsabilités sur les fonctionnalités proposées".
+Et il n'a pas tort. De cette façon, chaque maillon de la chaîne s'occupe d'une seule opération.
+Pour ajouter une nouvelle opération, il suffit d'ajouter un nouveau maillon.
+On ne touche quasiment pas au code existant. Il faut juste faire attention au fait
+que certaines opérations prennent deux opérandes, d'autres une seule (comme racine carrée,
+cosinus, sinus, etc). Ceci dit, il suffit de mettre un nombre variable d'opérande et
+chaque maillon saura exactement combien d'opérandes il est censé avoir.
+
+
+
+
+== Questions
+. Refaites le tour du pattern chaîne de responsabilité : à quoi sert-il ? Comment l'implanter ? (faites sur le papier et avec l'enseignant un exemple simple : s'authentifier par login/password ou par token).
+
+. Développez cette chaîne de responsabilités avec les opérations classiques : multiplication, division, addition, soustraction.
+
+. Ajoutez ensuite deux nouveaux maillons : racine carrée et cosinus.

@@ -1,0 +1,53 @@
+= VIDEO GAMES
+
+Nous proposons, dans cet exercice, de mettre en oeuvre le design pattern
+«Adaptateur» dans le cadre d'un jeu vidéo. Dans une première version, le
+jeu a été conçu pour être jouable à la « manette de la joie »
+(_joystick_). Nous désirons mettre à jour le jeu pour permettre
+également le jeu au clavier, avec le minimum d'impact sur le code
+existant. Voici ci-dessous des extraits de code source pour les classes
+principales du jeu:
+
+[source, java]
+----
+    public interface Manette { /* interface pour tous les types de manettes
+    */
+        public boolean isLeft();
+        public boolean isRight();
+        public boolean isPush();
+    }
+
+    public class Clavier {
+        public enum Key { SPACEBAR, ARROW_LEFT, ARROW_RIGHT };
+        public Clavier() { /* constructeur */ }
+        public Key keyPressed() { /* retourne le type de la touche */ }
+        /* etc */
+    }
+
+    public class Jeu {
+        private Manette manette;
+        public Jeu(Manette manette) { this.manette = manette; }
+        public void mainLoop() { /* boucle principale du jeu */
+            if(manette.isLeft()) { /* déplacement à gauche */ }
+            else
+                if(manette.isRight()) { /* déplacement à droite */ }
+                else
+                if(manette.isPush()) { /* appui sur le bouton */
+                }
+        }
+    }
+    public class JeuMain {
+        public static void main(String[] args) {
+            Manette manette = new ManetteClassique(); /* un certain type de manette
+            */
+            Jeu jeu = new Jeu(manette);
+            jeu.mainLoop();
+        }
+    }
+----
+
+a.  Donner le diagramme de classes (vision fournisseur) du jeu vidéo.
+Proposer une solution pour pouvoir jouer au clavier, sans modifier de
+classe (à l'exception du main).
+b.  Donner le code de la classe d'adaptation proposée: ManetteClavier.
+Que doit-on modifier dans le code existant ?

@@ -1,0 +1,33 @@
+= Fibonacci mon kiki!
+
+Vous avez écrit laborieusement une méthode de calcul de la suite de
+Fibonacci, avec sa double récursion !
+
+Avec encore en tête les cours de MAC, et le fameux principe « dépendez
+d’abstractions et pas d’implémentations », vous avez codé une interface
+Fibonacci, qui possède une méthode _int calculer(int n)_ et une
+implémentation _FibonacciImpl_, avec la double récursion.
+
+Tout se passait bien, les autres développeurs se sont mis à utiliser
+intensivement votre code, malheureusement le chef de projet vous appelle
+pendant votre sieste bien méritée : lors de la mise en production, le
+logiciel final est super lent, surtout à cause de votre méthode de
+calcul à double récursion !!
+
+Vous décidez donc de mettre en place un cache de calcul, qui stocke le
+résultat du calcul de Fibonacci au premier appel, et qui renvoie la
+valeur directement au deuxième appel… Génial ! Pour éviter des effets de
+bord désastreux, vous ne pouvez toutefois pas modifier le code de votre
+interface et de votre classe d’implémentation...
+
+
+
+== Questions
+
+.  Quel(s) patron(s) de conception permettent de résoudre ce problème ?
+Justifiez et donnez le diagramme de classes correspondant. Implémentez la solution complète.
+.  Donnez un main Java qui utilise ce design pattern et qui démontre
+l’utilisation du cache de calcul.
+.  Comment pouvez-vous vous assurez qu’un autre développeur ne peux pas
+appeler directement votre implémentation dans FibonacciImpl, sans passer
+par le cache de calcul ?
