@@ -13,4 +13,9 @@ public class Nu implements IPersonne {
     public void manger() {
         System.out.println("Mange aisément");
     }
+
+    @Override
+    public void sortir() {
+        System.out.println("Impossible de sortir");
+    }
 }

@@ -33,5 +33,6 @@ public class Programme {
         affichageCond.afficher();
         affichagePrev.afficher();
         affichageStat.afficher();
+        affichageHumidex.afficher();
     }
 }

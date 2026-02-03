@@ -6,11 +6,12 @@ public class Main {
         IPersonne p = new Nu();
         p.manger();
         p.respirer();
+        p.sortir();
 
-        Chapeau c = new Chapeau(p);
+        p = new Chapeau(p);
 
-        c.sortir();
-        c.manger();
-        c.respirer();
+        p.sortir();
+        p.manger();
+        p.respirer();
     }
 }

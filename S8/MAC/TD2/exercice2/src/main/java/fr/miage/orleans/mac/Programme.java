@@ -24,9 +24,9 @@ public class Programme {
         astro.addActionToUser(Action.AUTO_SHOW, etu1);
         astro.ajouterJourIndisponible(etu1, 2);
 
-        astro.programmer( "SHANNON WRIGHT + JUNIPER", "", Style.FOLK, LocalDateTime.of(2025, 03, 04, 20, 00));
-        astro.programmer( "A PLACE TO BURY STRANGERS + MADELINE GOLDSTEIN", "", Style.FOLK, LocalDateTime.of(2025, 04, 12, 20, 00));
-        paloma.programmer("KOMPROMAT", "", Style.ELECTRO, LocalDateTime.of(2025, 11, 28, 20, 00));
+        astro.programmer( "SHANNON WRIGHT + JUNIPER", "", Style.FOLK, LocalDateTime.of(2025, 3, 4, 20, 0));
+        astro.programmer( "A PLACE TO BURY STRANGERS + MADELINE GOLDSTEIN", "", Style.FOLK, LocalDateTime.of(2025, 4, 12, 20, 0));
+        paloma.programmer("KOMPROMAT", "", Style.ELECTRO, LocalDateTime.of(2025, 11, 28, 20, 0));
 
 
     }

@@ -4,4 +4,5 @@ public interface IPersonne {
 
     void respirer();
     void manger();
+    void sortir();
 }

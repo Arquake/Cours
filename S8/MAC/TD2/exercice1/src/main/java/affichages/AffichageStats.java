@@ -1,5 +1,9 @@
 package affichages;
 
+import modele.EventType;
+
+import java.util.function.Predicate;
+
 public class AffichageStats implements Affichage {
     private double tempMax = 0.0f;
     private double tempMin = 200;
@@ -12,15 +16,17 @@ public class AffichageStats implements Affichage {
     }
 
     @Override
-    public void actualiser(double temp, double humidite, double pression) {
-        somTemp += temp;
-        nbLectures++;
-        if (temp > tempMax) {
-            tempMax = temp;
+    public void update(double value, EventType e) {
+        if (e == EventType.TEMPERATURE) {
+            tempMax = Math.max(tempMax, value);
+            tempMin = Math.min(tempMin, value);
+            somTemp += value;
+            nbLectures++;
         }
-        if (temp < tempMin) {
-            tempMin = temp;
-        }
-        afficher();
+    }
+
+    @Override
+    public Predicate<EventType> getContract() {
+        return eventType -> eventType == EventType.TEMPERATURE;
     }
 }

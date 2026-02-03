@@ -1,5 +1,10 @@
 package affichages;
 
+import modele.EventType;
+
+import java.util.function.Predicate;
+
 public interface Affichage {
-    public void actualiser(double temp, double humidite, double pression);
+    void update(double value, EventType e);
+    Predicate<EventType> getContract();
 }

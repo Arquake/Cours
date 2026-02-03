@@ -3,6 +3,7 @@ package modele;
 import affichages.Affichage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DonneesMeteo {
@@ -16,17 +17,34 @@ public class DonneesMeteo {
     public DonneesMeteo(String nom, Affichage... affichages) {
         this.nom = nom;
         this.affichages = new ArrayList<>();
-        for (Affichage affichage : affichages)
-            this.affichages.add(affichage);
+        this.affichages.addAll(List.of(affichages));
     }
 
     public void actualiserMesures() {
-        double temp = getTemperature();
-        double humidite = getHumidite();
-        double pression = getPression();
+        actualiserHumidite();
+        actualiserTemperature();
+        actualiserPression();
+    }
 
-        for(Affichage affichage : affichages)
-            affichage.actualiser(temp, humidite, pression);
+    private void actualiserTemperature() {
+        double temp = getTemperature();
+        for (Affichage a: affichages) {
+            if (a.getContract().test(EventType.TEMPERATURE)) a.update(temp, EventType.TEMPERATURE);
+        }
+    }
+
+    private void actualiserHumidite() {
+        double humidite = getHumidite();
+        for (Affichage a: affichages) {
+            if (a.getContract().test(EventType.HUMIDITY)) a.update(humidite, EventType.HUMIDITY);
+        }
+    }
+
+    private void actualiserPression() {
+        double pression = getPression();
+        for (Affichage a: affichages) {
+            if (a.getContract().test(EventType.PRESSION)) a.update(pression, EventType.PRESSION);
+        }
     }
 
     public String getNom() {
@@ -55,5 +73,9 @@ public class DonneesMeteo {
 
     public void setPression(double pression) {
         this.pression = pression;
+    }
+
+    public void subscribe(Affichage... a) {
+        affichages.addAll(List.of(a));
     }
 }
