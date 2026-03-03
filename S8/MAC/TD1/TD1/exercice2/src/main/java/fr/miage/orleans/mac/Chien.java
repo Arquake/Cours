@@ -5,4 +5,9 @@ public class Chien extends Animal{
     public Chien() {
         super("Chien kys");
     }
+
+    public Animal clone() {
+        Chien c = new Chien();
+        return c;
+    }
 }

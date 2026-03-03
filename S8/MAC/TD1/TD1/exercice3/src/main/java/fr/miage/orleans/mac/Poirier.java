@@ -1,12 +1,13 @@
 package fr.miage.orleans.mac;
 
-public class Poirier extends ArbreFruitier {
-    public Poirier() {
-        super("Poirier");
-    }
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-    @Override
-    public Fruit cueille() {
-        return FruitFactory.makePoire();
+public class Poirier extends ArbreFruitier {
+
+
+
+    public Poirier(Supplier<Fruit> cueilleur) {
+        super("Poirier", cueilleur);
     }
 }

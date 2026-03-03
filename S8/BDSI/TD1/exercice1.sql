@@ -287,23 +287,24 @@ SELECT R.a AS 'a',T.d AS 'd',AVG(b+c) AS 'avg' FROM
 ----- 12 -----
 --------------
 
-SELECT b, MAX(R.a) AS 'a', MIN(T.c) AS 'c' FROM 
-(
-    SELECT a,b,c,MAX(d) FROM
+SELECT b FROm (
+    SELECT b, MAX(R.a) AS 'a', MIN(T.c) AS 'c' FROM 
     (
-        SELECT * FROM R
-        CROSS JOIN
-        SELECT * FROM T
-    )
-    GROUP BY d
-) GROUP BY a,c ORDER BY b,a,c
+        SELECT a,b,c,MAX(d) AS 'd' FROM R, T
+        GROUP BY a,b,c
+    ) GROUP BY b
+)
 
--- {
---     (0,1,5,6),(2,3,5,6),(2,4,5,6),(3,4,5,6)
--- }
+
+-- La correction de merde (c'est pas ça du tout)
+--{
+--    (0,1,2,6),(0,1,3,6),(0,1,5,6),(2,3,2,6),
+--    (2,3,3,6),(2,3,5,6),
+--    (2,4,2,6),(2,4,3,6),(2,4,5,6),(3,4,2,6),(3,4,3,6),(3,4,5,6),
+--}
 
 {
-    (3,5)
+    (1,0,2),(3,2,2),(4,3,2)
 }
 
 --------------
@@ -317,7 +318,7 @@ SELECT * FROM R ORDER BY b,a
 }
 
 --------------
------ 13 -----
+----- 14 -----
 --------------
 
 SELECT DISTINCT a,c FROM
@@ -333,16 +334,16 @@ WHERE d>bSum
 ORDER BY a
 
 -- R NATURAL JOIN S
--- {(0,1,2), (2,3,5) (2,4,5), (3,4,5)}
+-- {(0,1,2), (0,1,2), (0,1,2), (0,1,2), (2,3,5) (2,4,5), (3,4,5)}
 
--- SUM(b)
--- {0,2,1), (2,5,7), (3,5,4)}
+-- a,c,SUM(b)
+-- {0,2,4), (2,5,7), (3,5,4)}
 
 -- T NATURAL JOIN xxx (format a,c,SUM(b), d
--- {(0,2,1,3), (2,5,7,5), (2,5,7,6), (3,5,4,5), (3,5,4,6)}
+-- {(0,2,4,3), (2,5,7,5), (2,5,7,6), (3,5,4,5), (3,5,4,6)}
 
 -- DISTINCT d>SUM(b)
--- {(0,2), (3,5)}
+-- {(3,5)}
 
 
 -----------------
@@ -400,7 +401,7 @@ SELECT DISTINCT movieGoer FROM
 πmovieGoer ((likes) ÷ ((seen) ⨝ (likes)))
 
 SELECT DISTINCT movieGoer FROM likes
-MINUS
+EXCEPT
 (
     SELECT * FROM seen
     NATURAL JOIN
@@ -425,8 +426,74 @@ HAVING COUNT(gens.title)=(SELECT DISTINCT * FROM movie AS mc WHERE gens.title=mc
 
 πmovieGoer(σfilmsVu=filmsLike (γmovieGoer,count(filmsVu)→filmsVu (seen) ⨝ γmovieGoer,count(filmsLike)→filmsVu (likes)))
 
-SELECT DISTINCT movieGoer FROM (
-	SELECT DISTINCT movieGoer,title FROM seen
-)  AS gens
-GROUP BY title
-HAVING COUNT(gens.title)=(SELECT DISTINCT * FROM movie AS mc WHERE gens.title=mc.tile)
+--SELECT DISTINCT movieGoer FROM (
+--	SELECT DISTINCT movieGoer,title FROM seen
+--)  AS gens
+--GROUP BY title
+--HAVING COUNT(gens.title)=(SELECT DISTINCT * FROM movie AS mc WHERE gens.title=mc.tile)
+
+SELECT movieGoer FROM seen
+EXCEPT
+SELECT movieGoer FROM (
+    SELECT* FROM seen
+    EXCEPT
+    SELECT * FROM likes
+)
+
+-------------
+----- 8 -----
+-------------
+
+SELECT Count(title) FROM movie 
+EXCEPT
+(
+    SELECT title FROM movie
+    EXCEPT
+    SELECT DISTINCT title FROM seen
+)
+
+-------------
+----- 9 -----
+-------------
+
+SELECT movieGoer, Count(movieGoer) FROM (
+    SELECT DISTINCT * FROM seen
+) ORDER BY movieGoer
+
+--------------
+----- 10 -----
+--------------
+
+il faut que la personne est vu tous les films et les ai tous like et les soustraire au movieGoer si ils ont 1 like
+--SELECT DISTINCT movieGoer FROM seen
+--EXCEPT
+--SELECT DISTINCT movieGoer FROM likes
+
+--------------
+----- 11 -----
+--------------
+
+SELECT AVG(nb) AS moyenne
+FROM (
+    SELECT mobieGoer, COUNT(title) AS nb
+    FROM seen GROUP BY movieGoer
+) as table
+
+--SELECT AVG(movieGoer) FROM seen
+--GROUP BY movieGoer
+
+--------------
+----- 12 -----
+--------------
+
+SELECT actor, COUNT(actor) AS 'staredIn' FROM movie
+GROUP BY actor
+ORDER BY staredIn
+LIMIT 5;
+
+--SELECT actor FROM movie 
+--GROUP BY actor
+--HAVING COUNT(*) > ALL (
+--    SELECT COUNT(*) FROM movie NATURAL JOIN seen
+--    GROUP BY actor
+--)
