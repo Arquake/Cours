@@ -1,0 +1,107 @@
+@prefix ex:   <http://example.org/university#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+############################
+# Classes
+############################
+ex:Person a rdfs:Class .
+ex:Student a rdfs:Class .
+ex:Professor a rdfs:Class .
+ex:Course a rdfs:Class .
+ex:Department a rdfs:Class .
+
+# Hiérarchie
+ex:Student rdfs:subClassOf foaf:Person .
+ex:Professor rdfs:subClassOf foaf:Person .
+
+############################
+# Propriétés
+############################
+
+ex:teaches a rdf:Property ;
+    rdfs:domain ex:Professor ;
+    rdfs:range  ex:Course .
+
+ex:attends a rdf:Property ;
+    rdfs:domain ex:Student ;
+    rdfs:range  ex:Course .
+
+ex:hasAge a rdf:Property ;
+    rdfs:domain foaf:Person ;
+    rdfs:range  xsd:integer .
+
+ex:belongsTo a rdf:Property ;
+    rdfs:range ex:Department .
+
+############################
+# Données
+############################
+
+# Département
+ex:ComputerScience a ex:Department ;
+    rdfs:label "Computer Science" .
+
+# Professeurs
+ex:Prof_Alice a ex:Professor ;
+    foaf:name "Alice Dupont" ;
+    ex:hasAge 45 ;
+    ex:belongsTo ex:ComputerScience ;
+    ex:teaches ex:SemanticWeb .
+
+ex:Prof_Bob a ex:Professor ;
+    foaf:name "Bob Martin" ;
+    ex:hasAge 52 ;
+    ex:belongsTo ex:ComputerScience ;
+    ex:teaches ex:MachineLearning .
+
+# Cours
+ex:SemanticWeb a ex:Course ;
+    rdfs:label "Web Semantique" .
+
+ex:MachineLearning a ex:Course ;
+    rdfs:label "Machine Learning" .
+
+# Étudiants
+ex:Student_Charlie a ex:Student ;
+    foaf:name "Charlie Durand" ;
+    ex:hasAge 22 ;
+    ex:attends ex:SemanticWeb .
+
+ex:Student_Diana a ex:Student ;
+    foaf:name "Diana Leclerc" ;
+    ex:hasAge 21 ;
+    ex:attends ex:SemanticWeb ,
+               ex:MachineLearning .
+
+
+
+
+
+# Nouveau département Mathematics
+ex:Mathematics a rdfs:Department;
+    rdfs:label "Mathematique" .
+
+# Nouveau professeur de mathématiques
+ex:Zani a ex:Professor;
+    foaf:name "Marguerite Zani" ;
+    ex:hasAge 52 ;
+    ex:belongsTo ex:Mathematics ;
+    ex:teaches ex:Stats .
+    
+# Nouveau cours de mathématiques
+ex:Stats a ex:Course ;
+    rdfs:label "Stats" .
+    
+# Deux nouveaux étudiants
+ex:Benjamin a ex:Student ;
+    foaf:name "Benjamin Perez" ;
+    ex:hasAge 21 ;
+    ex:attends ex:Stats .
+    
+ex:Vincent a ex:Student ;
+    foaf:name "Vincent Gonnet" ;
+    ex:hasAge 23 ;
+    ex:attends ex:Stats .

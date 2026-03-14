@@ -38,9 +38,10 @@ public class Salle {
     public void programmer(String headline, String idkKms, Style style, LocalDateTime dateConcert) {
         Concert c = new Concert(headline,style, dateConcert);
         concerts.add(c);
-        abonnees.entrySet().forEach(entries -> {
-            if (!entries.getValue().getWantedStyles().contains(style) || entries.getValue().getUnwantedDays().contains(dateConcert.getDayOfWeek().getValue())) return;
-            entries.getKey().getNotification(c, this);
+        abonnees.forEach((key, value) -> {
+            if (!value.getWantedStyles().contains(style) || value.getUnwantedDays().contains(dateConcert.getDayOfWeek().getValue()))
+                return;
+            key.getNotification(c, this);
         });
     }
 
