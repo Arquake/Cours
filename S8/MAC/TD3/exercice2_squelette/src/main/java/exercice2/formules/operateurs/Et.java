@@ -1,6 +1,7 @@
 package exercice2.formules.operateurs;
 
 import exercice2.formules.Formule;
+import exercice2.visiteur.Visiteur;
 
 public class Et implements Formule {
 
@@ -18,5 +19,10 @@ public class Et implements Formule {
 
     public Formule getDroite() {
         return droite;
+    }
+
+    @Override
+    public void accept(Visiteur visiteur) {
+        visiteur.visiterEt(this);
     }
 }
