@@ -50,17 +50,17 @@ public class VisiteurEvaluation implements Visiteur {
 
     @Override
     public void visiterVrai(Vrai vrai) {
-        f = vrai;
+        f = new Vrai();
     }
 
     @Override
     public void visiterFaux(Faux faux) {
-        f = faux;
+        f = new Faux();
     }
 
     @Override
     public void visiterInconnu(Inconnu inconnu) {
-        f = inconnu;
+        f = new Inconnu();
     }
 
     @Override

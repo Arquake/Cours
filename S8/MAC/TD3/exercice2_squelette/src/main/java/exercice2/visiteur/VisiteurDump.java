@@ -20,9 +20,9 @@ public class VisiteurDump implements Visiteur {
     @Override
     public void visiterEt(Et et) {
         s.append("(");
-        et.getDroite().accept(this);
-        s.append(" AND ");
         et.getGauche().accept(this);
+        s.append(" AND ");
+        et.getDroite().accept(this);
         s.append(")");
     }
 
