@@ -3,7 +3,7 @@ package main.model;
 import java.util.Random;
 
 public class Clavier {
-    public enum Key { SPACEBAR, ARROW_LEFT, ARROW_RIGHT };
+    public enum Key { SPACEBAR, ARROW_LEFT, ARROW_RIGHT }
     public Clavier() {}
     public Key keyPressed() {
         Random rand = new Random();
