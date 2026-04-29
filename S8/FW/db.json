@@ -1,0 +1,26 @@
+{
+  "livres": [
+    {
+      "id": "3",
+      "titre": "Design Patterns",
+      "auteur": "Gang of Four",
+      "annee": 1994,
+      "disponible": false
+    },
+    {
+      "id": "4",
+      "titre": "Refactoring",
+      "auteur": "Martin Fowler",
+      "annee": 2018,
+      "disponible": true
+    },
+    {
+      "id": "5",
+      "titre": "You Don't Know JS",
+      "auteur": "Kyle Simpson",
+      "annee": 2014,
+      "disponible": true
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,23 @@
+@if (isLoading) {
+  <div class="spinner">Chargement en cours...</div>
+}
+@if (erreur) {
+  <div class="erreur">{{ erreur }}</div>
+}
+@if (!isLoading && !erreur) {
+  <div class="liste">
+    @for (livre of livres; track livre.id) {
+      <div class="carte">
+        <h3>{{ livre.titre }}</h3>
+        <p>{{ livre.auteur }} — {{ livre.annee }}</p>
+        <span [class]="livre.disponible ? 'dispo' : 'indispo'">
+        {{ livre.disponible ? 'Disponible' : 'Indisponible' }}
+        </span>
+        <button [routerLink]="['/livres', livre.id]">Voir le détail</button>
+        <button [routerLink]="['/modifier', livre.id]">Modifier</button>
+        <button (click)="supprimerLivre(livre.id!)">Supprimer</button>
+      </div>
+    }
+  </div>
+}
+

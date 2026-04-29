@@ -1,0 +1,13 @@
+@if (livre !== null) {
+  <div>
+    <h2>{{ livre.titre }}</h2>
+    <p><strong>Auteur :</strong> {{ livre.auteur }}</p>
+    <p><strong>Année :</strong> {{ livre.annee }}</p>
+    <p><strong>Statut :</strong> {{ livre.disponible ? 'Disponible' : 'Indisponible'
+    }}</p>
+    <button [routerLink]="['/modifier', livre.id]">Modifier</button>
+    <button routerLink="/livres">← Retour à la liste</button>
+  </div>
+} @else {
+  <p>Livre introuvable.</p>
+}
