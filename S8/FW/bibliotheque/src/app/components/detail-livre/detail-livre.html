@@ -1,13 +1,30 @@
 @if (livre !== null) {
-  <div>
-    <h2>{{ livre.titre }}</h2>
-    <p><strong>Auteur :</strong> {{ livre.auteur }}</p>
-    <p><strong>Année :</strong> {{ livre.annee }}</p>
-    <p><strong>Statut :</strong> {{ livre.disponible ? 'Disponible' : 'Indisponible'
-    }}</p>
-    <button [routerLink]="['/modifier', livre.id]">Modifier</button>
-    <button routerLink="/livres">← Retour à la liste</button>
+  <div class="details-container">
+    <header class="details-header">
+      <h2>{{ livre.titre }}</h2>
+      <p class="auteur-sous-titre">par {{ livre.auteur }}</p>
+    </header>
+
+    <div class="details-body">
+      <p><strong>Année :</strong> {{ livre.annee }}</p>
+      <p>{{livre.annee | anciennete}}</p>
+      <p><strong>Statut :</strong>
+        <span [style.color]="livre.disponible ? '#27ae60' : '#e74c3c'" class="statut-badge">
+          {{ livre.disponible ? 'Disponible' : 'Indisponible' }}
+        </span>
+      </p>
+    </div>
+
+    <div class="actions">
+
+      <button class="btn-back" routerLink="/livres">
+        ← Retour à la liste
+      </button>
+      <button class="btn-edit" [routerLink]="['/modifier', livre.id]">
+        Modifier
+      </button>
+    </div>
   </div>
 } @else {
-  <p>Livre introuvable.</p>
+  <div class="not-found">Livre introuvable.</div>
 }

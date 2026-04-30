@@ -1,18 +1,18 @@
 {
   "livres": [
     {
-      "id": "3",
       "titre": "Design Patterns",
       "auteur": "Gang of Four",
       "annee": 1994,
-      "disponible": false
+      "disponible": true,
+      "id": "3"
     },
     {
-      "id": "4",
       "titre": "Refactoring",
       "auteur": "Martin Fowler",
       "annee": 2018,
-      "disponible": true
+      "disponible": false,
+      "id": "4"
     },
     {
       "id": "5",

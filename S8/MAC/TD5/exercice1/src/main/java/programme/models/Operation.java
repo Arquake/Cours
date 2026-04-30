@@ -2,6 +2,7 @@ package programme.models;
 
 import programme.exceptions.MauvaisNombreDeParametresExceptions;
 import programme.exceptions.OperationNonSupporteeException;
+import programme.handlers.Handler;
 
 import java.util.Objects;
 import java.util.function.Function;

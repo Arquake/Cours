@@ -5,12 +5,24 @@
   <div class="erreur">{{ erreur }}</div>
 }
 @if (!isLoading && !erreur) {
+  <div class="recherche">
+    <input type="text" [(ngModel)]="recherche"
+    placeholder="Rechercher par titre ou auteur..." />
+    <p>{{ livresFiltres.length }} résultat(s) trouvé(s)</p>
+  </div>
   <div class="liste">
-    @for (livre of livres; track livre.id) {
-      <div class="carte">
-        <h3>{{ livre.titre }}</h3>
-        <p>{{ livre.auteur }} — {{ livre.annee }}</p>
-        <span [class]="livre.disponible ? 'dispo' : 'indispo'">
+    @for (livre of livresFiltres; track livre.id) {
+      <div [ngClass]="{
+        'carte': true,
+        'disponible': livre.disponible,
+        'indisponible': !livre.disponible
+      }">
+        <h3>{{ livre.titre | uppercase }}</h3>
+        <p>{{ livre.auteur | titlecase }} — {{ livre.annee }}</p>
+        <span [ngStyle]="{
+          color: livre.disponible ? 'green' : 'red',
+          fontWeight: 'bold'
+        }">
         {{ livre.disponible ? 'Disponible' : 'Indisponible' }}
         </span>
         <button [routerLink]="['/livres', livre.id]">Voir le détail</button>

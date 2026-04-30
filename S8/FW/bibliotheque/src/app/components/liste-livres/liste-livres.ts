@@ -1,15 +1,17 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Livre } from '../../models/livre.model';
 import { RouterLink } from '@angular/router';
 import { LivreService } from '../../services/livre';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-liste-livres',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './liste-livres.html',
   styleUrl: './liste-livres.css',
 })
-export class ListeLivres {
+export class ListeLivres implements OnInit {
   livres: Livre[] = [];
   isLoading: boolean = true;
   erreur: string = '';
@@ -37,5 +39,14 @@ export class ListeLivres {
       this.cdr.detectChanges();
     });
     }
+  }
+
+  recherche: string = '';
+  get livresFiltres(): Livre[] {
+    const terme = this.recherche.toLowerCase();
+    return this.livres.filter(l =>
+      l.titre.toLowerCase().includes(terme) ||
+      l.auteur.toLowerCase().includes(terme)
+    );
   }
 }

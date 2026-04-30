@@ -1,7 +1,104 @@
-.dispo {
-  color: green;
+
+.recherche {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.indispo {
-  color: red;
+.recherche input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.recherche input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 8px rgba(63, 81, 181, 0.2);
+}
+
+.liste {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.carte {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border-left: 6px solid #ccc; /* Bordure neutre par défaut */
+  transition: transform 0.2s ease;
+}
+
+.carte:hover {
+  transform: translateY(-5px);
+}
+
+.carte.disponible {
+  border-left-color: #2ecc71; /* Vert */
+}
+
+.carte.indisponible {
+  border-left-color: #e74c3c; /* Rouge */
+}
+
+.carte h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, opacity 0.8s;
+}
+
+button[routerLink] {
+  background-color: #3498db;
+  color: white;
+  margin-right: 5px;
+}
+
+button[routerLink]:hover {
+  background-color: #2980b9;
+}
+
+button:last-of-type {
+  background-color: #f8f9fa;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+}
+
+button:last-of-type:hover {
+  background-color: #c0392b;
+  color: white;
+}
+
+.spinner {
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+  color: #666;
+}
+
+.erreur {
+  background-color: #fdeaea;
+  color: #c0392b;
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #ebccd1;
 }

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         MachineCafe machine = new MachineCafe(WaitingToken::new);
 
-        Actions[] listActions = {Actions.INSERT_JETON, Actions.INSERT_JETON, Actions.BUTTON_NO_SUCRE, Actions.PICKUP_CAFE, Actions.INSERT_JETON, Actions.BUTTON_SUCRE, Actions.PICKUP_CAFE};
+        Actions[] listActions = {Actions.INSERT_JETON, Actions.INSERT_JETON, Actions.BUTTON_NO_SUCRE, Actions.PICKUP_CAFE, Actions.INSERT_JETON, Actions.BUTTON_SUCRE, Actions.PICKUP_CAFE, Actions.RECHARGER, Actions.INSERT_JETON, Actions.BUTTON_SUCRE, Actions.PICKUP_CAFE};
 
         for (Actions a: listActions) {
             try {

@@ -3,20 +3,17 @@ package org.example.model.state;
 import org.example.model.Actions;
 import org.example.model.MachineCafe;
 
-public class MakeCafe extends AbstractState {
+public class WaitingRecharger extends AbstractState {
 
-    public MakeCafe(MachineCafe machineCafe) {
+    public WaitingRecharger(MachineCafe machineCafe) {
         super(machineCafe);
     }
-
     @Override
     public State use(Actions a) throws UnhandledOperationException {
         return switch (a) {
-            case PICKUP_CAFE -> {
-                System.out.println("Café récupéré");
-                if (getMachineCafe().getCafeRestants() == 0) {
-                    yield new WaitingRecharger(getMachineCafe());
-                }
+            case RECHARGER -> {
+                System.out.println("Machine rechargé");
+                getMachineCafe().restock((short) 10);
                 yield new WaitingToken(getMachineCafe());
             }
             default -> throw new UnhandledOperationException();

@@ -5,5 +5,6 @@ public enum Actions {
     ANNULATION,
     BUTTON_SUCRE,
     BUTTON_NO_SUCRE,
-    PICKUP_CAFE
+    PICKUP_CAFE,
+    RECHARGER
 }

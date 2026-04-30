@@ -14,6 +14,9 @@ public class MakeCafeSucre extends AbstractState {
         return switch (a) {
             case PICKUP_CAFE -> {
                 System.out.println("Café sucré récupéré");
+                if (getMachineCafe().getCafeRestants() == 0) {
+                    yield new WaitingRecharger(getMachineCafe());
+                }
                 yield new WaitingToken(getMachineCafe());
             }
             default -> throw new UnhandledOperationException();

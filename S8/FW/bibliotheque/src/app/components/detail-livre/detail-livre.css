@@ -1,0 +1,93 @@
+.details-container {
+  max-width: 550px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px; /* Plus arrondi */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  border-top: 10px solid #3498db;
+}
+
+.details-header {
+  margin-bottom: 25px;
+}
+
+.details-container h2 {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.auteur-sous-titre {
+  color: #95a5a6; /* Gris plus clair */
+  font-size: 1.2rem;
+  margin: 8px 0 0 0;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.details-body {
+  padding: 20px 0;
+  border-top: 1px solid #f1f1f1;
+}
+
+.statut-badge {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.actions {
+  margin-top: 35px;
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  flex: 2;
+}
+
+.btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  filter: brightness(1.1);
+}
+
+.btn-edit:active {
+  transform: translateY(0);
+}
+
+.btn-back {
+  background-color: #f8f9fa;
+  color: #7f8c8d;
+  border: 2px solid #edf0f2;
+  flex: 1;
+}
+
+.btn-back:hover {
+  background-color: #edf0f2;
+  color: #2c3e50;
+  border-color: #dcdde1;
+}
+
+.icon {
+  margin-right: 8px;
+}
