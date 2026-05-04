@@ -20,6 +20,27 @@
       "auteur": "Kyle Simpson",
       "annee": 2014,
       "disponible": true
+    },
+    {
+      "titre": "aa",
+      "auteur": "aaa",
+      "annee": 1930,
+      "disponible": true,
+      "id": "RfjXuQCP65U"
+    },
+    {
+      "titre": "bb",
+      "auteur": "bbb",
+      "annee": 1970,
+      "disponible": true,
+      "id": "cJBwyit844s"
+    },
+    {
+      "titre": "cc",
+      "auteur": "ccc",
+      "annee": 1980,
+      "disponible": true,
+      "id": "i55djXcUNcA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

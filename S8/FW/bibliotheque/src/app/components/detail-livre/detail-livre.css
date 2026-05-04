@@ -8,6 +8,14 @@
   border-top: 10px solid #3498db;
 }
 
+.published-sous-titre {
+  color: #95a5a6;
+  font-size: 1rem;
+  margin: -1rem 0 0 2px;
+  font-style: italic;
+  font-weight: 400;
+}
+
 .details-header {
   margin-bottom: 25px;
 }
@@ -20,7 +28,7 @@
 }
 
 .auteur-sous-titre {
-  color: #95a5a6; /* Gris plus clair */
+  color: #95a5a6;
   font-size: 1.2rem;
   margin: 8px 0 0 0;
   font-style: italic;

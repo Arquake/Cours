@@ -7,7 +7,7 @@
 
     <div class="details-body">
       <p><strong>Année :</strong> {{ livre.annee }}</p>
-      <p>{{livre.annee | anciennete}}</p>
+      <p class="published-sous-titre">{{livre.annee | anciennete}}</p>
       <p><strong>Statut :</strong>
         <span [style.color]="livre.disponible ? '#27ae60' : '#e74c3c'" class="statut-badge">
           {{ livre.disponible ? 'Disponible' : 'Indisponible' }}

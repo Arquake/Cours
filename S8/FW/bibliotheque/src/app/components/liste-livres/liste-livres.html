@@ -10,8 +10,17 @@
     placeholder="Rechercher par titre ou auteur..." />
     <p>{{ livresFiltres.length }} résultat(s) trouvé(s)</p>
   </div>
+
+  <div class="">
+    @if (this.currentPage >  1) {
+      <button (click)="previousPage()">Page précédente</button>
+    }
+    @if (this.livres.length / 5 > this.currentPage) {
+      <button (click)="nextPage()">Page suivante</button>
+    }
+  </div>
   <div class="liste">
-    @for (livre of livresFiltres; track livre.id) {
+    @for (livre of livresToShow; track livre.id) {
       <div [ngClass]="{
         'carte': true,
         'disponible': livre.disponible,
